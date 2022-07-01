@@ -1,0 +1,16 @@
+<div [formGroup]="FormGroup" class="form__control">
+    <span (click)="addItem()" class="form__icon form__icon-action">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/></svg>
+    </span>
+    <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="value" (keydown.enter)="$event.preventDefault()" (keyup.enter)="addItem()" type="text" class="form__input" maxlength="100" spellcheck="false" autocomplete="off">
+    <input [formControlName]="field.name" (ngModelChange)="changedEvent()" class="form__input form__input-hidden">
+</div>
+<div class="form__items scrollbar">
+    <div *ngFor="let item of field.value;let i = index">
+        <div *ngIf="!item.deleted" class="form__item">
+            <span *ngIf="field.option && field.option.value && item">{{ item[field.option.label] }}</span>
+            <span *ngIf="!field.option && item && item.label">{{ item.label }}</span>
+            <span *ngIf="!field.option && !item.label">{{ item }}</span>
+        </div>
+    </div>
+</div>
