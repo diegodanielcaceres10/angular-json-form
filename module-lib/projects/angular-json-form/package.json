@@ -1,6 +1,17 @@
 {
   "name": "angular-json-form",
-  "version": "0.0.1",
+  "version": "1.0.2",
+  "author": "Diego Daniel Caceres <diegodanielcaceres10@gmail.com> (https://github.com/diegodanielcaceres10)",
+  "keywords": [
+      "angular",
+      "json",
+      "form",
+      "frontend"
+  ],
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/diegodanielcaceres10/angular-json-form"
+  },
   "peerDependencies": {
     "@angular/common": "^10.2.5",
     "@angular/core": "^10.2.5"
