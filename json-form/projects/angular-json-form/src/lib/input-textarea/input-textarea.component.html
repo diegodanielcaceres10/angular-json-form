@@ -1,0 +1,3 @@
+<div [formGroup]="FormGroup" class="form__control form__control-xl">
+    <textarea [formControlName]="field.name" [maxlength]="field.maxlength || 500" (ngModelChange)="changedEvent()" class="form__textarea" spellcheck="false" autocomplete="off"></textarea>
+</div>
