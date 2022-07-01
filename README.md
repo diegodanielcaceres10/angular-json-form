@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-npm install angular-json-form --save
+npm install angular-json-form
 ```
 
 ## Usage

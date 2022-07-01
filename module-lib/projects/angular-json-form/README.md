@@ -1,24 +1,40 @@
-# AngularJsonForm
+# Angular JSON Form
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.5.
+## Installation
 
-## Code scaffolding
+```sh
+npm install angular-json-form
+```
 
-Run `ng generate component component-name --project angular-json-form` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-json-form`.
-> Note: Don't forget to add `--project angular-json-form` or else it will be added to the default project in your `angular.json` file. 
+## Usage
 
-## Build
+#### 1. Import the `AngularJsonFormModule`:
 
-Run `ng build angular-json-form` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-## Publishing
+import { AngularJsonFormModule } from 'angular-json-form';
 
-After building your library with `ng build angular-json-form`, go to the dist folder `cd dist/angular-json-form` and run `npm publish`.
+import { AppComponent } from './app.component';
 
-## Running unit tests
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AngularJsonFormModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 
-Run `ng test angular-json-form` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
 
-## Further help
+#### 2. Add the component on html template:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```html
+<lib-angular-json-form [form]="form" (send)="send($event)"></lib-angular-json-form>
+```
