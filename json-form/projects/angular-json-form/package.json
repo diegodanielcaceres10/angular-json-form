@@ -1,0 +1,18 @@
+{
+  "name": "angular-json-form",
+  "version": "1.0.5",
+  "author": "Diego Daniel Caceres <diegodanielcaceres10@gmail.com> (https://github.com/diegodanielcaceres10)",
+  "keywords": [
+      "angular",
+      "json",
+      "form",
+      "frontend"
+  ],
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/diegodanielcaceres10/angular-json-form"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

@@ -1,0 +1,93 @@
+<form *ngIf="form" [formGroup]="FormGroup" (ngSubmit)="submitForm()" [ngClass]="{ 'form-full' : form.full }" class="form">
+    <div *ngIf="form.title" class="form__title">{{ form.title }}</div>
+
+    <div *ngFor="let group of form.groups" class="form__group">
+        <span *ngIf="group.text" class="form__section">{{ group.text }}</span>
+        <div *ngFor="let field of group.fields" [ngClass]="{ 'form__box-hidden' : field.hidden || field.type == 'hidden', 'form__box-visible' : !field.hidden && field.type != 'hidden' }" class="form__box">
+            <label *ngIf="!field.hidden && field.type != 'hidden' && field.type != 'checkbox' && field.label" class="form__label">
+                <span *ngIf="field.required" class="ellipsis">{{ field.label }} *</span>
+                <span *ngIf="!field.required" class="ellipsis">{{ field.label }}</span>
+                <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['required']" class="form__error">
+                    {{ legends[lang] ? legends[lang].REQUIRED : legends['en-US'].REQUIRED }}
+                </span>
+                <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['max']" class="form__error">
+                    {{ legends[lang] ? legends[lang].MAX : legends['en-US'].MAX }}
+                </span>
+                <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['min']" class="form__error">
+                    {{ legends[lang] ? legends[lang].MIN : legends['en-US'].MIN }}
+                </span>
+                <span *ngIf="!form.error && field.error == 'DUPLICATE'" class="form__error">
+                    {{ legends[lang] ? legends[lang].DUPLICATE : legends['en-US'].DUPLICATE }}
+                </span>
+                <span *ngIf="!form.error && field.error == 'MATCH'" class="form__error">
+                    {{ legends[lang] ? legends[lang].MATCH : legends['en-US'].MATCH }}
+                </span>
+                <span *ngIf="!form.error && field.error == 'FORMAT'" class="form__error">
+                    {{ legends[lang] ? legends[lang].FORMAT : legends['en-US'].FORMAT }}
+                </span>
+                <span *ngIf="!form.error && field.error == 'SIZE'" class="form__error">
+                    {{ legends[lang] ? legends[lang].SIZE : legends['en-US'].SIZE }}
+                </span>
+            </label>
+
+            <!-- Input type checkbox -->
+            <app-input-checkbox *ngIf="!field.hidden && field.type == 'checkbox'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-checkbox>
+
+            <!-- Input type color -->
+            <app-input-color *ngIf="!field.hidden && field.type == 'color'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-color>
+
+            <!-- Input type email -->
+            <app-input-email *ngIf="!field.hidden && field.type == 'email'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-email>
+
+            <!-- Input type hidden -->
+            <app-input-hidden *ngIf="!field.hidden && field.type == 'hidden'" [FormGroup]="FormGroup" [field]="field"></app-input-hidden>
+
+            <!-- Input type image -->
+            <app-input-image *ngIf="!field.hidden && field.type == 'image'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-image>
+
+            <!-- Input type list -->
+            <app-input-list *ngIf="!field.hidden && field.type == 'list'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-list>
+
+            <!-- Input type number -->
+            <app-input-number *ngIf="!field.hidden && field.type == 'number'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-number>
+
+            <!-- Input type password -->
+            <app-input-password *ngIf="!field.hidden && field.type == 'password'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-password>
+
+            <!-- Input type radio -->
+            <app-input-radio *ngIf="!field.hidden && field.type == 'radio'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-radio>
+
+            <!-- Input type select -->
+            <app-input-select *ngIf="!field.hidden && field.type == 'select'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-select>
+
+            <!-- Input type tel -->
+            <app-input-tel *ngIf="!field.hidden && field.type == 'tel'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-tel>
+
+            <!-- Input type text -->
+            <app-input-text *ngIf="!field.hidden && field.type == 'text'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-text>
+
+            <!-- Input type textarea -->
+            <app-input-textarea *ngIf="!field.hidden && field.type == 'textarea'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-textarea>
+            
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div *ngIf="form.buttons" class="form__group">
+        <div [ngClass]="{ 'form__box-center' : form.format == 'center' }" class="form__box">
+            <div class="form__control">
+                <button *ngFor="let button of form.buttons" [ngClass]="{ 'form__button-primary' : button.primary && button.type == 'submit' }" [disabled]="form.saving" [type]="button.type == 'submit' ? 'submit' : 'button'" (click)="eventForm(button)" class="form__button">
+                    <div *ngIf="form.saving && button.type == 'submit'" class="form__loader">
+                        <div class="loader">
+                            <div class="loader__inner"></div>
+                        </div>
+                    </div>
+                    <span *ngIf="!form.saving || button.type != 'submit'">
+                        <span>{{ button.text }}</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <span *ngIf="form.message" class="form__message">{{ form.message }}</span>
+</form>
