@@ -30,7 +30,7 @@
     ],
     "strictPropertyInitialization": false,
     "noImplicitAny": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,8 +1,8 @@
 <form *ngIf="form" [formGroup]="FormGroup" (ngSubmit)="submitForm()" [ngClass]="{ 'form-full' : form.full }" class="form">
     <div *ngIf="form.title" class="form__title">{{ form.title }}</div>
 
+    <span *ngIf="form.text" class="form__section">{{ form.text }}</span>
     <div *ngFor="let group of form.groups" class="form__group">
-        <span *ngIf="group.text" class="form__section">{{ group.text }}</span>
         <div *ngFor="let field of group.fields" [ngClass]="{ 'form__box-hidden' : field.hidden || field.type == 'hidden', 'form__box-visible' : !field.hidden && field.type != 'hidden' }" class="form__box">
             <label *ngIf="!field.hidden && field.type != 'hidden' && field.type != 'checkbox' && field.label" class="form__label">
                 <span *ngIf="field.required" class="ellipsis">{{ field.label }} *</span>
@@ -74,15 +74,15 @@
 
     <!-- Buttons -->
     <div *ngIf="form.buttons" class="form__group">
-        <div [ngClass]="{ 'form__box-center' : form.format == 'center' }" class="form__box">
-            <div class="form__control">
-                <button *ngFor="let button of form.buttons" [ngClass]="{ 'form__button-primary' : button.primary && button.type == 'submit' }" [disabled]="form.saving" [type]="button.type == 'submit' ? 'submit' : 'button'" (click)="eventForm(button)" class="form__button">
-                    <div *ngIf="form.saving && button.type == 'submit'" class="form__loader">
+        <div [ngClass]="{ 'form__box-center' : form.center, 'form__box-full' : form.full }" class="form__box">
+            <div class="form__control form__control-full">
+                <button *ngFor="let button of form.buttons" [ngClass]="{ 'form__button-primary' : button.primary && button.submit, 'form__button-full' : form.full }" [disabled]="form.saving" [type]="button.submit ? 'submit' : 'button'" (click)="eventForm(button)" class="form__button">
+                    <div *ngIf="form.saving && button.submit" class="form__loader">
                         <div class="loader">
-                            <div class="loader__inner"></div>
+                            <div [ngClass]="{ 'loader__inner-primary' : button.primary && button.submit }" class="loader__inner"></div>
                         </div>
                     </div>
-                    <span *ngIf="!form.saving || button.type != 'submit'">
+                    <span *ngIf="!form.saving || !button.submit">
                         <span>{{ button.text }}</span>
                     </span>
                 </button>

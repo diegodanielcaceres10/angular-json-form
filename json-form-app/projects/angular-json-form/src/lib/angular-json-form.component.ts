@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'lib-angular-json-form',
+    selector: 'angular-json-form',
     templateUrl: './angular-json-form.component.html',
     styleUrls: ['./angular-json-form.component.scss']
 })

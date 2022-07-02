@@ -82,6 +82,10 @@ input, textarea, button {
             width: 0;
         }
 
+        &-full {
+            width: 100%;
+        }
+
         &-center {
             align-items: center;
             width: 100%;
@@ -101,6 +105,7 @@ input, textarea, button {
         }
 
         &-full {
+            justify-content: center;
             width: 100%;
         }
 
@@ -577,15 +582,6 @@ input, textarea, button {
         transition: all .1s ease;
         width: 8rem;
 
-        &-full {
-            width: 100%;
-        }
-
-        &-primary {
-            background: blue;
-            color: white;
-        }
-
         &:disabled {
             opacity: .5;
         }
@@ -610,7 +606,7 @@ input, textarea, button {
         }
 
         &:focus {
-            border-color: blue;
+            border-color: gold;
         }
 
         &:not(:first-child) {
@@ -619,6 +615,19 @@ input, textarea, button {
 
         &:not(:last-child) {
             margin-right: .2rem;
+        }
+
+        &-full {
+            width: 100%;
+        }
+
+        &-primary {
+            background: blue;
+            color: white;
+
+            &:focus {
+                border-color: blue;
+            }
         }
     }
 
@@ -717,13 +726,18 @@ input, textarea, button {
     &__inner {
         box-sizing: border-box;
         position: relative;
-        border: 3px solid whitesmoke;
+        border: 3px solid blue;
         border-left: 3px solid transparent;
         -webkit-transform: translateZ(0);
         -ms-transform: translateZ(0);
         transform: translateZ(0);
         -webkit-animation: load8 1.1s infinite linear;
         animation: load8 1.1s infinite linear;
+
+        &-primary {
+            border: 3px solid whitesmoke;
+            border-left: 3px solid transparent;
+        }
     }
 }
 
