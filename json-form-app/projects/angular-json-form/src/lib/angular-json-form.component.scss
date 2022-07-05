@@ -1,1 +1,808 @@
-@import "../assets/style"; // path to the style.scss file
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Ubuntu&display=swap');
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 600px) { @content };
+    }
+}
+::selection {
+    background: var(--angular-json-form-color, #444);
+    color: var(--angular-json-form-background, white);
+}
+
+.angular-json-form {
+    align-items: flex-end;
+    background: var(--angular-json-form-background, white);
+    box-sizing: border-box;
+    color: var(--angular-json-form-color, #444);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Ubuntu', sans-serif;
+    max-width: 600px;
+    padding: .5rem;
+    position: relative;
+    width: 100%;
+
+    &-full {
+        max-width: 100%;
+    }
+
+    &__title {
+        font-weight: bold;
+        padding: 1rem;
+    }
+
+    &__section {
+        padding-bottom: 1rem;
+        width: 100%;
+    }
+
+    &__group {
+        box-sizing: border-box;
+        display: flex;
+        position: relative;
+        width: 100%;
+
+        @include respond(phone) {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+    &__box {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+
+        &-full {
+            width: 100%;
+        }
+
+        &-center {
+            align-items: center;
+            width: 100%;
+        }
+
+        &-visible {
+            padding: .5rem 0;
+            width: 100%;
+        }
+
+        &-overflow {
+            overflow: hidden;
+        }
+    }
+
+    &__field {
+        padding: 0 .2rem;
+
+        &-hidden {
+            padding: 0;
+        }
+    }
+
+    &__label {
+        box-sizing: border-box;
+        display: flex;
+        font-size: .8rem;
+        padding: 0 .5rem;
+        width: 100%;
+
+        & label {
+            display: flex;
+            height: 1rem;
+            overflow: hidden;
+            width: 100%;
+        }
+    }
+
+    &__error {
+        color: var(--angular-json-form-error, red);
+        flex: 1;
+        font-size: .8rem;
+        padding-left: .2rem;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    &__control {
+        align-items: center;
+        border-radius: .5rem;
+        display: flex;
+        height: 3rem;
+        position: relative;
+
+        &-xl {
+            height: 10rem;
+        }
+
+        &-full {
+            justify-content: center;
+            width: 100%;
+        }
+
+        &-wrap {
+            flex-wrap: wrap;
+            height: auto;
+        }
+    }
+
+    &__radio {
+        align-items: center;
+        display: flex;
+        height: 3rem;
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+
+        @include respond(phone) {
+            width: 100%;
+        }
+    }
+
+    &__input {
+        background: transparent;
+        border: 1px solid var(--angular-json-form-border, lightgrey);
+        border-radius: .5rem;
+        box-sizing: border-box;
+        color: var(--angular-json-form-color, #444);
+        font: inherit;
+        height: 100%;
+        margin: 0;
+        outline: none;
+        padding: 1rem;
+        text-align: left;
+        width: 100%;
+        z-index: 2;
+
+        &[type=number]::-webkit-inner-spin-button, 
+        &[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        &[type="checkbox"] {
+            cursor: pointer;
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+
+            & + label {
+                border: 1px solid var(--angular-json-form-border, lightgrey);
+                border-radius: .2rem;
+                height: 20px;
+                width: 20px;
+            }
+
+            &:focus + label {
+                border-color: var(--angular-json-form-focus, gold);
+            }
+
+            & + label::before {
+                border: 1px solid transparent;
+                border-radius: .2rem;
+                content: "";
+                height: 14px;
+                left: 3px;
+                position: absolute;
+                width: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            &:checked + label::before {
+                background: var(--angular-json-form-primary, blue);
+                border-color: var(--angular-json-form-primary, blue);
+            }
+
+            & ~ label:last-child {
+                flex: 1;
+                font-size: .9rem;
+                height: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                & span {
+                    flex: 1;
+                    padding: 0 1rem 0 .3rem;
+                }
+            }
+        }
+
+        &[type="radio"] {
+            cursor: pointer;
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+
+            & + label {
+                border: 1px solid var(--angular-json-form-border, lightgrey);
+                border-radius: 1.5rem;
+                height: 20px;
+                width: 20px;
+            }
+
+            &:focus + label {
+                border-color: var(--angular-json-form-focus, gold);
+            }
+
+            & + label::before {
+                border: 1px solid transparent;
+                border-radius: 100%;
+                content: "";
+                height: 14px;
+                left: 3px;
+                position: absolute;
+                width: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            &:checked + label::before {
+                background: var(--angular-json-form-primary, blue);
+                border-color: var(--angular-json-form-primary, blue);
+            }
+
+            & ~ label:last-child {
+                flex: 1;
+                font-size: .9rem;
+                height: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+                & span {
+                    flex: 1;
+                    padding: 0 1rem 0 .3rem;
+                }
+            }
+        }
+
+        &[type="file"] {
+            cursor: pointer;
+            max-width: 100%;
+            opacity: 0;
+            position: absolute;
+            width: 10rem;
+            z-index: 5;
+
+            &:focus + div {
+                border-color: var(--angular-json-form-focus, gold);
+            }
+
+            &::file-selector-button {
+                display: none;
+            }
+
+            &[multiple] {
+                width: 100%;
+
+                &:focus + span {
+                    border-color: var(--angular-json-form-focus, gold);
+                }
+
+                & ~ span {
+                    align-items: center;
+                    border: 1px solid var(--angular-json-form-border, lightgrey);
+                    border-radius: .5rem;
+                    display: flex;
+                    height: 100%;
+                    padding-left: 1rem;
+                    width: 100%;
+                }
+            }
+    
+            &:disabled {
+                cursor: not-allowed;
+                opacity: 0;
+            }
+        }
+
+        &[type="color"] {
+            border-radius: 50%;
+            cursor: pointer;
+            padding: .3rem;
+            width: 3rem;
+
+            &.empty {
+                opacity: 0;
+            }
+
+            &:focus + span {
+                border-color: var(--angular-json-form-focus, gold);
+            }
+
+            & ~ span {
+                border: 1px solid var(--angular-json-form-border, lightgrey);
+                border-radius: 50%;
+                height: 100%;
+                position: absolute;
+                width: 3rem;
+            }
+
+            &::-webkit-color-swatch-wrapper {
+                border-radius: 50%;
+                padding: 0;
+            }
+    
+            &::-webkit-color-swatch {
+                border-radius: 50%;
+                border: none;
+            }
+        }
+
+        &:focus {
+            border-color: var(--angular-json-form-focus, gold);
+        }
+
+        &:disabled {
+            background: var(--angular-json-form-border, lightgrey);
+            opacity: .5;
+        }
+
+        &-hidden {
+            display: none;
+        }
+    }
+
+    &__select {
+        align-items: center;
+        background: transparent;
+        border: 1px solid var(--angular-json-form-border, lightgrey);
+        border-radius: .5rem;
+        color: var(--angular-json-form-color, #444);
+        display: flex;
+        font: inherit;
+        height: 100%;
+        outline: none;
+        padding: 1rem;
+        text-align: left;
+        width: 100%;
+        z-index: 3;
+
+        & div, & span {
+            width: 100%;
+        }
+    
+        &:not(:disabled) {
+            cursor: pointer;
+
+            &:focus, &:focus-within {
+                z-index: 10;
+            }
+        }
+    
+        &:disabled {
+            background: var(--angular-json-form-border, lightgrey);
+            opacity: .5;
+        }
+
+        &:focus, &:focus-within {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-color: var(--angular-json-form-focus, gold);
+
+            & ul {
+                display: flex;
+            }
+        }
+    }
+
+    &__options {
+        width: 100%;
+    }
+
+    &__list {
+        background: var(--angular-json-form-background, white);
+        border: 1px solid var(--angular-json-form-border, lightgrey);
+        box-sizing: border-box;
+        box-shadow: 2px 2px 5px rgba(black, .3);
+        display: none;
+        flex-direction: column;
+        left: 0;
+        list-style: none;
+        margin: 0;
+        max-height: 10rem;
+        overflow: auto;
+        padding: 0;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+    }
+
+    &__search {
+        background: transparent;
+        border: none;
+        border-bottom: .1rem solid var(--angular-json-form-border, lightgrey);
+        box-sizing: border-box;
+        color: var(--angular-json-form-color, #444);
+        font: inherit;
+        font-size: .8rem;
+        height: 100%;
+        outline: none;
+        text-align: left;
+        width: 100%;
+
+        &::placeholder {
+            color: var(--angular-json-form-grey, lightgrey);;
+        }
+    }
+
+    &__option {
+        font-size: .8rem;
+        text-align: left;
+
+        &-empty {
+            color: var(--angular-json-form-grey, lightgrey);
+            cursor: default;
+        }
+
+        &-valid {
+            cursor: pointer;
+
+            &:hover {
+                background: var(--angular-json-form-grey, lightgrey);
+            }
+        }
+
+        & span {
+            box-sizing: border-box;
+            display: flex;
+            line-height: initial;
+            padding: 1rem;
+        }
+
+        & input {
+            padding: 1rem;
+        }
+    }
+
+    &__items {
+        align-content: flex-start;
+        border: 1px solid var(--angular-json-form-border, lightgrey);
+        border-radius: .5rem;
+        display: flex;
+        flex-wrap: wrap;
+        height: 10rem;
+        margin-top: .5rem;
+        overflow-y: scroll;
+
+        & figure {
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: .5rem;
+            display: flex;
+            height: 8rem;
+            justify-content: center;
+            margin: .2rem;
+            overflow: hidden;
+            position: relative;
+            width: 8rem;
+
+            &:hover {
+                border-color: var(--angular-json-form-border, lightgrey);
+                box-shadow: 2px 2px 10px rgba(black, .3);
+            }
+
+            &:hover svg {
+                opacity: .5;
+            }
+
+            & svg {
+                cursor: pointer;
+                fill: var(--angular-json-form-error, red);
+                opacity: 0;
+                padding: .3rem;
+                position: absolute;
+                right: 0;
+                text-shadow: 0 0 .1rem black;
+                top: 0;
+                width: 1.3rem;
+                z-index: 1;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+
+            & img.delete {
+                filter: grayscale(1);
+                opacity: .5;
+            }
+        
+            & img.cover {
+                min-height: 100%;
+                object-fit: cover;
+                width: 100%;
+            }
+        
+            & img.contain {
+                height: 100%;
+                min-width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    &__item {
+        align-items: center;
+        background: var(--angular-json-form-border, lightgrey);
+        border-radius: 5rem;
+        display: flex;
+        padding: .5rem 1rem;
+        margin: .2rem;
+
+        & span {
+            width: 100%;
+        }
+
+        & svg {
+            cursor: pointer;
+            padding-left: .5rem;
+            width: 1rem;
+        }
+    }
+
+    &__image {
+        border: 1px solid var(--angular-json-form-border, lightgrey);
+        border-radius: .5rem;
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        max-width: 10rem;
+        width: 100%;
+
+        & figure {
+            align-items: center;
+            border-radius: .5rem;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+            width: 100%;
+
+            & svg {
+                fill: var(--angular-json-form-border, lightgrey);
+                opacity: .7;
+                width: 2rem;
+            }
+        
+            & img.cover {
+                min-height: 100%;
+                object-fit: cover;
+                width: 100%;
+            }
+        
+            & img.contain {
+                min-height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    &__textarea {
+        background: transparent;
+        border: 1px solid var(--angular-json-form-border, lightgrey);
+        border-radius: .5rem;
+        box-sizing: border-box;
+        color: var(--angular-json-form-color, #444);
+        height: 10rem;
+        font: inherit;
+        outline: none;
+        padding: 1rem;
+        resize: none;
+        width: 100%;
+
+        &:focus {
+            border-color: var(--angular-json-form-focus, gold);
+        }
+    }
+
+    &__button {
+        align-items: center;
+        background: transparent;
+        border: 1px solid var(--angular-json-form-border, lightgrey);
+        border-radius: .5rem;
+        color: var(--angular-json-form-color, #444);
+        display: flex;
+        font: inherit;
+        height: 100%;
+        justify-content: center;
+        margin: 0 .2rem;
+        outline: none;
+        overflow: hidden;
+        padding: 1rem 0;
+        transition: all .1s ease;
+        width: 8rem;
+
+        &:disabled {
+            opacity: .5;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: .8;
+            cursor: pointer;
+        }
+    
+        &:active:not(:disabled) {
+            transform: translateY(.2rem);
+        }
+    
+        & span {
+            align-items: baseline;
+            display: flex;
+            justify-content: center;
+    
+            & i ~ span {
+                padding-left: .3rem;
+            }
+        }
+
+        &:focus {
+            border-color: var(--angular-json-form-focus, gold);
+        }
+
+        &-full {
+            width: 100%;
+        }
+
+        &-primary {
+            background: var(--angular-json-form-primary, blue);
+            border-color: var(--angular-json-form-primary, blue);
+            color: var(--angular-json-form-background, white);
+
+            &:focus {
+                border-color: var(--angular-json-form-focus, gold);
+            }
+        }
+    }
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all .2s ease;
+        width: 2.5rem;
+        z-index: 5;
+
+        & svg {
+            fill: var(--angular-json-form-border, lightgrey);
+            width: 1rem;
+        }
+
+        &-symbol {
+            left: 0;
+
+            & ~ input,& ~ button {
+                padding-left: 2.5rem;
+            }
+        }
+
+        &-action {
+            border: 1px solid transparent;
+            border-left-color: var(--angular-json-form-border, lightgrey);
+            cursor: pointer;
+            right: 0;
+
+
+            & ~ input,& ~ button {
+                padding-right: 2.5rem;
+            }
+        }
+
+        &-off {
+            border: 1px solid transparent;
+            border-left-color: var(--angular-json-form-border, lightgrey);
+            right: 0;
+            z-index: 1;
+
+            & ~ input,& ~ button {
+                padding-right: 2.5rem;
+            }
+        }
+    }
+
+    &__loader {
+        height: 1.5rem;
+        position: relative;
+        width: 1.5rem;
+    }
+
+    &__message {
+        color: var(--angular-json-form-error, red);
+        font-size: .8rem;
+        padding: .5rem;
+    }
+}
+
+.loader {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+
+    &-primary {
+        background: var(--primary);
+    }
+
+    &-sub {
+        background: var(--light);
+        z-index: 10;
+    }
+
+    &__inner,
+    &__inner:after {
+        border-radius: 50%;
+        height: 100%;
+        max-height: 3rem;
+        max-width: 3rem;
+        width: 100%;
+    }
+    
+    &__inner {
+        box-sizing: border-box;
+        position: relative;
+        border: 3px solid var(--angular-json-form-primary, blue);
+        border-left: 3px solid transparent;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s infinite linear;
+        animation: load8 1.1s infinite linear;
+
+        &-primary {
+            border: 3px solid var(--angular-json-form-background, white);
+            border-left: 3px solid transparent;
+        }
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+// Define scroll bar design
+.scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: .1rem;
+}
+
+.scrollbar::-webkit-scrollbar {
+    height: .3rem;
+    width: .3rem;
+    background: transparent;
+
+    @include respond(phone) {
+        width: .3rem;
+    }
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background: grey;
+}

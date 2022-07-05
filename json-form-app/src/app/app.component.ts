@@ -14,7 +14,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "hidden2",
+                        name: "hidden",
                         type: "hidden",
                         value: 1,
                     },
@@ -22,11 +22,6 @@ export class AppComponent {
             },
             {
                 fields: [
-                    {
-                        name: "hidden",
-                        type: "hidden",
-                        value: 1,
-                    },
                     {
                         name: "text",
                         type: "text",
@@ -59,6 +54,16 @@ export class AppComponent {
             {
                 fields: [
                     {
+                        name: "textdisabled",
+                        type: "text",
+                        label: "Text Disabled",
+                        disabled: true,
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
                         name: "password",
                         type: "password",
                         label: "Password",
@@ -72,6 +77,17 @@ export class AppComponent {
                         type: "number",
                         label: "Number",
                         value: 100,
+                    },
+                    {
+                        name: "numbermin",
+                        type: "number",
+                        label: "Number Min Value 50",
+                        min: 50,
+                    },
+                    {
+                        name: "numbermax",
+                        type: "number",
+                        label: "Number Max Value 50",
                         max: 50,
                     },
                 ],
@@ -102,16 +118,12 @@ export class AppComponent {
                         name: "checkbox",
                         type: "checkbox",
                         label: "CheckBox",
+                        text: "CheckBox",
                     },
                     {
                         name: "checkbox2",
                         type: "checkbox",
-                        label: "CheckBox2",
-                    },
-                    {
-                        name: "checkbox3",
-                        type: "checkbox",
-                        label: "CheckBox3",
+                        text: "CheckBox2",
                     },
                 ],
             },
@@ -131,8 +143,22 @@ export class AppComponent {
                         name: "select",
                         type: "select",
                         label: "Element Select",
-                        options: ["Option 1", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3", "Option 2", "Option 3"],
+                        options: ["Option 1", "Option 2", "Option 3"],
                         searchable: true,
+                        required: true,
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
+                        name: "selectdisabled",
+                        type: "select",
+                        label: "Element Select Disabled",
+                        options: ["Option 1", "Option 2", "Option 3"],
+                        searchable: true,
+                        required: true,
+                        disabled: true,
                     },
                 ],
             },
@@ -219,10 +245,13 @@ export class AppComponent {
                 submit: true,
             },
         ],
+        format: {
+            primary: "lime",
+        },
     };
     form2: any = {
         full: true,
-        title: "Example full size.",
+        title: "Example formated and full size.",
         groups: [
             {
                 fields: [
@@ -256,6 +285,11 @@ export class AppComponent {
                 primary: true,
             },
         ],
+        format: {
+            background: "whitesmoke",
+            primary: "coral",
+            focus: "darkgrey",
+        },
     };
     form3: any = {
         center: true,
@@ -265,17 +299,16 @@ export class AppComponent {
                 text: "Ok",
                 submit: true,
                 primary: true,
+                saving: true,
             },
         ],
+        format: {
+            background: "whitesmoke",
+        },
     };
 
     send(data) {
         console.log(data);
-        setTimeout(() => {
-            this.form.saving = false;
-            this.form2.saving = false;
-            this.form3.saving = false;
-        }, 500);
     }
 
     event(data) {

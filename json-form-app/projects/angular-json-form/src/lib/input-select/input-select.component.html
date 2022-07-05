@@ -1,8 +1,8 @@
-<div [formGroup]="FormGroup" class="form__control">
-    <span class="form__icon form__icon-off">
+<div [formGroup]="FormGroup" class="angular-json-form__control">
+    <span class="angular-json-form__icon angular-json-form__icon-off">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"/></svg>
     </span>
-    <button #button [disabled]="field.disabled" type="button" class="form__select">
+    <button #button [disabled]="field.disabled" type="button" class="angular-json-form__select">
         <span *ngIf="field.multiple">{{ legends[lang] ? legends[lang].SELECT : legends["en-US"].SELECT }}</span>
         <div *ngIf="field.option && field.option.value && field.value">
             <span *ngIf="field.translate">{{ ((field.prefix || "") + field.value[field.option.label]) }}</span>
@@ -16,15 +16,15 @@
             <span *ngIf="field.translate">{{ ((field.prefix || "") + field.value) }}</span>
             <span *ngIf="!field.translate">{{ field.value }}</span>
         </div>
-        <div class="form__options">
-            <ul class="form__list scrollbar-custom">
-                <li *ngIf="field.searchable && field.options && field.options.length > 0" class="form__option">
-                    <input #input (input)="filterOptions($event)" [placeholder]="legends[lang] ? legends[lang].SEARCH : legends['en-US'].SEARCH" class="form__search" type="text" spellcheck="false">
+        <div class="angular-json-form__options">
+            <ul class="angular-json-form__list scrollbar-custom">
+                <li *ngIf="field.searchable && field.options && field.options.length > 0" class="angular-json-form__option">
+                    <input #input (input)="filterOptions($event)" [placeholder]="legends[lang] ? legends[lang].SEARCH : legends['en-US'].SEARCH" class="angular-json-form__search" type="text" spellcheck="false">
                 </li>
-                <li *ngIf="!field.optionsView || field.optionsView.length == 0" class="form__option form__option-empty">
+                <li *ngIf="!field.optionsView || field.optionsView.length == 0" class="angular-json-form__option angular-json-form__option-empty">
                     <span>{{ legends[lang] ? legends[lang].EMPTY : legends["en-US"].EMPTY }}</span>
                 </li>
-                <li *ngFor="let option of field.optionsView" (click)="selectOption(option)" class="form__option form__option-valid">
+                <li *ngFor="let option of field.optionsView" (click)="selectOption(option)" class="angular-json-form__option angular-json-form__option-valid">
                     <div *ngIf="field.option && field.option.value && option">
                         <span *ngIf="field.translate">{{ ((field.prefix || "") + option[field.option.label]) }}</span>
                         <span *ngIf="!field.translate">{{ option[field.option.label] }}</span>
@@ -41,13 +41,13 @@
             </ul>
         </div>
     </button>
-    <input [formControlName]="field.name" (ngModelChange)="changedEvent()" class="form__input form__input-hidden">
+    <input [formControlName]="field.name" (ngModelChange)="changedEvent()" class="angular-json-form__input angular-json-form__input-hidden">
 </div>
-<div *ngIf="field.multiple" class="form__items scrollbar">
+<div *ngIf="field.multiple" class="angular-json-form__items scrollbar">
     <div *ngFor="let item of field.value;let i = index">
-        <div *ngIf="!item.deleted" class="form__item">
-            <span *ngIf="field.option && field.option.value">{{ item[field.option.label] }}</span>
-            <span *ngIf="!field.option || !field.option.value">{{ item }}</span>
+        <div *ngIf="!item.deleted" class="angular-json-form__item">
+            <span>{{ item }}</span>
+            <svg (click)="deleteOption(i)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
         </div>
     </div>
 </div>
