@@ -9,7 +9,6 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 export class AngularJsonFormComponent implements OnInit {
 
     @Input() form: any;
-    @Input() lang: string = "en-US";
     @Output() send = new EventEmitter<any>();
     @Output() event = new EventEmitter<any>();
 
@@ -258,7 +257,7 @@ export class AngularJsonFormComponent implements OnInit {
             this.form.saving = true;
             if (this.FormGroup.invalid) {
                 this.form.error = true;
-                this.form.message = this.legends[this.lang] ? this.legends[this.lang].INVALID : this.legends['en-US'].INVALID;
+                this.form.message = this.legends[this.form.lang] ? this.legends[this.form.lang].INVALID : this.legends['en-US'].INVALID;
                 this.form.saving = false;
             } else {
                 let values = this.FormGroup.value;

@@ -8,68 +8,68 @@
                     <span>{{ field.label }}</span>
                     <span *ngIf="field.required">*</span>
                     <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['required']" class="angular-json-form__error">
-                        {{ legends[lang] ? legends[lang].REQUIRED : legends['en-US'].REQUIRED }}
+                        {{ legends[form.lang] ? legends[form.lang].REQUIRED : legends['en-US'].REQUIRED }}
                     </span>
                     <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['max']" class="angular-json-form__error">
-                        {{ legends[lang] ? legends[lang].MAX : legends['en-US'].MAX }}
+                        {{ legends[form.lang] ? legends[form.lang].MAX : legends['en-US'].MAX }}
                     </span>
                     <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['min']" class="angular-json-form__error">
-                        {{ legends[lang] ? legends[lang].MIN : legends['en-US'].MIN }}
+                        {{ legends[form.lang] ? legends[form.lang].MIN : legends['en-US'].MIN }}
                     </span>
                     <span *ngIf="field.error == 'DUPLICATE'" class="angular-json-form__error">
-                        {{ legends[lang] ? legends[lang].DUPLICATE : legends['en-US'].DUPLICATE }}
+                        {{ legends[form.lang] ? legends[form.lang].DUPLICATE : legends['en-US'].DUPLICATE }}
                     </span>
                     <span *ngIf="field.error == 'MATCH'" class="angular-json-form__error">
-                        {{ legends[lang] ? legends[lang].MATCH : legends['en-US'].MATCH }}
+                        {{ legends[form.lang] ? legends[form.lang].MATCH : legends['en-US'].MATCH }}
                     </span>
                     <span *ngIf="field.error == 'FORMAT'" class="angular-json-form__error">
-                        {{ legends[lang] ? legends[lang].FORMAT : legends['en-US'].FORMAT }}
+                        {{ legends[form.lang] ? legends[form.lang].FORMAT : legends['en-US'].FORMAT }}
                     </span>
                     <span *ngIf="field.error == 'SIZE'" class="angular-json-form__error">
-                        {{ legends[lang] ? legends[lang].SIZE : legends['en-US'].SIZE }}
+                        {{ legends[form.lang] ? legends[form.lang].SIZE : legends['en-US'].SIZE }}
                     </span>
                 </label>
             </div>
             <div *ngIf="!field.hidden" [ngClass]="{ 'angular-json-form__field-hidden' : field.type == 'hidden' }" class="angular-json-form__field">
 
                 <!-- Input type checkbox -->
-                <app-input-checkbox *ngIf="field.type == 'checkbox'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-checkbox>
+                <app-input-checkbox *ngIf="field.type == 'checkbox'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-checkbox>
 
                 <!-- Input type color -->
-                <app-input-color *ngIf="field.type == 'color'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-color>
+                <app-input-color *ngIf="field.type == 'color'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-color>
 
                 <!-- Input type email -->
-                <app-input-email *ngIf="field.type == 'email'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-email>
+                <app-input-email *ngIf="field.type == 'email'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-email>
 
                 <!-- Input type hidden -->
                 <app-input-hidden *ngIf="field.type == 'hidden'" [FormGroup]="FormGroup" [field]="field"></app-input-hidden>
 
                 <!-- Input type image -->
-                <app-input-image *ngIf="field.type == 'image'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-image>
+                <app-input-image *ngIf="field.type == 'image'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-image>
 
                 <!-- Input type list -->
-                <app-input-list *ngIf="field.type == 'list'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-list>
+                <app-input-list *ngIf="field.type == 'list'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-list>
 
                 <!-- Input type number -->
-                <app-input-number *ngIf="field.type == 'number'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-number>
+                <app-input-number *ngIf="field.type == 'number'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-number>
 
                 <!-- Input type password -->
-                <app-input-password *ngIf="field.type == 'password'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-password>
+                <app-input-password *ngIf="field.type == 'password'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-password>
 
                 <!-- Input type radio -->
-                <app-input-radio *ngIf="field.type == 'radio'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-radio>
+                <app-input-radio *ngIf="field.type == 'radio'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-radio>
 
                 <!-- Input type select -->
-                <app-input-select *ngIf="field.type == 'select'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-select>
+                <app-input-select *ngIf="field.type == 'select'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-select>
 
                 <!-- Input type tel -->
-                <app-input-tel *ngIf="field.type == 'tel'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-tel>
+                <app-input-tel *ngIf="field.type == 'tel'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-tel>
 
                 <!-- Input type text -->
-                <app-input-text *ngIf="field.type == 'text'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-text>
+                <app-input-text *ngIf="field.type == 'text'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-text>
 
                 <!-- Input type textarea -->
-                <app-input-textarea *ngIf="field.type == 'textarea'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="lang" (changed)="changed($event)"></app-input-textarea>
+                <app-input-textarea *ngIf="field.type == 'textarea'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-textarea>
 
             </div>
         </div>
