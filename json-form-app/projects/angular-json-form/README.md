@@ -8,7 +8,6 @@
 ```sh
 npm install angular-json-form
 ```
------
 ## Quickstart
 
 #### 1. Add the `AngularJsonFormModule` to `imports` in `src/app/app.module.ts`:
@@ -110,7 +109,6 @@ handleValues(values) {
     // Do something...
 }
 ```
------
 ## Usage
 
 ### Input Types
@@ -281,15 +279,6 @@ Property `max` is required.
 {
     fields: [
         {
-            name: "imagecontain",
-            type: "image",
-            label: "Image Contain Label",
-        },
-    ],
-},
-{
-    fields: [
-        {
             name: "imagemultiplename",
             type: "image",
             label: "Multiple Images upload",
@@ -376,7 +365,6 @@ handleEvent(event) {
     // Do something...
 }
 ```
------
 ## Demo
 
 ### Example application
@@ -385,7 +373,6 @@ You can clone the project and find `json-form-app` to run on your own machine.
 ```sh
 npm start
 ```
------
 ### Validators
 |Property|Type|Description|
 |-|-|-|
@@ -395,7 +382,6 @@ npm start
 |maxlength|integer|Max length for a value|
 |minlength|integer|Min length for a value|
 
------
 ### Custom properties
 |Property|Type|Description|
 |-|-|-|
@@ -408,7 +394,6 @@ npm start
 |multiple|bool|Enable multiple item. Only for image and select type|
 |cover|bool|Format image size to cover the background. Only for image type|
 
------
 ## Format and styling
 The property `format` contains colors and styles properties.
 |Property|Type|Description|

@@ -281,15 +281,6 @@ Property `max` is required.
 {
     fields: [
         {
-            name: "imagecontain",
-            type: "image",
-            label: "Image Contain Label",
-        },
-    ],
-},
-{
-    fields: [
-        {
             name: "imagemultiplename",
             type: "image",
             label: "Multiple Images upload",
