@@ -8,13 +8,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
     title = 'json-form-app';
     form: any = {
+        lang: "pt-BR",
         title: "Title From Header",
         text: "Example text description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dicta dolor ipsam iure. Corporis, tenetur eaque commodi deserunt modi dignissimos nostrum rem velit nihil accusamus debitis, reiciendis aperiam repudiandae asperiores.",
         groups: [
             {
                 fields: [
                     {
-                        name: "hidden",
+                        name: "hiddenname",
                         type: "hidden",
                         value: 1,
                     },
@@ -23,7 +24,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "text",
+                        name: "textname",
                         type: "text",
                         label: "Text",
                         value: "Example Text",
@@ -34,18 +35,18 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "text2",
+                        name: "text2name",
                         type: "text",
                         label: "Text Inline Left",
                         required: true,
                     },
                     {
-                        name: "text3",
+                        name: "text3name",
                         type: "text",
                         label: "Text Inline center",
                     },
                     {
-                        name: "text4",
+                        name: "text4name",
                         type: "text",
                         label: "Text Inline Right",
                     },
@@ -54,7 +55,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "textdisabled",
+                        name: "textdisabledname",
                         type: "text",
                         label: "Text Disabled",
                         disabled: true,
@@ -64,7 +65,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "password",
+                        name: "passwordname",
                         type: "password",
                         label: "Password",
                     },
@@ -73,19 +74,19 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "number",
+                        name: "numbername",
                         type: "number",
                         label: "Number",
                         value: 100,
                     },
                     {
-                        name: "numbermin",
+                        name: "numberminname",
                         type: "number",
                         label: "Number Min Value 50",
                         min: 50,
                     },
                     {
-                        name: "numbermax",
+                        name: "numbermaxname",
                         type: "number",
                         label: "Number Max Value 50",
                         max: 50,
@@ -95,7 +96,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "email",
+                        name: "emailname",
                         type: "email",
                         label: "E-Mail",
                         value: "exampleemail@mail.com",
@@ -105,7 +106,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "tel",
+                        name: "telname",
                         type: "tel",
                         label: "Tel",
                         value: "(12) 34567-8912",
@@ -115,13 +116,13 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "checkbox",
+                        name: "checkboxname",
                         type: "checkbox",
                         label: "CheckBox",
                         text: "CheckBox",
                     },
                     {
-                        name: "checkbox2",
+                        name: "checkbox2name",
                         type: "checkbox",
                         text: "CheckBox2",
                     },
@@ -130,7 +131,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "radio",
+                        name: "radioname",
                         type: "radio",
                         label: "Radio",
                         options: ["Option 1", "Option 2", "Option 3"],
@@ -140,7 +141,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "select",
+                        name: "selectname",
                         type: "select",
                         label: "Element Select",
                         options: ["Option 1", "Option 2", "Option 3"],
@@ -152,7 +153,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "selectdisabled",
+                        name: "selectdisabledname",
                         type: "select",
                         label: "Element Select Disabled",
                         options: ["Option 1", "Option 2", "Option 3"],
@@ -165,7 +166,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "selectmultiple",
+                        name: "selectmultiplename",
                         type: "select",
                         label: "Multiple Element Select",
                         options: ["Option 1", "Option 2", "Option 3"],
@@ -176,7 +177,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "list",
+                        name: "listname",
                         type: "list",
                         label: "Element List",
                     },
@@ -185,7 +186,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "color",
+                        name: "colorname",
                         type: "color",
                         label: "Color",
                     },
@@ -194,7 +195,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "image",
+                        name: "imagename",
                         type: "image",
                         label: "Image logo",
                         max: 500000,
@@ -204,7 +205,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "imagecover",
+                        name: "imagecovername",
                         type: "image",
                         label: "Image photo",
                         max: 500000,
@@ -215,7 +216,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "imagemultiple",
+                        name: "imagemultiplename",
                         type: "image",
                         label: "Images",
                         max: 500000,
@@ -226,15 +227,9 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "textarea",
+                        name: "textareaname",
                         type: "textarea",
                         label: "Textarea",
-                    },
-                    {
-                        name: "textarea2",
-                        type: "textarea",
-                        label: "Textarea2",
-                        required: true,
                     },
                 ],
             },
@@ -250,15 +245,14 @@ export class AppComponent {
         },
     };
     form2: any = {
-        full: true,
         title: "Example formated and full size.",
         groups: [
             {
                 fields: [
                     {
-                        name: "usuario",
+                        name: "user",
                         type: "text",
-                        label: "Usuario",
+                        label: "User",
                         required: true,
                     },
                 ],
@@ -286,13 +280,13 @@ export class AppComponent {
             },
         ],
         format: {
+            full: true,
             background: "whitesmoke",
             primary: "coral",
             focus: "darkgrey",
         },
     };
     form3: any = {
-        center: true,
         title: "Example center buttons.",
         buttons: [
             {
@@ -303,6 +297,7 @@ export class AppComponent {
             },
         ],
         format: {
+            center: true,
             background: "whitesmoke",
         },
     };

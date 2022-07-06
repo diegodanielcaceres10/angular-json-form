@@ -6,7 +6,7 @@
     }
 }
 ::selection {
-    background: var(--angular-json-form-color, #444);
+    background: var(--angular-json-form-text, #444);
     color: var(--angular-json-form-background, white);
 }
 
@@ -14,7 +14,7 @@
     align-items: flex-end;
     background: var(--angular-json-form-background, white);
     box-sizing: border-box;
-    color: var(--angular-json-form-color, #444);
+    color: var(--angular-json-form-text, #444);
     display: flex;
     flex-wrap: wrap;
     font-family: 'Ubuntu', sans-serif;
@@ -146,7 +146,7 @@
         border: 1px solid var(--angular-json-form-border, lightgrey);
         border-radius: .5rem;
         box-sizing: border-box;
-        color: var(--angular-json-form-color, #444);
+        color: var(--angular-json-form-text, #444);
         font: inherit;
         height: 100%;
         margin: 0;
@@ -357,7 +357,7 @@
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
         border-radius: .5rem;
-        color: var(--angular-json-form-color, #444);
+        color: var(--angular-json-form-text, #444);
         display: flex;
         font: inherit;
         height: 100%;
@@ -422,7 +422,7 @@
         border: none;
         border-bottom: .1rem solid var(--angular-json-form-border, lightgrey);
         box-sizing: border-box;
-        color: var(--angular-json-form-color, #444);
+        color: var(--angular-json-form-text, #444);
         font: inherit;
         font-size: .8rem;
         height: 100%;
@@ -594,7 +594,7 @@
         border: 1px solid var(--angular-json-form-border, lightgrey);
         border-radius: .5rem;
         box-sizing: border-box;
-        color: var(--angular-json-form-color, #444);
+        color: var(--angular-json-form-text, #444);
         height: 10rem;
         font: inherit;
         outline: none;
@@ -612,7 +612,7 @@
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
         border-radius: .5rem;
-        color: var(--angular-json-form-color, #444);
+        color: var(--angular-json-form-text, #444);
         display: flex;
         font: inherit;
         height: 100%;

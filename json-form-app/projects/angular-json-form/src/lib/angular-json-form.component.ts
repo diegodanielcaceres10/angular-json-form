@@ -106,10 +106,10 @@ export class AngularJsonFormComponent implements OnInit {
         try {
             if (this.form && this.form.format && this.ElementRef && this.ElementRef.nativeElement) {
                 if (this.form.format.primary) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-primary", this.form.format.primary);
+                if (this.form.format.background) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-background", this.form.format.background);
+                if (this.form.format.text) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-text", this.form.format.text);
                 if (this.form.format.focus) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-focus", this.form.format.focus);
                 if (this.form.format.error) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-error", this.form.format.error);
-                if (this.form.format.background) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-background", this.form.format.background);
-                if (this.form.format.color) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-color", this.form.format.color);
                 if (this.form.format.border) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-border", this.form.format.border);
                 if (this.form.format.grey) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-grey", this.form.format.grey);
             };
@@ -124,6 +124,7 @@ export class AngularJsonFormComponent implements OnInit {
             if (!field.disabled && field.required) validators.push(Validators.required);
             if (!field.disabled && field.max) validators.push(Validators.max(field.max));
             if (!field.disabled && field.min) validators.push(Validators.min(field.min));
+            if (!field.disabled && field.maxlength) validators.push(Validators.maxLength(field.maxlength));
             if (!field.disabled && field.minlength) validators.push(Validators.minLength(field.minlength));
             return validators;
         } catch (e) {

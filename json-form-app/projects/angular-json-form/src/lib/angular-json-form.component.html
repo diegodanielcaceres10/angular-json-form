@@ -1,4 +1,4 @@
-<form *ngIf="form" [formGroup]="FormGroup" (ngSubmit)="submitForm()" [ngClass]="{ 'form-full' : form.full }" class="angular-json-form">
+<form *ngIf="form" [formGroup]="FormGroup" (ngSubmit)="submitForm()" [ngClass]="{ 'form-full' : form.format && form.format.full }" class="angular-json-form">
     <div *ngIf="form.title" class="angular-json-form__title">{{ form.title }}</div>
     <span *ngIf="form.text" class="angular-json-form__section">{{ form.text }}</span>
     <div *ngFor="let group of form.groups" class="angular-json-form__group">
@@ -77,9 +77,9 @@
 
     <!-- Buttons -->
     <div *ngIf="form.buttons" class="angular-json-form__group">
-        <div [ngClass]="{ 'angular-json-form__box-center' : form.center, 'angular-json-form__box-full' : form.full }" class="angular-json-form__box">
+        <div [ngClass]="{ 'angular-json-form__box-center' : form.format && form.format.center, 'angular-json-form__box-full' : form.format && form.format.full }" class="angular-json-form__box">
             <div class="angular-json-form__control angular-json-form__control-full">
-                <button *ngFor="let button of form.buttons" [ngClass]="{ 'angular-json-form__button-primary' : button.primary, 'angular-json-form__button-full' : form.full }" [disabled]="form.saving" [type]="button.submit ? 'submit' : 'button'" (click)="eventForm(button)" class="angular-json-form__button">
+                <button *ngFor="let button of form.buttons" [ngClass]="{ 'angular-json-form__button-primary' : button.primary, 'angular-json-form__button-full' : form.format && form.format.full }" [disabled]="form.saving" [type]="button.submit ? 'submit' : 'button'" (click)="eventForm(button)" class="angular-json-form__button">
                     <div *ngIf="form.saving && button.submit && button.saving" class="angular-json-form__loader">
                         <div class="loader">
                             <div [ngClass]="{ 'loader__inner-primary' : button.primary }" class="loader__inner"></div>
