@@ -13,6 +13,7 @@ export class AngularJsonFormComponent implements OnInit {
     @Output() event = new EventEmitter<any>();
 
     FormGroup: FormGroup;
+    types: any = ["checkbox", "color", "email", "hidden", "image", "list", "number", "password", "radio", "select", "tel", "text", "textarea"];
     legends: any = {
         "en-US": {
             "INVALID": "Invalid form",
@@ -67,10 +68,27 @@ export class AngularJsonFormComponent implements OnInit {
 
     ngOnInit(): void {
         try {
+            let ready = true;
+            let names = [];
             this.FormGroup = new FormGroup({});
-            if (this.form && this.form.groups && this.form.groups.length > 0) {
-                if (this.form.groups) this.form.groups.map((group) => {
-                    if (group.fields) group.fields.map((field) => {
+            if (this.form && this.form.groups && this.form.groups.length > 0) this.form.groups.map((group) => {
+                if (group.fields && group.fields.length > 0) group.fields.map((field) => {
+                    if (!field.name || !field.type) {
+                        ready = false;
+                        return
+                    } else if (ready) {
+                        if (names.indexOf(field.name) > -1) {
+                            console.error("Duplicate name control: " + field.name);
+                            ready = false;
+                            return
+                        } else {
+                            names.push(field.name);
+                        };
+                        if (this.types.indexOf(field.type) == -1) {
+                            console.error("Uknow type control: " + field.type);
+                            ready = false;
+                            return
+                        };
                         let validators = this.setValidators(field);
                         if (field.type == "select") {
                             if (field.option && field.option.value) {
@@ -86,6 +104,7 @@ export class AngularJsonFormComponent implements OnInit {
                                 value: field.multiple && field.value && field.value.map(i => new File([""], i.id)),
                                 disabled: field.disabled,
                             }, validators));
+                            if (!field.maxsize || field.maxsize < 1 || field.maxsize > 5000000) field.maxsize = 500000;
                             if (field.multiple && !field.images) field.images = [];
                         } else if (field.type == "checkbox") {
                             this.FormGroup.addControl(field.name, new FormControl(field.value ? true : false));
@@ -94,9 +113,10 @@ export class AngularJsonFormComponent implements OnInit {
                         };
                         if (field.options && field.options.length > 0) field.optionsView = field.options;
                         if (field.type == "list" && !field.value) field.value = [];
-                    });
+                    };
                 });
-            };
+            });
+            this.form.ready = ready;
         } catch (e) {
             console.error("Error", e);
         };

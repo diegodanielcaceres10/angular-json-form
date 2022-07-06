@@ -1,4 +1,4 @@
-<form *ngIf="form" [formGroup]="FormGroup" (ngSubmit)="submitForm()" [ngClass]="{ 'form-full' : form.format && form.format.full }" class="angular-json-form">
+<form *ngIf="form && form.ready" [formGroup]="FormGroup" (ngSubmit)="submitForm()" [ngClass]="{ 'form-full' : form.format && form.format.full }" class="angular-json-form">
     <div *ngIf="form.title" class="angular-json-form__title">{{ form.title }}</div>
     <span *ngIf="form.text" class="angular-json-form__section">{{ form.text }}</span>
     <div *ngFor="let group of form.groups" class="angular-json-form__group">
@@ -94,3 +94,4 @@
     </div>
     <span *ngIf="form.message" class="angular-json-form__message">{{ form.message }}</span>
 </form>
+<span *ngIf="form && !form.ready">{{ legends[form.lang] ? legends[form.lang].INVALID : legends['en-US'].INVALID }}</span>

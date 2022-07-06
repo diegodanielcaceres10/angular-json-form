@@ -35,6 +35,26 @@ export class AppComponent {
             {
                 fields: [
                     {
+                        name: "emailname",
+                        type: "email",
+                        label: "E-Mail",
+                        value: "exampleemail@mail.com",
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
+                        name: "telname",
+                        type: "tel",
+                        label: "Tel",
+                        value: "(12) 34567-8912",
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
                         name: "text2name",
                         type: "text",
                         label: "Text Inline Left",
@@ -90,26 +110,6 @@ export class AppComponent {
                         type: "number",
                         label: "Number Max Value 50",
                         max: 50,
-                    },
-                ],
-            },
-            {
-                fields: [
-                    {
-                        name: "emailname",
-                        type: "email",
-                        label: "E-Mail",
-                        value: "exampleemail@mail.com",
-                    },
-                ],
-            },
-            {
-                fields: [
-                    {
-                        name: "telname",
-                        type: "tel",
-                        label: "Tel",
-                        value: "(12) 34567-8912",
                     },
                 ],
             },
@@ -197,8 +197,8 @@ export class AppComponent {
                     {
                         name: "imagename",
                         type: "image",
-                        label: "Image logo",
-                        max: 500000,
+                        label: "Image logo. 100 KB Max Size",
+                        maxsize: 100000,
                     },
                 ],
             },
@@ -208,7 +208,6 @@ export class AppComponent {
                         name: "imagecovername",
                         type: "image",
                         label: "Image photo",
-                        max: 500000,
                         cover: true,
                     },
                 ],
@@ -219,7 +218,6 @@ export class AppComponent {
                         name: "imagemultiplename",
                         type: "image",
                         label: "Images",
-                        max: 500000,
                         multiple: true,
                     },
                 ],

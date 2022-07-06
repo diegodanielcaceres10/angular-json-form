@@ -3,11 +3,26 @@
 [![npm](https://img.shields.io/npm/v/angular-json-form.svg?maxAge=2592000)](https://www.npmjs.com/package/angular-json-form)
 [![downloads](https://img.shields.io/npm/dt/angular-json-form.svg?maxAge=2592000)](https://www.npmjs.com/package/angular-json-form)
 
+## Description
+Angular JSON Form is a angular module with a component to allow create html form from a json or javascript object, fully modelable and stylizable with the most common types of `inputs` and some custom ones, a set of `buttons` and callbacks functions.
+
+## Quick links
+- [Installation](#installation)
+- [Quickstart](#quickstart)
+- [Usage](#usage)
+    - [Input Types](#input-types)
+    - [Button Set](#button-set)
+- [Validators](#validators)
+- [Custom Properties](#custom-properties)
+- [Format and Styling](#format-and-styling)
+- [Demo](#demo)
+
 ## Installation
 
 ```sh
 npm install angular-json-form
 ```
+
 ## Quickstart
 
 #### 1. Add the `AngularJsonFormModule` to `imports` in `src/app/app.module.ts`:
@@ -113,6 +128,9 @@ handleValues(values) {
 
 ### Input Types
 Each element in a `groups` array, is a line of the form and each element in a `fields` array is a input in a group line. Properties `name` and `type` are required.
+
+![](json-form-app/src/assets/img/inputs.png)
+
 #### Text, Number, E-Mail and Tel.
 ```javascript
 {
@@ -152,7 +170,6 @@ Each element in a `groups` array, is a line of the form and each element in a `f
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs.png)
 
 #### Checkbox and Radio button.
 ```javascript
@@ -177,7 +194,6 @@ Each element in a `groups` array, is a line of the form and each element in a `f
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs2.png)
 
 #### Password.
 ```javascript
@@ -191,7 +207,6 @@ Each element in a `groups` array, is a line of the form and each element in a `f
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs3.png)
 
 #### Select, single and multiple options.
 ```javascript
@@ -217,7 +232,6 @@ Each element in a `groups` array, is a line of the form and each element in a `f
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs4.png)
 
 #### List items.
 ```javascript
@@ -231,7 +245,6 @@ Each element in a `groups` array, is a line of the form and each element in a `f
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs5.png)
 
 #### Color selector.
 ```javascript
@@ -245,10 +258,9 @@ Each element in a `groups` array, is a line of the form and each element in a `f
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs6.png)
 
 #### Image upload, contain and cover format preview.
-Property `max` is required.
+Property `maxsize` is a size value for a file. Default value 500 KB (500000 bytes). Max value allowed is 5 MB (5000000 bytes) 
 ```javascript
 {
     fields: [
@@ -256,7 +268,7 @@ Property `max` is required.
             name: "imagecontain",
             type: "image",
             label: "Image Contain Label",
-            max: 500000,
+            maxsize: 100000,
         },
     ],
 },
@@ -266,13 +278,11 @@ Property `max` is required.
             name: "imagecover",
             type: "image",
             label: "Image Cover Label",
-            max: 500000,
             cover: true,
         },
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs7.png)
 
 #### Multiple Image upload.
 ```javascript
@@ -282,13 +292,12 @@ Property `max` is required.
             name: "imagemultiplename",
             type: "image",
             label: "Multiple Images upload",
-            max: 500000,
+            maxsize: 500000,
             multiple: true,
         },
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs8.png)
 
 #### Textarea.
 ```javascript
@@ -302,7 +311,6 @@ Property `max` is required.
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs9.png)
 
 #### Hidden.
 ```javascript
@@ -316,6 +324,7 @@ Property `max` is required.
 },
 ```
 ### Inline fields
+More than one input element on a `fields` array for a inline desing. Not recomended more than 3 items.
 ```javascript
 {
     fields: [
@@ -338,7 +347,6 @@ Property `max` is required.
     ],
 },
 ```
-![](json-form-app/src/assets/img/inputs10.png)
 
 ### Button Set
 Each element in a `buttons` array, is a button in a group line.
@@ -355,7 +363,7 @@ Each element in a `buttons` array, is a button in a group line.
 ```
 ![](json-form-app/src/assets/img/buttons.png)
 
-Only one element must be a `submit` button. Set the `(event)` in a html template to capture the other events button.
+Set the `(event)` in a html template to capture the other events button.
 ```html
 <angular-json-form [form]="form" (event)="handleEvent($event)" (send)="handleValues($event)"></angular-json-form>
 ```
@@ -365,15 +373,8 @@ handleEvent(event) {
     // Do something...
 }
 ```
-## Demo
 
-### Example application
-You can clone the project and find `json-form-app` to run on your own machine.
-
-```sh
-npm start
-```
-### Validators
+## Validators
 |Property|Type|Description|
 |-|-|-|
 |required|bool|Required field on a submit event|
@@ -381,8 +382,9 @@ npm start
 |min|integer|Max value for a number input type|
 |maxlength|integer|Max length for a value|
 |minlength|integer|Min length for a value|
+|maxsize|integer|Max size for a file|
 
-### Custom properties
+## Custom Properties
 |Property|Type|Description|
 |-|-|-|
 |value|any|Initial input value|
@@ -393,8 +395,9 @@ npm start
 |searchable|bool|Enable search input for a select input type|
 |multiple|bool|Enable multiple item. Only for image and select type|
 |cover|bool|Format image size to cover the background. Only for image type|
+|saving|bool|Enable spinner on a submit button. Only for button type|
 
-## Format and styling
+## Format and Styling
 The property `format` contains colors and styles properties.
 |Property|Type|Description|
 |-|-|-|
@@ -408,3 +411,12 @@ The property `format` contains colors and styles properties.
 |border|Css Color|Border and icons color in a input|
 |grey|Css Color|Placeholder and hover color in a input|
 |lang|string|Custom lang for a legends. Default value: "en-US". Allow values: "es-ES", "pt-BR".|
+
+## Demo
+
+### Example application
+You can clone the project and find `json-form-app` to run on your own machine.
+
+```sh
+npm start
+```
