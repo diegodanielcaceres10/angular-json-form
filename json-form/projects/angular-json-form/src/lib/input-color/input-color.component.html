@@ -1,4 +1,0 @@
-<div [formGroup]="FormGroup" class="form__control">
-    <input [formControlName]="field.name" [ngClass]="{ 'empty' : !FormGroup.controls || !FormGroup.controls[field.name] || !FormGroup.controls[field.name].value }" (ngModelChange)="changedEvent()" type="color" class="form__input">
-    <span *ngIf="!FormGroup.controls || !FormGroup.controls[field.name] || !FormGroup.controls[field.name].value"></span>
-</div>

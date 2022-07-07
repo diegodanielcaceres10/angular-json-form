@@ -1,0 +1,9 @@
+<div [formGroup]="FormGroup" class="angular-json-form__control angular-json-form__control-wrap">
+    <div *ngFor="let radio of field.options" class="angular-json-form__radio">
+        <input [formControlName]="field.name" [value]="radio" (ngModelChange)="changedEvent()" type="radio" class="angular-json-form__input">
+        <label></label>
+        <label>
+            <span>{{ radio }}</span>
+        </label>
+    </div>
+</div>
