@@ -5,7 +5,7 @@
     <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="value" (keydown.enter)="$event.preventDefault()" (keyup.enter)="addItem()" type="text" class="angular-json-form__input" maxlength="100" spellcheck="false" autocomplete="off">
     <input [formControlName]="field.name" (ngModelChange)="changedEvent()" class="angular-json-form__input angular-json-form__input-hidden">
 </div>
-<div class="angular-json-form__items scrollbar">
+<div class="angular-json-form__items angular-json-form__-scrollbar">
     <div *ngFor="let item of field.value;let i = index">
         <div *ngIf="!item.deleted" class="angular-json-form__item">
             <span *ngIf="field.option && field.option.value && item">{{ item[field.option.label] }}</span>

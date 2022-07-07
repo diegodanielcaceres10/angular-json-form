@@ -17,7 +17,7 @@
             <span *ngIf="!field.translate">{{ field.value }}</span>
         </div>
         <div class="angular-json-form__options">
-            <ul class="angular-json-form__list scrollbar-custom">
+            <ul class="angular-json-form__list angular-json-form__-scrollbar">
                 <li *ngIf="field.searchable && field.options && field.options.length > 0" class="angular-json-form__option">
                     <input #input (input)="filterOptions($event)" [placeholder]="legends[lang] ? legends[lang].SEARCH : legends['en-US'].SEARCH" class="angular-json-form__search" type="text" spellcheck="false">
                 </li>
@@ -43,7 +43,7 @@
     </button>
     <input [formControlName]="field.name" (ngModelChange)="changedEvent()" class="angular-json-form__input angular-json-form__input-hidden">
 </div>
-<div *ngIf="field.multiple" class="angular-json-form__items scrollbar">
+<div *ngIf="field.multiple" class="angular-json-form__items angular-json-form__-scrollbar">
     <div *ngFor="let item of field.value;let i = index">
         <div *ngIf="!item.deleted" class="angular-json-form__item">
             <span>{{ item }}</span>
