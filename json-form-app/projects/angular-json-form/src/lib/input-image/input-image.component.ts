@@ -29,14 +29,20 @@ export class InputImageComponent implements OnInit {
 
     drawImage(files) {
         try {
-            if (files) {
+            if (files && files.length) {
+                console.log(this.field.maxfiles);
+                console.log(this.field.images.length + files.length);
+                if (this.field.multiple && this.field.maxfiles < this.field.images.length + files.length) {
+                    this.field.error = "COUNT";
+                    return;
+                };
                 for (let item of files) {
                     const file: File = item;
                     if (["image/png", "image/jpeg", "image/jpg"].indexOf(file.type) == -1) {
                         this.field.error = "FORMAT";
                         return;
                     };
-                    if (this.field.max && this.field.max < file.size) {
+                    if (this.field.max < file.size) {
                         this.field.error = "SIZE";
                         return;
                     };

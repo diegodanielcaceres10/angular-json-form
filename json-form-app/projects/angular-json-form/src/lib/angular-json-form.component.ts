@@ -23,6 +23,7 @@ export class AngularJsonFormComponent implements OnInit {
             "MATCH": "Wrong value",
             "FORMAT": "Wrong format",
             "SIZE": "Wrong size",
+            "COUNT": "Maximum quantity exceeded",
             "DUPLICATE": "Duplicate value",
             "RIGHT": "Right!",
             "SELECT": "Select",
@@ -38,6 +39,7 @@ export class AngularJsonFormComponent implements OnInit {
             "MATCH": "Valor incorrecto",
             "FORMAT": "Formato incorrecto",
             "SIZE": "Tamaño incorrecto",
+            "COUNT": "Cantidad máxima excedida",
             "DUPLICATE": "Valor duplicado",
             "RIGHT": "Correcto!",
             "SELECT": "Seleccionar",
@@ -53,6 +55,7 @@ export class AngularJsonFormComponent implements OnInit {
             "MATCH": "Valor errado",
             "FORMAT": "Formato errado",
             "SIZE": "Tamanho errado",
+            "COUNT": "Quantidade máxima excedida",
             "DUPLICATE": "Valor duplicado",
             "RIGHT": "Correto!",
             "SELECT": "Selecionar",
@@ -105,6 +108,7 @@ export class AngularJsonFormComponent implements OnInit {
                                 disabled: field.disabled,
                             }, validators));
                             if (!field.maxsize || field.maxsize < 1 || field.maxsize > 5000000) field.maxsize = 500000;
+                            if (!field.maxfiles || field.maxfiles < 1 || field.maxfiles > 8) field.maxfiles = 4;
                             if (field.multiple && !field.images) field.images = [];
                         } else if (field.type == "checkbox") {
                             this.FormGroup.addControl(field.name, new FormControl(field.value ? true : false));

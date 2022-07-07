@@ -260,7 +260,7 @@ Each element in a `groups` array, is a line of the form and each element in a `f
 ```
 
 #### Image upload, contain and cover format preview.
-Property `maxsize` is a size value for a file. Default value 500 KB (500000 bytes). Max value allowed is 5 MB (5000000 bytes) 
+Property `maxsize` is a max size value for a file. Default value 500 KB (500000 bytes). Max value allowed is 5 MB (5000000 bytes) 
 ```javascript
 {
     fields: [
@@ -285,6 +285,7 @@ Property `maxsize` is a size value for a file. Default value 500 KB (500000 byte
 ```
 
 #### Multiple Image upload.
+Property `maxfiles` is a max files count for a upload. Default value 5. Max value allowed is 8 
 ```javascript
 {
     fields: [

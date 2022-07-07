@@ -28,6 +28,9 @@
                     <span *ngIf="field.error == 'SIZE'" class="angular-json-form__error">
                         {{ legends[form.lang] ? legends[form.lang].SIZE : legends['en-US'].SIZE }}
                     </span>
+                    <span *ngIf="field.error == 'COUNT'" class="angular-json-form__error">
+                        {{ legends[form.lang] ? legends[form.lang].COUNT : legends['en-US'].COUNT }}
+                    </span>
                 </label>
             </div>
             <div *ngIf="!field.hidden" [ngClass]="{ 'angular-json-form__field-hidden' : field.type == 'hidden' }" class="angular-json-form__field">
