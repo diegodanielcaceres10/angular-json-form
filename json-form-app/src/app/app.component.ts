@@ -291,7 +291,6 @@ export class AppComponent {
                 text: "Ok",
                 submit: true,
                 primary: true,
-                saving: true,
             },
         ],
         format: {

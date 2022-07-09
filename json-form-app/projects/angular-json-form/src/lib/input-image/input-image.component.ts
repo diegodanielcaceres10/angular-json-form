@@ -30,8 +30,6 @@ export class InputImageComponent implements OnInit {
     drawImage(files) {
         try {
             if (files && files.length) {
-                console.log(this.field.maxfiles);
-                console.log(this.field.images.length + files.length);
                 if (this.field.multiple && this.field.maxfiles < this.field.images.length + files.length) {
                     this.field.error = "COUNT";
                     return;
