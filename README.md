@@ -396,7 +396,6 @@ handleEvent(event) {
 |searchable|bool|Enable search input for a select input type|
 |multiple|bool|Enable multiple item. Only for image and select type|
 |cover|bool|Format image size to cover the background. Only for image type|
-|saving|bool|Enable spinner on a submit button. Only for button type|
 
 ## Format and Styling
 The property `format` contains colors and styles properties.
