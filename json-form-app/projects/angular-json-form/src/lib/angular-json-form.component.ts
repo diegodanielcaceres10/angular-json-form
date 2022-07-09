@@ -267,7 +267,6 @@ export class AngularJsonFormComponent implements OnInit {
             if (button.submit) {
                 this.form.error = false;
                 this.form.message = "";
-                if (button.save) this.form.saving = true;
                 this.event.emit(button && button.event);
             };
         } catch (e) {
@@ -279,11 +278,9 @@ export class AngularJsonFormComponent implements OnInit {
         try {
             this.form.error = false;
             this.form.message = "";
-            this.form.saving = true;
             if (this.FormGroup.invalid) {
                 this.form.error = true;
                 this.form.message = this.legends[this.form.lang] ? this.legends[this.form.lang].INVALID : this.legends['en-US'].INVALID;
-                this.form.saving = false;
             } else {
                 let values = this.FormGroup.value;
                 this.send.emit(values);
