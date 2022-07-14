@@ -71,6 +71,10 @@
             width: 100%;
         }
 
+        &-buttons {
+            padding-top: .5em;
+        }
+
         &-overflow {
             overflow: hidden;
         }
@@ -88,7 +92,7 @@
         align-items: center;
         box-sizing: border-box;
         display: flex;
-        font-size: .8em;
+        font-size: .9em;
         padding: 0 .5em;
         width: 100%;
 
@@ -103,7 +107,7 @@
     &__error {
         color: var(--angular-json-form-error, red);
         flex: 1;
-        font-size: .8em;
+        font-size: .9em;
         height: 1em;
         padding-left: .2em;
         text-align: right;
@@ -432,7 +436,7 @@
         box-sizing: border-box;
         color: var(--angular-json-form-text, #444);
         font: inherit;
-        font-size: .8em;
+        font-size: .9em;
         height: 100%;
         outline: none;
         text-align: left;
@@ -444,7 +448,7 @@
     }
 
     &__option {
-        font-size: .8em;
+        font-size: .9em;
         text-align: left;
 
         &-empty {
@@ -721,9 +725,15 @@
     }
 
     &__message {
+        align-items: center;
         color: var(--angular-json-form-error, red);
-        font-size: .8em;
+        display: flex;
+        font-size: .9em;
+        height: 1.3em;
+        overflow: hidden;
         padding: .5em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     // Define scroll bar design
