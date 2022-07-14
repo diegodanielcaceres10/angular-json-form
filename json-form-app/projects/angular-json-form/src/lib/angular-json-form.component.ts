@@ -130,6 +130,7 @@ export class AngularJsonFormComponent implements OnInit {
         try {
             if (this.form && this.form.format && this.ElementRef && this.ElementRef.nativeElement) {
                 if (this.form.format.primary) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-primary", this.form.format.primary);
+                if (this.form.format.secondary) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-secondary", this.form.format.secondary);
                 if (this.form.format.background) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-background", this.form.format.background);
                 if (this.form.format.text) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-text", this.form.format.text);
                 if (this.form.format.focus) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-focus", this.form.format.focus);
@@ -264,10 +265,10 @@ export class AngularJsonFormComponent implements OnInit {
 
     eventForm(button) {
         try {
-            if (button.submit) {
+            if (button && !button.submit) {
                 this.form.error = false;
                 this.form.message = "";
-                this.event.emit(button && button.event);
+                this.event.emit(button.event);
             };
         } catch (e) {
             console.error("Error", e);

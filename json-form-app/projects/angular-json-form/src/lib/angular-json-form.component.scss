@@ -20,7 +20,7 @@
     font-family: 'Ubuntu', sans-serif;
     line-height: normal;
     max-width: 600px;
-    padding: .5rem;
+    padding: .5em;
     position: relative;
     width: 100%;
 
@@ -30,11 +30,12 @@
 
     &__title {
         font-weight: bold;
-        padding: 1rem;
+        padding: 1em;
     }
 
     &__section {
-        padding-bottom: 1rem;
+        padding: 0 .5em;
+        padding-bottom: 1em;
         width: 100%;
     }
 
@@ -66,7 +67,7 @@
         }
 
         &-visible {
-            padding: .5rem 0;
+            padding: .5em 0;
             width: 100%;
         }
 
@@ -76,7 +77,7 @@
     }
 
     &__field {
-        padding: 0 .2rem;
+        padding: 0 .2em;
 
         &-hidden {
             padding: 0;
@@ -84,15 +85,16 @@
     }
 
     &__label {
+        align-items: center;
         box-sizing: border-box;
         display: flex;
-        font-size: .8rem;
-        padding: 0 .5rem;
+        font-size: .8em;
+        padding: 0 .5em;
         width: 100%;
 
         & label {
             display: flex;
-            height: 1rem;
+            height: 1.3em;
             overflow: hidden;
             width: 100%;
         }
@@ -101,21 +103,22 @@
     &__error {
         color: var(--angular-json-form-error, red);
         flex: 1;
-        font-size: .8rem;
-        padding-left: .2rem;
+        font-size: .8em;
+        height: 1em;
+        padding-left: .2em;
         text-align: right;
         white-space: nowrap;
     }
 
     &__control {
         align-items: center;
-        border-radius: .5rem;
+        border-radius: .5em;
         display: flex;
-        height: 3rem;
+        height: 3em;
         position: relative;
 
         &-xl {
-            height: 10rem;
+            height: 10em;
         }
 
         &-full {
@@ -132,7 +135,7 @@
     &__radio {
         align-items: center;
         display: flex;
-        height: 3rem;
+        height: 3em;
         max-width: 100%;
         overflow: hidden;
         position: relative;
@@ -145,14 +148,14 @@
     &__input {
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5rem;
+        border-radius: .5em;
         box-sizing: border-box;
         color: var(--angular-json-form-text, #444);
         font: inherit;
         height: 100%;
         margin: 0;
         outline: none;
-        padding: 1rem;
+        padding: 1em;
         text-align: left;
         width: 100%;
         z-index: 2;
@@ -174,7 +177,7 @@
 
             & + label {
                 border: 1px solid var(--angular-json-form-border, lightgrey);
-                border-radius: .2rem;
+                border-radius: .2em;
                 height: 20px;
                 width: 20px;
             }
@@ -185,7 +188,7 @@
 
             & + label::before {
                 border: 1px solid transparent;
-                border-radius: .2rem;
+                border-radius: .2em;
                 content: "";
                 height: 14px;
                 left: 3px;
@@ -202,14 +205,14 @@
 
             & ~ label:last-child {
                 flex: 1;
-                font-size: .9rem;
-                height: 1rem;
+                font-size: .9em;
+                height: 1em;
                 overflow: hidden;
                 text-overflow: ellipsis;
 
                 & span {
                     flex: 1;
-                    padding: 0 1rem 0 .3rem;
+                    padding: 0 1em 0 .3em;
                 }
             }
         }
@@ -225,7 +228,7 @@
 
             & + label {
                 border: 1px solid var(--angular-json-form-border, lightgrey);
-                border-radius: 1.5rem;
+                border-radius: 1.5em;
                 height: 20px;
                 width: 20px;
             }
@@ -253,15 +256,15 @@
 
             & ~ label:last-child {
                 flex: 1;
-                font-size: .9rem;
-                height: 1rem;
+                font-size: .9em;
+                height: 1em;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
 
                 & span {
                     flex: 1;
-                    padding: 0 1rem 0 .3rem;
+                    padding: 0 1em 0 .3em;
                 }
             }
         }
@@ -271,7 +274,7 @@
             max-width: 100%;
             opacity: 0;
             position: absolute;
-            width: 10rem;
+            width: 10em;
             z-index: 5;
 
             &:focus + div {
@@ -292,10 +295,10 @@
                 & ~ span {
                     align-items: center;
                     border: 1px solid var(--angular-json-form-border, lightgrey);
-                    border-radius: .5rem;
+                    border-radius: .5em;
                     display: flex;
                     height: 100%;
-                    padding-left: 1rem;
+                    padding-left: 1em;
                     width: 100%;
                 }
             }
@@ -313,8 +316,8 @@
         &[type="color"] {
             border-radius: 50%;
             cursor: pointer;
-            padding: .3rem;
-            width: 3rem;
+            padding: .3em;
+            width: 3em;
 
             &.empty {
                 opacity: 0;
@@ -329,7 +332,7 @@
                 border-radius: 50%;
                 height: 100%;
                 position: absolute;
-                width: 3rem;
+                width: 3em;
             }
 
             &::-webkit-color-swatch-wrapper {
@@ -361,13 +364,13 @@
         align-items: center;
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5rem;
+        border-radius: .5em;
         color: var(--angular-json-form-text, #444);
         display: flex;
         font: inherit;
         height: 100%;
         outline: none;
-        padding: 1rem;
+        padding: 1em;
         text-align: left;
         width: 100%;
         z-index: 3;
@@ -414,7 +417,7 @@
         left: 0;
         list-style: none;
         margin: 0;
-        max-height: 15rem;
+        max-height: 15em;
         overflow: auto;
         padding: 0;
         position: absolute;
@@ -425,11 +428,11 @@
     &__search {
         background: transparent;
         border: none;
-        border-bottom: .1rem solid var(--angular-json-form-border, lightgrey);
+        border-bottom: .1em solid var(--angular-json-form-border, lightgrey);
         box-sizing: border-box;
         color: var(--angular-json-form-text, #444);
         font: inherit;
-        font-size: .8rem;
+        font-size: .8em;
         height: 100%;
         outline: none;
         text-align: left;
@@ -441,7 +444,7 @@
     }
 
     &__option {
-        font-size: .8rem;
+        font-size: .8em;
         text-align: left;
 
         &-empty {
@@ -461,35 +464,35 @@
             box-sizing: border-box;
             display: flex;
             line-height: initial;
-            padding: 1rem;
+            padding: 1em;
         }
 
         & input {
-            padding: 1rem;
+            padding: 1em;
         }
     }
 
     &__items {
         align-content: flex-start;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5rem;
+        border-radius: .5em;
         display: flex;
         flex-wrap: wrap;
-        height: 10rem;
-        margin-top: .5rem;
+        height: 10em;
+        margin-top: .5em;
         overflow-y: scroll;
 
         & figure {
             align-items: center;
             border: 1px solid var(--angular-json-form-border, lightgrey);
-            border-radius: .5rem;
+            border-radius: .5em;
             display: flex;
-            height: 8rem;
+            height: 8em;
             justify-content: center;
-            margin: .2rem;
+            margin: .2em;
             overflow: hidden;
             position: relative;
-            width: 8rem;
+            width: 8em;
 
             &:hover {
                 box-shadow: 2px 2px 5px rgba(black, .3);
@@ -502,13 +505,13 @@
             & svg {
                 cursor: pointer;
                 fill: var(--angular-json-form-error, red);
+                margin: .3em;
                 opacity: 0;
-                padding: .3rem;
                 position: absolute;
                 right: 0;
-                text-shadow: 0 0 .1rem black;
+                text-shadow: 0 0 .1em black;
                 top: 0;
-                width: 1.3rem;
+                width: 1.3em;
                 z-index: 1;
 
                 &:hover {
@@ -538,10 +541,10 @@
     &__item {
         align-items: center;
         background: var(--angular-json-form-border, lightgrey);
-        border-radius: 5rem;
+        border-radius: 5em;
         display: flex;
-        padding: .5rem 1rem;
-        margin: .2rem;
+        padding: .5em 1em;
+        margin: .2em;
 
         & span {
             width: 100%;
@@ -549,23 +552,23 @@
 
         & svg {
             cursor: pointer;
-            padding-left: .5rem;
-            width: 1rem;
+            padding-left: .5em;
+            width: 1em;
         }
     }
 
     &__image {
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5rem;
+        border-radius: .5em;
         box-sizing: border-box;
         height: 100%;
         display: flex;
-        max-width: 10rem;
+        max-width: 10em;
         width: 100%;
 
         & figure {
             align-items: center;
-            border-radius: .5rem;
+            border-radius: .5em;
             display: flex;
             height: 100%;
             justify-content: center;
@@ -576,7 +579,7 @@
             & svg {
                 fill: var(--angular-json-form-border, lightgrey);
                 opacity: .7;
-                width: 2rem;
+                width: 2em;
             }
         
             & img.cover {
@@ -596,13 +599,13 @@
     &__textarea {
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5rem;
+        border-radius: .5em;
         box-sizing: border-box;
         color: var(--angular-json-form-text, #444);
-        height: 10rem;
+        height: 10em;
         font: inherit;
         outline: none;
-        padding: 1rem;
+        padding: 1em;
         resize: none;
         width: 100%;
 
@@ -615,18 +618,18 @@
         align-items: center;
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5rem;
+        border-radius: .5em;
         color: var(--angular-json-form-text, #444);
         display: flex;
         font: inherit;
         height: 100%;
         justify-content: center;
-        margin: 0 .2rem;
+        margin: 0 .2em;
         outline: none;
         overflow: hidden;
-        padding: 1rem 0;
+        padding: 1em 0;
         transition: all .1s ease;
-        width: 8rem;
+        width: 8em;
 
         &:disabled {
             opacity: .5;
@@ -638,7 +641,7 @@
         }
     
         &:active:not(:disabled) {
-            transform: translateY(.2rem);
+            transform: translateY(.2em);
         }
     
         & span {
@@ -647,7 +650,7 @@
             justify-content: center;
     
             & i ~ span {
-                padding-left: .3rem;
+                padding-left: .3em;
             }
         }
 
@@ -662,7 +665,7 @@
         &-primary {
             background: var(--angular-json-form-primary, blue);
             border-color: var(--angular-json-form-primary, blue);
-            color: var(--angular-json-form-background, white);
+            color: var(--angular-json-form-secondary, white);
 
             &:focus {
                 border-color: var(--angular-json-form-focus, gold);
@@ -677,19 +680,19 @@
         top: 50%;
         transform: translateY(-50%);
         transition: all .2s ease;
-        width: 2.5rem;
+        width: 2.5em;
         z-index: 5;
 
         & svg {
             fill: var(--angular-json-form-border, lightgrey);
-            width: 1rem;
+            width: 1em;
         }
 
         &-symbol {
             left: 0;
 
             & ~ input,& ~ button {
-                padding-left: 2.5rem;
+                padding-left: 2.5em;
             }
         }
 
@@ -701,7 +704,7 @@
 
 
             & ~ input,& ~ button {
-                padding-right: 2.5rem;
+                padding-right: 2.5em;
             }
         }
 
@@ -712,36 +715,36 @@
             z-index: 1;
 
             & ~ input,& ~ button {
-                padding-right: 2.5rem;
+                padding-right: 2.5em;
             }
         }
     }
 
     &__message {
         color: var(--angular-json-form-error, red);
-        font-size: .8rem;
-        padding: .5rem;
+        font-size: .8em;
+        padding: .5em;
     }
 
     // Define scroll bar design
     &__scrollbar {
         &::-webkit-scrollbar-track {
             background: transparent;
-            border-radius: .1rem;
+            border-radius: .1em;
         }
         
         &::-webkit-scrollbar {
-            height: .3rem;
-            width: .3rem;
+            height: .3em;
+            width: .3em;
             background: transparent;
         
             @include respond(phone) {
-                width: .3rem;
+                width: .3em;
             }
         }
         
         &::-webkit-scrollbar-thumb {
-            border-radius: 1rem;
+            border-radius: 1em;
             background: grey;
         }
     }
