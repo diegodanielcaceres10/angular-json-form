@@ -108,8 +108,9 @@ export class AppComponent {
                     {
                         name: "numbermaxname",
                         type: "number",
-                        label: "Number Max Value 50",
+                        label: "Number Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50",
                         max: 50,
+                        error: "MAX",
                     },
                 ],
             },
@@ -281,6 +282,7 @@ export class AppComponent {
             full: true,
             background: "whitesmoke",
             primary: "coral",
+            secondary: "pink",
             focus: "darkgrey",
         },
     };
@@ -289,7 +291,7 @@ export class AppComponent {
         buttons: [
             {
                 text: "Ok",
-                submit: true,
+                event: "ok",
                 primary: true,
             },
         ],
