@@ -108,9 +108,8 @@ export class AppComponent {
                     {
                         name: "numbermaxname",
                         type: "number",
-                        label: "Number Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50 Max Value 50",
+                        label: "Number Max Value 50",
                         max: 50,
-                        error: "MAX",
                     },
                 ],
             },
@@ -229,6 +228,7 @@ export class AppComponent {
                         name: "textareaname",
                         type: "textarea",
                         label: "Textarea",
+                        required: true,
                     },
                 ],
             },
