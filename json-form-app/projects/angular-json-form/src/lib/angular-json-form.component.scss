@@ -57,6 +57,15 @@
         justify-content: flex-end;
         position: relative;
 
+        &-visible {
+            padding: .5em 0;
+            width: 100%;
+
+            @include respond(phone) {
+                width: 100% !important;
+            }
+        }
+
         &-full {
             width: 100%;
         }
@@ -66,9 +75,8 @@
             width: 100%;
         }
 
-        &-visible {
-            padding: .5em 0;
-            width: 100%;
+        &-buttons {
+            padding-top: 1em;
         }
 
         &-overflow {
@@ -88,26 +96,41 @@
         align-items: center;
         box-sizing: border-box;
         display: flex;
-        font-size: .8em;
+        font-size: .9em;
         padding: 0 .5em;
         width: 100%;
 
         & label {
             display: flex;
-            height: 1.3em;
-            overflow: hidden;
             width: 100%;
+
+            & span:first-child {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    &__name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &-error {
+            max-width: calc(100% - 9em);
         }
     }
 
     &__error {
+        box-sizing: border-box;
         color: var(--angular-json-form-error, red);
-        flex: 1;
         font-size: .8em;
-        height: 1em;
-        padding-left: .2em;
+        overflow: hidden;
         text-align: right;
+        text-overflow: ellipsis;
         white-space: nowrap;
+        flex: 1;
     }
 
     &__control {
@@ -432,7 +455,7 @@
         box-sizing: border-box;
         color: var(--angular-json-form-text, #444);
         font: inherit;
-        font-size: .8em;
+        font-size: .9em;
         height: 100%;
         outline: none;
         text-align: left;
@@ -444,7 +467,7 @@
     }
 
     &__option {
-        font-size: .8em;
+        font-size: .9em;
         text-align: left;
 
         &-empty {
@@ -721,9 +744,16 @@
     }
 
     &__message {
+        align-items: center;
+        box-sizing: border-box;
         color: var(--angular-json-form-error, red);
-        font-size: .8em;
-        padding: .5em;
+        display: flex;
+        font-size: .9em;
+        height: 1.5em;
+        overflow: hidden;
+        padding: 0 .5em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     // Define scroll bar design

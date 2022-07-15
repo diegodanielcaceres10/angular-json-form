@@ -404,6 +404,7 @@ The property `format` contains colors and styles properties.
 |full|bool|Full width size form|
 |center|bool|Center buttons set|
 |primary|Css Color|Primary color|
+|secondary|Css Color|Secondary color|
 |background|Css Color|Background color|
 |text|Css Color|Text color|
 |focus|Css Color|Border color in a focus input|

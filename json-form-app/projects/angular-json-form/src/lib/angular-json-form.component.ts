@@ -23,7 +23,7 @@ export class AngularJsonFormComponent implements OnInit {
             "MATCH": "Wrong value",
             "FORMAT": "Wrong format",
             "SIZE": "Wrong size",
-            "COUNT": "Maximum quantity exceeded",
+            "COUNT": "Maximum exceeded",
             "DUPLICATE": "Duplicate value",
             "RIGHT": "Right!",
             "SELECT": "Select",
@@ -39,7 +39,7 @@ export class AngularJsonFormComponent implements OnInit {
             "MATCH": "Valor incorrecto",
             "FORMAT": "Formato incorrecto",
             "SIZE": "Tamaño incorrecto",
-            "COUNT": "Cantidad máxima excedida",
+            "COUNT": "Cantidad excedida",
             "DUPLICATE": "Valor duplicado",
             "RIGHT": "Correcto!",
             "SELECT": "Seleccionar",
@@ -55,7 +55,7 @@ export class AngularJsonFormComponent implements OnInit {
             "MATCH": "Valor errado",
             "FORMAT": "Formato errado",
             "SIZE": "Tamanho errado",
-            "COUNT": "Quantidade máxima excedida",
+            "COUNT": "Quantidade excedida",
             "DUPLICATE": "Valor duplicado",
             "RIGHT": "Correto!",
             "SELECT": "Selecionar",
@@ -159,7 +159,7 @@ export class AngularJsonFormComponent implements OnInit {
 
     changed(field) {
         try {
-            this.form.message = false;
+            this.form.error = "";
             field.error = false;
             let control = this.FormGroup.controls[field.name];
             let value = control.value;
@@ -266,8 +266,7 @@ export class AngularJsonFormComponent implements OnInit {
     eventForm(button) {
         try {
             if (button && !button.submit) {
-                this.form.error = false;
-                this.form.message = "";
+                this.form.error = "";
                 this.event.emit(button.event);
             };
         } catch (e) {
@@ -277,11 +276,11 @@ export class AngularJsonFormComponent implements OnInit {
 
     async submitForm() {
         try {
-            this.form.error = false;
-            this.form.message = "";
+            this.form.invalid = false;
+            this.form.error = "";
             if (this.FormGroup.invalid) {
-                this.form.error = true;
-                this.form.message = this.legends[this.form.lang] ? this.legends[this.form.lang].INVALID : this.legends['en-US'].INVALID;
+                this.form.invalid = true;
+                this.form.error = this.legends[this.form.lang] ? this.legends[this.form.lang].INVALID : this.legends['en-US'].INVALID;
             } else {
                 let values = this.FormGroup.value;
                 this.send.emit(values);

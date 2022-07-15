@@ -2,35 +2,27 @@
     <div *ngIf="form.title" class="angular-json-form__title">{{ form.title }}</div>
     <span *ngIf="form.text" class="angular-json-form__section">{{ form.text }}</span>
     <div *ngFor="let group of form.groups" class="angular-json-form__group">
-        <div *ngFor="let field of group.fields" [ngClass]="{ 'angular-json-form__box-visible' : !field.hidden && field.type != 'hidden', 'angular-json-form__box-overflow' : field.type == 'checkbox' }" class="angular-json-form__box">
+        <div *ngFor="let field of group.fields" [ngStyle]="{ 'width' : (100 / group.fields.length) + '%' }" [ngClass]="{ 'angular-json-form__box-visible' : !field.hidden && field.type != 'hidden', 'angular-json-form__box-overflow' : field.type == 'checkbox' }" class="angular-json-form__box">
             <div *ngIf="!field.hidden && field.type != 'hidden' && field.label" class="angular-json-form__label">
                 <label>
-                    <span>{{ field.label }}</span>
+                    <div [ngClass]="{ 'angular-json-form__name-error' : (form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors) || field.error }" class="angular-json-form__name">
+                        <span>{{ field.label }}</span>
+                    </div>
                     <span *ngIf="field.required">*</span>
-                    <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['required']" class="angular-json-form__error">
-                        {{ legends[form.lang] ? legends[form.lang].REQUIRED : legends['en-US'].REQUIRED }}
-                    </span>
-                    <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['max']" class="angular-json-form__error">
-                        {{ legends[form.lang] ? legends[form.lang].MAX : legends['en-US'].MAX }}
-                    </span>
-                    <span *ngIf="form.error && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['min']" class="angular-json-form__error">
-                        {{ legends[form.lang] ? legends[form.lang].MIN : legends['en-US'].MIN }}
-                    </span>
-                    <span *ngIf="field.error == 'DUPLICATE'" class="angular-json-form__error">
-                        {{ legends[form.lang] ? legends[form.lang].DUPLICATE : legends['en-US'].DUPLICATE }}
-                    </span>
-                    <span *ngIf="field.error == 'MATCH'" class="angular-json-form__error">
-                        {{ legends[form.lang] ? legends[form.lang].MATCH : legends['en-US'].MATCH }}
-                    </span>
-                    <span *ngIf="field.error == 'FORMAT'" class="angular-json-form__error">
-                        {{ legends[form.lang] ? legends[form.lang].FORMAT : legends['en-US'].FORMAT }}
-                    </span>
-                    <span *ngIf="field.error == 'SIZE'" class="angular-json-form__error">
-                        {{ legends[form.lang] ? legends[form.lang].SIZE : legends['en-US'].SIZE }}
-                    </span>
-                    <span *ngIf="field.error == 'COUNT'" class="angular-json-form__error">
-                        {{ legends[form.lang] ? legends[form.lang].COUNT : legends['en-US'].COUNT }}
-                    </span>
+                    <div class="angular-json-form__error">
+                        <span *ngIf="form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['required']">
+                            {{ legends[form.lang] ? legends[form.lang].REQUIRED : legends['en-US'].REQUIRED }}
+                        </span>
+                        <span *ngIf="form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['max']">
+                            {{ legends[form.lang] ? legends[form.lang].MAX : legends['en-US'].MAX }}
+                        </span>
+                        <span *ngIf="form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['min']">
+                            {{ legends[form.lang] ? legends[form.lang].MIN : legends['en-US'].MIN }}
+                        </span>
+                        <span *ngIf="!form.invalid && field.error">
+                            {{ legends[form.lang] ? legends[form.lang][field.error] : legends['en-US'][field.error] }}
+                        </span>
+                    </div>
                 </label>
             </div>
             <div *ngIf="!field.hidden" [ngClass]="{ 'angular-json-form__field-hidden' : field.type == 'hidden' }" class="angular-json-form__field">
@@ -80,7 +72,7 @@
 
     <!-- Buttons -->
     <div *ngIf="form.buttons" class="angular-json-form__group">
-        <div [ngClass]="{ 'angular-json-form__box-center' : form.format && form.format.center, 'angular-json-form__box-full' : form.format && form.format.full }" class="angular-json-form__box">
+        <div [ngClass]="{ 'angular-json-form__box-center' : form.format && form.format.center, 'angular-json-form__box-full' : form.format && form.format.full }" class="angular-json-form__box angular-json-form__box-buttons">
             <div class="angular-json-form__control angular-json-form__control-full">
                 <button *ngFor="let button of form.buttons" [ngClass]="{ 'angular-json-form__button-primary' : button.primary, 'angular-json-form__button-full' : form.format && form.format.full }" [type]="button.submit ? 'submit' : 'button'" (click)="eventForm(button)" class="angular-json-form__button">
                     <span>
@@ -90,6 +82,6 @@
             </div>
         </div>
     </div>
-    <span *ngIf="form.message" class="angular-json-form__message">{{ form.message }}</span>
+    <span class="angular-json-form__message">{{ form.error }}</span>
 </form>
 <span *ngIf="form && !form.ready">{{ legends[form.lang] ? legends[form.lang].INVALID : legends['en-US'].INVALID }}</span>
