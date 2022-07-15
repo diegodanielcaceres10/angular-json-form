@@ -159,7 +159,7 @@ export class AngularJsonFormComponent implements OnInit {
 
     changed(field) {
         try {
-            this.form.error = false;
+            this.form.error = "";
             field.error = false;
             let control = this.FormGroup.controls[field.name];
             let value = control.value;
@@ -266,7 +266,7 @@ export class AngularJsonFormComponent implements OnInit {
     eventForm(button) {
         try {
             if (button && !button.submit) {
-                this.form.error = false;
+                this.form.error = "";
                 this.event.emit(button.event);
             };
         } catch (e) {
@@ -277,7 +277,7 @@ export class AngularJsonFormComponent implements OnInit {
     async submitForm() {
         try {
             this.form.invalid = false;
-            this.form.error = false;
+            this.form.error = "";
             if (this.FormGroup.invalid) {
                 this.form.invalid = true;
                 this.form.error = this.legends[this.form.lang] ? this.legends[this.form.lang].INVALID : this.legends['en-US'].INVALID;
