@@ -58,8 +58,12 @@
         position: relative;
 
         &-visible {
-            padding: 1em 0;
+            padding: .5em 0;
             width: 100%;
+
+            @include respond(phone) {
+                width: 100% !important;
+            }
         }
 
         &-full {
@@ -108,17 +112,25 @@
         }
     }
 
+    &__name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &-error {
+            max-width: calc(100% - 9em);
+        }
+    }
+
     &__error {
-        bottom: 0;
         box-sizing: border-box;
         color: var(--angular-json-form-error, red);
         font-size: .8em;
         overflow: hidden;
-        padding: 0 .5em;
-        position: absolute;
+        text-align: right;
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: 100%;
+        flex: 1;
     }
 
     &__control {
