@@ -28,7 +28,7 @@
             <div *ngIf="!field.hidden" [ngClass]="{ 'angular-json-form__field-hidden' : field.type == 'hidden' }" class="angular-json-form__field">
 
                 <!-- Input type checkbox -->
-                <app-input-checkbox *ngIf="field.type == 'checkbox'" [FormGroup]="FormGroup" [field]="field" [translations]="form.translations" (changed)="changed($event)"></app-input-checkbox>
+                <app-input-checkbox *ngIf="field.type == 'checkbox'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-checkbox>
 
                 <!-- Input type color -->
                 <app-input-color *ngIf="field.type == 'color'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-color>
