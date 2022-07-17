@@ -10,8 +10,6 @@ export class InputHiddenComponent implements OnInit {
 
     @Input() FormGroup: FormGroup;
     @Input() field: any = {};
-    @Input() legends: any;
-    @Input() lang: string;
 
     constructor() { }
 

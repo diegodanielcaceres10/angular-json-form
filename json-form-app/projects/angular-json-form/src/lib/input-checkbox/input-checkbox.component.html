@@ -2,6 +2,6 @@
     <input [formControlName]="field.name" (change)="changedEvent()" type="checkbox" class="angular-json-form__input">
     <label></label>
     <label>
-        <span>{{ field.text }}</span>
+        <span>{{ translations && translations[lang] && translations[lang][field.text] ? translations[lang][field.text] : field.text }}</span>
     </label>
 </div>

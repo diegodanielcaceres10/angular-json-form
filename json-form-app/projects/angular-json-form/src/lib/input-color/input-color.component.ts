@@ -10,8 +10,6 @@ export class InputColorComponent implements OnInit {
 
     @Input() FormGroup: FormGroup;
     @Input() field: any = {};
-    @Input() legends: any;
-    @Input() lang: string;
     @Output() changed = new EventEmitter<any>();
 
     constructor() { }
