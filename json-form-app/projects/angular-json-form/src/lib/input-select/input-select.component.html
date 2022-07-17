@@ -4,16 +4,16 @@
     </span>
     <button #button [disabled]="field.disabled" type="button" class="angular-json-form__select">
         <span *ngIf="field.multiple">{{ legends[lang] ? legends[lang].SELECT : legends["en-US"].SELECT }}</span>
-        <div *ngIf="field.option && field.option.value && field.value">
-            <span *ngIf="field.translate">{{ ((field.prefix || "") + field.value[field.option.label]) }}</span>
+        <div *ngIf="!field.multiple && field.option && field.value">
+            <span *ngIf="field.translate">{{ translations && translations[lang] && translations[lang][(field.prefix || "") + field.value[field.option.label]] ? translations[lang][(field.prefix || "") + field.value[field.option.label]] : field.value[field.option.label] }}</span>
             <span *ngIf="!field.translate">{{ field.value[field.option.label] }}</span>
         </div>
-        <div *ngIf="!field.option && field.value && field.value.label">
-            <span *ngIf="field.translate">{{ ((field.prefix || "") + field.value.label) }}</span>
+        <div *ngIf="!field.multiple && !field.option && field.value && field.value.label">
+            <span *ngIf="field.translate">{{ translations && translations[lang] && translations[lang][(field.prefix || "") + field.value.label] ? translations[lang][(field.prefix || "") + field.value.label] : field.value.label }}</span>
             <span *ngIf="!field.translate">{{ field.value.label }}</span>
         </div>
-        <div *ngIf="!field.option && field.value && !field.value.label">
-            <span *ngIf="field.translate">{{ ((field.prefix || "") + field.value) }}</span>
+        <div *ngIf="!field.multiple && !field.option && field.value && !field.value.label">
+            <span *ngIf="field.translate">{{ translations && translations[lang] && translations[lang][(field.prefix || "") + field.value] ? translations[lang][(field.prefix || "") + field.value] : field.value }}</span>
             <span *ngIf="!field.translate">{{ field.value }}</span>
         </div>
         <div class="angular-json-form__options">
@@ -25,16 +25,16 @@
                     <span>{{ legends[lang] ? legends[lang].EMPTY : legends["en-US"].EMPTY }}</span>
                 </li>
                 <li *ngFor="let option of field.optionsView" (click)="selectOption(option)" class="angular-json-form__option angular-json-form__option-valid">
-                    <div *ngIf="field.option && field.option.value && option">
-                        <span *ngIf="field.translate">{{ ((field.prefix || "") + option[field.option.label]) }}</span>
+                    <div *ngIf="field.option">
+                        <span *ngIf="field.translate">{{ translations && translations[lang] && translations[lang][(field.prefix || "") + option[field.option.label]] ? translations[lang][(field.prefix || "") + option[field.option.label]] : option[field.option.label] }}</span>
                         <span *ngIf="!field.translate">{{ option[field.option.label] }}</span>
                     </div>
-                    <div *ngIf="!field.option && option && option.label">
-                        <span *ngIf="field.translate">{{ ((field.prefix || "") + option.label) }}</span>
+                    <div *ngIf="!field.option && option.label">
+                        <span *ngIf="field.translate">{{ translations && translations[lang] && translations[lang][(field.prefix || "") + option.label] ? translations[lang][(field.prefix || "") + option.label] : option.label }}</span>
                         <span *ngIf="!field.translate">{{ option.label }}</span>
                     </div>
                     <div *ngIf="!field.option && !option.label">
-                        <span *ngIf="field.translate">{{ ((field.prefix || "") + option) }}</span>
+                        <span *ngIf="field.translate">{{ translations && translations[lang] && translations[lang][(field.prefix || "") + option] ? translations[lang][(field.prefix || "") + option] : option }}</span>
                         <span *ngIf="!field.translate">{{ option }}</span>
                     </div>
                 </li>
@@ -46,7 +46,18 @@
 <div *ngIf="field.multiple" class="angular-json-form__items angular-json-form__scrollbar">
     <div *ngFor="let item of field.value;let i = index">
         <div *ngIf="!item.deleted" class="angular-json-form__item">
-            <span>{{ item }}</span>
+            <div *ngIf="field.option">
+                <span *ngIf="field.translate">{{ translations && translations[lang] ? translations[lang][(field.prefix || "") + item[field.option.label]] : item[field.option.label] }}</span>
+                <span *ngIf="!field.translate">{{ item[field.option.label] }}</span>
+            </div>
+            <div *ngIf="!field.option && item.label">
+                <span *ngIf="field.translate">{{ translations && translations[lang] ? translations[lang][(field.prefix || "") + item.label] : item.label }}</span>
+                <span *ngIf="!field.translate">{{ item.label }}</span>
+            </div>
+            <div *ngIf="!field.option && !item.label">
+                <span *ngIf="field.translate">{{ translations && translations[lang] ? translations[lang][(field.prefix || "") + item] : item }}</span>
+                <span *ngIf="!field.translate">{{ item }}</span>
+            </div>
             <svg (click)="deleteOption(i)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
         </div>
     </div>
