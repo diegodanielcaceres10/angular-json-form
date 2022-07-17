@@ -76,7 +76,7 @@ export class AngularJsonFormComponent implements OnInit {
             this.FormGroup = new FormGroup({});
             if (this.form && this.form.groups && this.form.groups.length > 0) this.form.groups.map((group) => {
                 if (group.fields && group.fields.length > 0) {
-                    group.count = group.fields.filter(i => !i.hidden && i.type == "hidden").length;
+                    group.count = group.fields.filter(i => !i.hidden && i.type != "hidden").length;
                     group.fields.map((field) => {
                         if (!field.name || !field.type) {
                             ready = false;

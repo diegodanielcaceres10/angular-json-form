@@ -10,8 +10,6 @@ export class InputListComponent implements OnInit {
 
     @Input() FormGroup: FormGroup;
     @Input() field: any = {};
-    @Input() legends: any;
-    @Input() lang: string;
     @Input() value: string = "";
     @Output() changed = new EventEmitter<any>();
 

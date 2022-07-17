@@ -10,8 +10,8 @@ export class InputCheckboxComponent implements OnInit {
 
     @Input() FormGroup: FormGroup;
     @Input() field: any = {};
-    @Input() legends: any;
     @Input() lang: string;
+    @Input() translations: any;
     @Output() changed = new EventEmitter<any>();
 
     constructor() { }
