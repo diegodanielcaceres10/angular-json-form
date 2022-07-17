@@ -75,50 +75,53 @@ export class AngularJsonFormComponent implements OnInit {
             let names = [];
             this.FormGroup = new FormGroup({});
             if (this.form && this.form.groups && this.form.groups.length > 0) this.form.groups.map((group) => {
-                if (group.fields && group.fields.length > 0) group.fields.map((field) => {
-                    if (!field.name || !field.type) {
-                        ready = false;
-                        return
-                    } else if (ready) {
-                        if (names.indexOf(field.name) > -1) {
-                            console.error("Duplicate name control: " + field.name);
+                if (group.fields && group.fields.length > 0) {
+                    group.count = group.fields.filter(i => !i.hidden && i.type == "hidden").length;
+                    group.fields.map((field) => {
+                        if (!field.name || !field.type) {
                             ready = false;
                             return
-                        } else {
-                            names.push(field.name);
-                        };
-                        if (this.types.indexOf(field.type) == -1) {
-                            console.error("Uknow type control: " + field.type);
-                            ready = false;
-                            return
-                        };
-                        let validators = this.setValidators(field);
-                        if (field.type == "select") {
-                            if (field.option && field.option.value) {
-                                this.FormGroup.addControl(field.name, new FormControl(field.value && field.value && field.value[field.option.value], validators));
-                            } else if (field.value && field.value.value !== undefined) {
-                                this.FormGroup.addControl(field.name, new FormControl(field.value.value, validators));
+                        } else if (ready) {
+                            if (names.indexOf(field.name) > -1) {
+                                console.error("Duplicate name control: " + field.name);
+                                ready = false;
+                                return
                             } else {
-                                this.FormGroup.addControl(field.name, new FormControl(field.value, validators));
+                                names.push(field.name);
                             };
-                            if (field.multiple && !field.value) field.value = [];
-                        } else if (field.type == "image") {
-                            this.FormGroup.addControl(field.name, new FormControl({
-                                value: field.multiple && field.value && field.value.map(i => new File([""], i.id)),
-                                disabled: field.disabled,
-                            }, validators));
-                            if (!field.maxsize || field.maxsize < 1 || field.maxsize > 5000000) field.maxsize = 500000;
-                            if (!field.maxfiles || field.maxfiles < 1 || field.maxfiles > 8) field.maxfiles = 4;
-                            if (field.multiple && !field.images) field.images = [];
-                        } else if (field.type == "checkbox") {
-                            this.FormGroup.addControl(field.name, new FormControl(field.value ? true : false));
-                        } else {
-                            this.FormGroup.addControl(field.name, new FormControl({ value: field.value, disabled: field.disabled }, validators));
+                            if (this.types.indexOf(field.type) == -1) {
+                                console.error("Uknow type control: " + field.type);
+                                ready = false;
+                                return
+                            };
+                            let validators = this.setValidators(field);
+                            if (field.type == "select") {
+                                if (field.option && field.option.value) {
+                                    this.FormGroup.addControl(field.name, new FormControl(field.value && field.value && field.value[field.option.value], validators));
+                                } else if (field.value && field.value.value !== undefined) {
+                                    this.FormGroup.addControl(field.name, new FormControl(field.value.value, validators));
+                                } else {
+                                    this.FormGroup.addControl(field.name, new FormControl(field.value, validators));
+                                };
+                                if (field.multiple && !field.value) field.value = [];
+                            } else if (field.type == "image") {
+                                this.FormGroup.addControl(field.name, new FormControl({
+                                    value: field.multiple && field.value && field.value.map(i => new File([""], i.id)),
+                                    disabled: field.disabled,
+                                }, validators));
+                                if (!field.maxsize || field.maxsize < 1 || field.maxsize > 5000000) field.maxsize = 500000;
+                                if (!field.maxfiles || field.maxfiles < 1 || field.maxfiles > 8) field.maxfiles = 4;
+                                if (field.multiple && !field.images) field.images = [];
+                            } else if (field.type == "checkbox") {
+                                this.FormGroup.addControl(field.name, new FormControl(field.value ? true : false));
+                            } else {
+                                this.FormGroup.addControl(field.name, new FormControl({ value: field.value, disabled: field.disabled }, validators));
+                            };
+                            if (field.options && field.options.length > 0) field.optionsView = field.options;
+                            if (field.type == "list" && !field.value) field.value = [];
                         };
-                        if (field.options && field.options.length > 0) field.optionsView = field.options;
-                        if (field.type == "list" && !field.value) field.value = [];
-                    };
-                });
+                    });
+                };
             });
             this.form.ready = ready;
         } catch (e) {

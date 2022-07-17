@@ -9,3 +9,9 @@
 <div style="width: 400px;max-width: 90%;">
     <angular-json-form [form]="form3" (event)="event($event)" (send)="send($event)"></angular-json-form>
 </div>
+<hr>
+<div style="width: 400px;max-width: 90%;">
+    <angular-json-form [form]="form4" (event)="event($event)" (send)="send($event)"></angular-json-form>
+    <span style="cursor: pointer;padding: 5px;" (click)="form4.lang = 'en-US'">English</span>
+    <span style="cursor: pointer;padding: 5px;" (click)="form4.lang = 'es-ES'">Español</span>
+</div>

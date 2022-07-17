@@ -300,6 +300,69 @@ export class AppComponent {
             background: "whitesmoke",
         },
     };
+    form4: any = {
+        title: "Example translate legends.",
+        groups: [
+            {
+                fields: [
+                    {
+                        name: "name",
+                        type: "text",
+                        label: "NAME",
+                        required: true,
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
+                        name: "lastname",
+                        type: "text",
+                        label: "LASTNAME",
+                        required: true,
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
+                        name: "job4",
+                        type: "select",
+                        label: "JOB",
+                        options: [{ label: "DEVELOPMENT", value: 1 }, { label: "DESIGNER", value: 2 }],
+                        translate: true,
+                        required: true,
+                    },
+                ],
+            },
+        ],
+        buttons: [
+            {
+                text: "OK",
+                submit: true,
+                primary: true,
+            },
+        ],
+        lang: "es-ES",
+        translations: {
+            "en-US": {
+                "NAME": "Name",
+                "LASTNAME": "Lastname",
+                "JOB": "Job",
+                "OK": "Ok",
+                "DEVELOPMENT": "Development",
+                "DESIGNER": "Designer",
+            },
+            "es-ES": {
+                "NAME": "Nombre",
+                "LASTNAME": "Apellido",
+                "JOB": "Profesión",
+                "OK": "Listo",
+                "DEVELOPMENT": "Desarrollador",
+                "DESIGNER": "Diseñador",
+            },
+        },
+    };
 
     send(data) {
         console.log(data);
