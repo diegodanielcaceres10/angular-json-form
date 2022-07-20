@@ -15,7 +15,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "hiddenname4. .",
+                        name: "hiddenname",
                         type: "hidden",
                         value: 1,
                     },
@@ -292,6 +292,7 @@ export class AppComponent {
                 text: "Yes",
                 submit: true,
                 primary: true,
+                spinner: true,
             },
         ],
         format: {

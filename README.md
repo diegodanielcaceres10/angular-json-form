@@ -422,6 +422,7 @@ handleEvent(event) {
 |multiple|bool|Enable multiple item. Only for image and select type|
 |cover|bool|Format image size to cover the background. Only for image type|
 |help|string|Tooltip text on a help icon for som e help text|
+|spinner|string|Spinner animation on a button after submit|
 
 ## Format and Styling
 The property `format` contains colors and styles properties.
