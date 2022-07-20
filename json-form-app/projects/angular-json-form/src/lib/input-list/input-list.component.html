@@ -1,17 +1,21 @@
 <div [formGroup]="FormGroup" class="angular-json-form__control">
     <span (click)="addItem()" class="angular-json-form__icon angular-json-form__icon-action">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+            <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
+        </svg>
     </span>
-    <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="value" (keydown.enter)="$event.preventDefault()" (keyup.enter)="addItem()" type="text" class="angular-json-form__input" maxlength="100" spellcheck="false" autocomplete="off">
+    <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="value" (keydown.enter)="$event.preventDefault()" (keyup.enter)="addItem()" [placeholder]="legends[lang] ? legends[lang].ADD : legends['en-US'].ADD" type="text" class="angular-json-form__input" maxlength="100" spellcheck="false" autocomplete="off">
     <input [formControlName]="field.name" (ngModelChange)="changedEvent()" class="angular-json-form__input angular-json-form__input-hidden">
 </div>
 <div class="angular-json-form__items angular-json-form__scrollbar">
-    <div *ngFor="let item of field.value;let i = index">
-        <div *ngIf="!item.deleted" class="angular-json-form__item">
-            <span *ngIf="field.option && field.option.value && item">{{ item[field.option.label] }}</span>
-            <span *ngIf="!field.option && item && item.label">{{ item.label }}</span>
-            <span *ngIf="!field.option && !item.label">{{ item }}</span>
-            <svg (click)="deleteItem(i)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+    <div *ngFor="let item of field.value;let i = index" class="angular-json-form__item">
+        <div>
+            <span>{{ item }}</span>
         </div>
+        <svg (click)="deleteItem(i)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
+        </svg>
     </div>
 </div>

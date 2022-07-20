@@ -2,26 +2,45 @@
     <div *ngIf="form.title" class="angular-json-form__title">{{ form.translations && form.translations[form.lang] && form.translations[form.lang][form.title] ? form.translations[form.lang][form.title] : form.title }}</div>
     <span *ngIf="form.text" class="angular-json-form__section">{{ form.translations && form.translations[form.lang] && form.translations[form.lang][form.text] ? form.translations[form.lang][form.text] : form.text }}</span>
     <div *ngFor="let group of form.groups" class="angular-json-form__group">
-        <div *ngFor="let field of group.fields" [ngStyle]="{ 'width' : !field.hidden && field.type != 'hidden' ? ((100 / group.count) + '%') : '0' }" [ngClass]="{ 'angular-json-form__box-visible' : !field.hidden && field.type != 'hidden', 'angular-json-form__box-overflow' : field.type == 'checkbox' }" class="angular-json-form__box">
-            <div *ngIf="!field.hidden && field.type != 'hidden' && field.label" class="angular-json-form__label">
+        <div *ngFor="let field of group.fields" [ngStyle]="{ 'max-width' : !field.hidden && field.type != 'hidden' ? ((100 / group.count) + '%') : '0' }" [ngClass]="{ 'angular-json-form__box-visible' : !field.hidden && field.type != 'hidden', 'angular-json-form__box-overflow' : !field.hidden && field.type == 'checkbox', 'angular-json-form__box-portrait' : !field.hidden && (field.type == 'image' || field.type == 'color') && !field.multiple }" class="angular-json-form__box">
+            <div *ngIf="!field.hidden && field.type != 'hidden'" class="angular-json-form__label">
                 <label>
                     <div [ngClass]="{ 'angular-json-form__name-error' : (form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors) || field.error }" class="angular-json-form__name">
-                        <span>{{ form.translations && form.translations[form.lang] && form.translations[form.lang][field.label] ? form.translations[form.lang][field.label] : field.label }}</span>
+                        <span *ngIf="field.label">{{ form.translations && form.translations[form.lang] && form.translations[form.lang][field.label] ? form.translations[form.lang][field.label] : field.label }}</span>
                     </div>
                     <span *ngIf="field.required">*</span>
                     <div class="angular-json-form__error">
-                        <span *ngIf="form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['required']">
+                        <span *ngIf="!field.error && form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['required']">
                             {{ legends[form.lang] ? legends[form.lang].REQUIRED : legends['en-US'].REQUIRED }}
                         </span>
-                        <span *ngIf="form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['max']">
+                        <span *ngIf="!field.error && form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['max']">
                             {{ legends[form.lang] ? legends[form.lang].MAX : legends['en-US'].MAX }}
                         </span>
-                        <span *ngIf="form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['min']">
+                        <span *ngIf="!field.error && form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors && FormGroup.controls[field.name].errors['min']">
                             {{ legends[form.lang] ? legends[form.lang].MIN : legends['en-US'].MIN }}
                         </span>
-                        <span *ngIf="!form.invalid && field.error">
+                        <span *ngIf="field.error">
                             {{ legends[form.lang] ? legends[form.lang][field.error] : legends['en-US'][field.error] }}
                         </span>
+                    </div>
+                    <div *ngIf="field.help || field.type == 'image' || field.type == 'file' || (field.type == 'number' && (field.max || field.min))" class="angular-json-form__help">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM256 336c-18 0-32 14-32 32s13.1 32 32 32c17.1 0 32-14 32-32S273.1 336 256 336zM289.1 128h-51.1C199 128 168 159 168 198c0 13 11 24 24 24s24-11 24-24C216 186 225.1 176 237.1 176h51.1C301.1 176 312 186 312 198c0 8-4 14.1-11 18.1L244 251C236 256 232 264 232 272V288c0 13 11 24 24 24S280 301 280 288V286l45.1-28c21-13 34-36 34-60C360 159 329 128 289.1 128z"/></svg>
+                        <section class="angular-json-form__scrollbar">
+                            <div *ngIf="field.help">
+                                <span>
+                                    {{ form.translations && form.translations[form.lang] && form.translations[form.lang][field.help] ? form.translations[form.lang][field.help] : field.help }}
+                                </span>
+                            </div>
+                            <div *ngIf="field.type == 'image' || field.type == 'file'">
+                                <span *ngIf="field.multiple"><strong>{{ legends[form.lang] ? legends[form.lang].MAXFILES : legends['en-US'].MAXFILES }}:</strong> {{ field.maxfiles }}</span>
+                                <span><strong>{{ legends[form.lang] ? legends[form.lang].FORMATS : legends['en-US'].FORMATS }}:</strong> {{ field.type == "image" ? "JPEG - JPG - PNG" : "PDF" }}</span>
+                                <span><strong>{{ legends[form.lang] ? legends[form.lang].MAXSIZE : legends['en-US'].MAXSIZE }}:</strong> {{ field.maxsizeconvert }}</span>
+                            </div>
+                            <div *ngIf="field.type == 'number'">
+                                <span *ngIf="field.max"><strong>{{ legends[form.lang] ? legends[form.lang].MAXVALUE : legends['en-US'].MAXVALUE }}:</strong> {{ field.max }}</span>
+                                <span *ngIf="field.min"><strong>{{ legends[form.lang] ? legends[form.lang].MINVALUE : legends['en-US'].MINVALUE }}:</strong> {{ field.min }}</span>
+                            </div>
+                        </section>
                     </div>
                 </label>
             </div>
@@ -36,6 +55,9 @@
                 <!-- Input type email -->
                 <app-input-email *ngIf="field.type == 'email'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-email>
 
+                <!-- Input type file -->
+                <app-input-file *ngIf="field.type == 'file'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-file>
+
                 <!-- Input type hidden -->
                 <app-input-hidden *ngIf="field.type == 'hidden'" [FormGroup]="FormGroup" [field]="field"></app-input-hidden>
 
@@ -43,7 +65,7 @@
                 <app-input-image *ngIf="field.type == 'image'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-image>
 
                 <!-- Input type list -->
-                <app-input-list *ngIf="field.type == 'list'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-list>
+                <app-input-list *ngIf="field.type == 'list'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-list>
 
                 <!-- Input type number -->
                 <app-input-number *ngIf="field.type == 'number'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-number>

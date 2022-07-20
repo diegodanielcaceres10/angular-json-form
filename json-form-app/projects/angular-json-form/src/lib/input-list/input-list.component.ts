@@ -10,6 +10,8 @@ export class InputListComponent implements OnInit {
 
     @Input() FormGroup: FormGroup;
     @Input() field: any = {};
+    @Input() legends: any;
+    @Input() lang: string;
     @Input() value: string = "";
     @Output() changed = new EventEmitter<any>();
 
@@ -36,11 +38,9 @@ export class InputListComponent implements OnInit {
                     else if (i.label) return i.label.toLowerCase() == this.value.toLowerCase();
                     else if (typeof i == "string") return i.toLowerCase() == this.value.toLowerCase();
                 });
-                if (item && !item.deleted) {
+                if (item) {
                     this.field.error = "DUPLICATE";
                     return;
-                } else if (item && item.deleted) {
-                    item.deleted = false;
                 } else {
                     if (this.field.option && this.field.option.label) items.push({ [this.field.option.label]: this.value });
                     else items.push(this.value);
@@ -57,14 +57,8 @@ export class InputListComponent implements OnInit {
     deleteItem(index) {
         try {
             let items = this.field.value;
-            if (this.field.option && this.field.option.value) {
-                if (items[index]) items[index].deleted = true;
-            } else if (items[index] && items[index].label) {
-                items[index].deleted = true;
-            } else {
-                items && items.splice(index, 1);
-            };
-            if (items.filter(i => !i.deleted).length > 0) this.FormGroup.controls[this.field.name].setValue(items);
+            items && items.splice(index, 1);
+            if (items.length > 0) this.FormGroup.controls[this.field.name].setValue(items);
             else this.FormGroup.controls[this.field.name].setValue("");
         } catch (e) {
             console.error("Error", e);

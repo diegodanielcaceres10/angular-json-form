@@ -259,8 +259,33 @@ Each element in a `groups` array, is a line of the form and each element in a `f
 },
 ```
 
+#### File upload, single and multiple.
+Property `maxsize` is a max size value for a file. Default value 500 KB (512000 bytes). Max value allowed is 5 MB (5242880 bytes) 
+Property `maxfiles` is a max files count for a upload. Default value 4. Max value allowed is 8 
+```javascript
+{
+    fields: [
+        {
+            name: "filecontain",
+            type: "file",
+            label: "File",
+        },
+    ],
+},
+{
+    fields: [
+        {
+            name: "filemultiplename",
+            type: "file",
+            label: "Multiple files upload",
+            multiple: true,
+        },
+    ],
+},
+```
+
 #### Image upload, contain and cover format preview.
-Property `maxsize` is a max size value for a file. Default value 500 KB (500000 bytes). Max value allowed is 5 MB (5000000 bytes) 
+Property `maxsize` is a max size value for a file. Default value 500 KB (512000 bytes). Max value allowed is 5 MB (5242880 bytes) 
 ```javascript
 {
     fields: [
@@ -285,7 +310,7 @@ Property `maxsize` is a max size value for a file. Default value 500 KB (500000 
 ```
 
 #### Multiple Image upload.
-Property `maxfiles` is a max files count for a upload. Default value 5. Max value allowed is 8 
+Property `maxfiles` is a max files count for a upload. Default value 4. Max value allowed is 8 
 ```javascript
 {
     fields: [
@@ -293,7 +318,7 @@ Property `maxfiles` is a max files count for a upload. Default value 5. Max valu
             name: "imagemultiplename",
             type: "image",
             label: "Multiple Images upload",
-            maxsize: 500000,
+            maxsize: 512000,
             multiple: true,
         },
     ],
@@ -396,6 +421,7 @@ handleEvent(event) {
 |searchable|bool|Enable search input for a select input type|
 |multiple|bool|Enable multiple item. Only for image and select type|
 |cover|bool|Format image size to cover the background. Only for image type|
+|help|string|Tooltip text on a help icon for som e help text|
 
 ## Format and Styling
 The property `format` contains colors and styles properties.
