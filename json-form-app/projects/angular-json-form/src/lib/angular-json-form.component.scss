@@ -54,7 +54,6 @@
     &__box {
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
         position: relative;
 
         &-visible {
@@ -62,7 +61,15 @@
             width: 100%;
 
             @include respond(phone) {
-                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
+        &-portrait {
+            width: 50%;
+
+            @include respond(phone) {
+                width: 100%;
             }
         }
 
@@ -97,18 +104,13 @@
         box-sizing: border-box;
         display: flex;
         font-size: .9em;
+        height: 1.5em;
         padding: 0 .5em;
         width: 100%;
 
         & label {
             display: flex;
             width: 100%;
-
-            & span:first-child {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
         }
     }
 
@@ -117,20 +119,77 @@
         text-overflow: ellipsis;
         white-space: nowrap;
 
+        & span:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         &-error {
-            max-width: calc(100% - 9em);
+            max-width: calc(100% - 10em);
         }
     }
 
     &__error {
         box-sizing: border-box;
         color: var(--angular-json-form-error, red);
+        flex: 1;
         font-size: .8em;
         overflow: hidden;
         text-align: right;
         text-overflow: ellipsis;
         white-space: nowrap;
-        flex: 1;
+
+        & span {
+            padding: 0 .2rem;
+        }
+    }
+
+    &__help {
+        background: transparent;
+        border: none;
+        fill: var(--angular-json-form-border, lightgrey);
+        font: inherit;
+        height: 1em;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        width: 1em;
+
+        & section {
+            background: var(--angular-json-form-background, white);
+            border: 1px solid var(--angular-json-form-border, lightgrey);
+            border-radius: .5em;
+            box-shadow: 2px 2px 5px rgba(black, .3);
+            box-sizing: border-box;
+            cursor: default;
+            display: none;
+            flex-direction: column;
+            font-size: .9em;
+            max-height: 95%;
+            max-width: 90%;
+            padding: .5em;
+            overflow: auto;
+            position: absolute;
+            right: .2em;
+            text-align: left;
+            top: 0;
+            width: 20em;
+            z-index: 10;
+
+            & div {
+                display: flex;
+                flex-direction: column;
+
+                & span {
+                    margin: .2em 0;
+                }
+            }
+        }
+
+        &:hover section {
+            display: flex;
+        }
     }
 
     &__control {
@@ -142,6 +201,10 @@
 
         &-xl {
             height: 10em;
+        }
+
+        &-xxl {
+            height: 15em;
         }
 
         &-full {
@@ -182,6 +245,10 @@
         text-align: left;
         width: 100%;
         z-index: 2;
+
+        &::placeholder {
+            color: var(--angular-json-form-grey, lightgrey);;
+        }
 
         &[type=number]::-webkit-inner-spin-button, 
         &[type=number]::-webkit-outer-spin-button { 
@@ -229,13 +296,13 @@
             & ~ label:last-child {
                 flex: 1;
                 font-size: .9em;
-                height: 1em;
                 overflow: hidden;
                 text-overflow: ellipsis;
 
                 & span {
                     flex: 1;
                     padding: 0 1em 0 .3em;
+                    white-space: nowrap;
                 }
             }
         }
@@ -293,12 +360,19 @@
         }
 
         &[type="file"] {
+            color: transparent;
             cursor: pointer;
-            max-width: 100%;
-            opacity: 0;
             position: absolute;
-            width: 10em;
             z-index: 5;
+
+            & ~ span {
+                overflow: hidden;
+                padding-left: 1em;
+                padding-right: 3em;
+                text-overflow: ellipsis;
+                width: 100%;
+                white-space: nowrap;
+            }
 
             &:focus + div {
                 border-color: var(--angular-json-form-focus, gold);
@@ -309,7 +383,6 @@
             }
 
             &[multiple] {
-                width: 100%;
 
                 &:focus + span {
                     border-color: var(--angular-json-form-focus, gold);
@@ -317,7 +390,6 @@
 
                 & ~ span {
                     align-items: center;
-                    border: 1px solid var(--angular-json-form-border, lightgrey);
                     border-radius: .5em;
                     display: flex;
                     height: 100%;
@@ -496,19 +568,19 @@
     }
 
     &__items {
-        align-content: flex-start;
         border: 1px solid var(--angular-json-form-border, lightgrey);
         border-radius: .5em;
         display: flex;
-        flex-wrap: wrap;
-        height: 10em;
+        flex-direction: column;
+        height: 11.4em;
         margin-top: .5em;
-        overflow-y: scroll;
+        overflow-y: auto;
 
         & figure {
             align-items: center;
-            border: 1px solid var(--angular-json-form-border, lightgrey);
             border-radius: .5em;
+            box-sizing: border-box;
+            box-shadow: 2px 2px 5px rgba(black, .3);
             display: flex;
             height: 8em;
             justify-content: center;
@@ -516,10 +588,6 @@
             overflow: hidden;
             position: relative;
             width: 8em;
-
-            &:hover {
-                box-shadow: 2px 2px 5px rgba(black, .3);
-            }
 
             &:hover svg {
                 opacity: .5;
@@ -541,11 +609,6 @@
                     opacity: 1;
                 }
             }
-
-            & img.delete {
-                filter: grayscale(1);
-                opacity: .5;
-            }
         
             & img.cover {
                 min-height: 100%;
@@ -563,20 +626,26 @@
 
     &__item {
         align-items: center;
-        background: var(--angular-json-form-border, lightgrey);
-        border-radius: 5em;
+        border-bottom: 1px solid var(--angular-json-form-border, lightgrey);
         display: flex;
-        padding: .5em 1em;
-        margin: .2em;
+        padding: 1em;
 
-        & span {
-            width: 100%;
+        & div {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            & span {
+                width: 100%;
+            }
         }
-
+    
         & svg {
             cursor: pointer;
+            fill: var(--angular-json-form-error, red);
             margin-left: .5em;
-            width: 1em;
+            width: .5em;
         }
     }
 
@@ -586,7 +655,6 @@
         box-sizing: border-box;
         height: 100%;
         display: flex;
-        max-width: 10em;
         width: 100%;
 
         & figure {
@@ -612,8 +680,8 @@
             }
         
             & img.contain {
-                min-height: 100%;
-                width: 100%;
+                height: 100%;
+                min-width: 100%;
                 object-fit: contain;
             }
         }
@@ -625,7 +693,7 @@
         border-radius: .5em;
         box-sizing: border-box;
         color: var(--angular-json-form-text, #444);
-        height: 10em;
+        height: 100%;
         font: inherit;
         outline: none;
         padding: 1em;
@@ -715,7 +783,7 @@
             left: 0;
 
             & ~ input,& ~ button {
-                padding-left: 2.5em;
+                padding-left: 3em;
             }
         }
 
@@ -727,7 +795,7 @@
 
 
             & ~ input,& ~ button {
-                padding-right: 2.5em;
+                padding-right: 3em;
             }
         }
 
@@ -738,7 +806,7 @@
             z-index: 1;
 
             & ~ input,& ~ button {
-                padding-right: 2.5em;
+                padding-right: 3em;
             }
         }
     }

@@ -56,11 +56,8 @@ export class InputSelectComponent implements OnInit {
                     else if (i.value && option.value) return i.value == option.value;
                     else if (typeof i == "string") return i == option;
                 });
-                if (item && !item.deleted) {
+                if (item) {
                     this.field.error = "DUPLICATE";
-                } else if (item && item.deleted) {
-                    item.deleted = false;
-                    this.FormGroup.controls[this.field.name].setValue(this.field.value);
                 } else {
                     this.field.value.push(option);
                     this.FormGroup.controls[this.field.name].setValue(this.field.value);
@@ -82,14 +79,8 @@ export class InputSelectComponent implements OnInit {
     deleteOption(index) {
         try {
             let items = this.field.value;
-            if (this.field.option && this.field.option.value) {
-                if (items[index]) items[index].deleted = true;
-            } else if (items[index] && items[index].label) {
-                items[index].deleted = true;
-            } else {
-                items && items.splice(index, 1);
-            };
-            if (items.filter(i => !i.deleted).length > 0) this.FormGroup.controls[this.field.name].setValue(items);
+            items && items.splice(index, 1);
+            if (items.length > 0) this.FormGroup.controls[this.field.name].setValue(items);
             else this.FormGroup.controls[this.field.name].setValue("");
         } catch (e) {
             console.error("Error", e);

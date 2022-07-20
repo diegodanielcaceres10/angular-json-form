@@ -1,3 +1,3 @@
 <div [formGroup]="FormGroup" class="angular-json-form__control angular-json-form__control-xl">
-    <textarea [formControlName]="field.name" [maxlength]="field.maxlength || 500" (ngModelChange)="changedEvent()" class="angular-json-form__textarea" spellcheck="false" autocomplete="off"></textarea>
+    <textarea [formControlName]="field.name" [maxlength]="field.maxlength || 500" [placeholder]="field.placeholder || ''" (ngModelChange)="changedEvent()" class="angular-json-form__textarea" spellcheck="false" autocomplete="off"></textarea>
 </div>

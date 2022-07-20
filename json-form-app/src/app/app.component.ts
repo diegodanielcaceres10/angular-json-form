@@ -15,7 +15,7 @@ export class AppComponent {
             {
                 fields: [
                     {
-                        name: "hiddenname",
+                        name: "hiddenname4. .",
                         type: "hidden",
                         value: 1,
                     },
@@ -189,6 +189,22 @@ export class AppComponent {
                         name: "colorname",
                         type: "color",
                         label: "Color",
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
+                        name: "filename",
+                        type: "file",
+                        label: "File upload.",
+                        required: true,
+                    },
+                    {
+                        name: "filemultiplename",
+                        type: "file",
+                        label: "Multiple File upload.",
+                        multiple: true,
                     },
                 ],
             },

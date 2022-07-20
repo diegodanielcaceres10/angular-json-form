@@ -13,7 +13,7 @@ export class AngularJsonFormComponent implements OnInit {
     @Output() event = new EventEmitter<any>();
 
     FormGroup: FormGroup;
-    types: any = ["checkbox", "color", "email", "hidden", "image", "list", "number", "password", "radio", "select", "tel", "text", "textarea"];
+    types: any = ["checkbox", "color", "email", "file", "hidden", "image", "list", "number", "password", "radio", "select", "tel", "text", "textarea"];
     legends: any = {
         "en-US": {
             "INVALID": "Invalid form",
@@ -30,6 +30,11 @@ export class AngularJsonFormComponent implements OnInit {
             "SEARCH": "Search...",
             "ADD": "Add",
             "EMPTY": "No options found",
+            "FORMATS": "Allowed formats",
+            "MAXFILES": "Maximum number of files",
+            "MAXSIZE": "Maximum size allowed",
+            "MAXVALUE": "Maximum allowed value",
+            "MINVALUE": "Minimum value allowed",
         },
         "es-ES": {
             "INVALID": "Formulario invalido",
@@ -46,6 +51,11 @@ export class AngularJsonFormComponent implements OnInit {
             "SEARCH": "Buscar...",
             "ADD": "Adicionar",
             "EMPTY": "No hay opciones encontradas",
+            "FORMATS": "Formatos permitidos",
+            "MAXFILES": "Máxima cantidad de archivos",
+            "MAXSIZE": "Máximo tamaño permitido",
+            "MAXVALUE": "Máximo valor permitido",
+            "MINVALUE": "Mínimo valor permitido",
         },
         "pt-BR": {
             "INVALID": "Formulário inválido",
@@ -62,6 +72,11 @@ export class AngularJsonFormComponent implements OnInit {
             "SEARCH": "Pesquisar...",
             "ADD": "Adicionar",
             "EMPTY": "Nenhuma opção encontrada",
+            "FORMATS": "Formatos permitidos",
+            "MAXFILES": "Número máximo de arquivos",
+            "MAXSIZE": "Tamanho máximo permitido",
+            "MAXVALUE": "Valor máximo permitido",
+            "MINVALUE": "Valor mínimo permitido",
         },
     };
 
@@ -82,6 +97,9 @@ export class AngularJsonFormComponent implements OnInit {
                             ready = false;
                             return
                         } else if (ready) {
+                            field.name = field.name.replace(/[^A-Za-z0-9]+/g, "");
+                            console.log(field.name);
+                            
                             if (names.indexOf(field.name) > -1) {
                                 console.error("Duplicate name control: " + field.name);
                                 ready = false;
@@ -104,14 +122,15 @@ export class AngularJsonFormComponent implements OnInit {
                                     this.FormGroup.addControl(field.name, new FormControl(field.value, validators));
                                 };
                                 if (field.multiple && !field.value) field.value = [];
-                            } else if (field.type == "image") {
+                            } else if (field.type == "image" || field.type == "file") {
                                 this.FormGroup.addControl(field.name, new FormControl({
                                     value: field.multiple && field.value && field.value.map(i => new File([""], i.id)),
                                     disabled: field.disabled,
                                 }, validators));
-                                if (!field.maxsize || field.maxsize < 1 || field.maxsize > 5000000) field.maxsize = 500000;
+                                if (!field.maxsize || field.maxsize < 1 || field.maxsize > 5242880) field.maxsize = 512000;
                                 if (!field.maxfiles || field.maxfiles < 1 || field.maxfiles > 8) field.maxfiles = 4;
-                                if (field.multiple && !field.images) field.images = [];
+                                field.maxsizeconvert = field.maxsize < 1024 ? field.maxsize + " bytes" : field.maxsize / 1024 < 1024 ? (field.maxsize / 1024).toFixed(2).replace(".00", "") + " KB (" + field.maxsize + " bytes)" : (field.maxsize / 1024 / 1024).toFixed(2).replace(".00", "") + " MB (" + field.maxsize + " bytes)";
+                                if (field.multiple) field.files = field.value && field.value.length > 0 ? field.value : [];
                             } else if (field.type == "checkbox") {
                                 this.FormGroup.addControl(field.name, new FormControl(field.value ? true : false));
                             } else {
@@ -119,6 +138,8 @@ export class AngularJsonFormComponent implements OnInit {
                             };
                             if (field.options && field.options.length > 0) field.optionsView = field.options;
                             if (field.type == "list" && !field.value) field.value = [];
+                            if (field.type == "number" && field.max && isNaN(field.max)) field.max = false;
+                            if (field.type == "number" && field.min && isNaN(field.min)) field.min = false;
                         };
                     });
                 };
@@ -177,15 +198,8 @@ export class AngularJsonFormComponent implements OnInit {
                                 let ok = false;
                                 g.fields.some(f => {
                                     if (f.name == field) {
-                                        if (f.type == "list" || (f.type == "select" && f.multiple)) {
-                                            let values = [];
-                                            items && items.length > 0 && items.map(i => {
-                                                if ((f.option && f.option.value && i[f.option.value]) || i.value) values.push({ ...i, deleted: true });
-                                            });
-                                            f.value = values || [];
-                                        } else {
-                                            f.value = "";
-                                        };
+                                        if (f.type == "list" || ((f.type == "select" || f.type == "image" || f.type == "file") && f.multiple)) f.value = [];
+                                        else f.value = "";
                                         this.FormGroup.controls[field] && this.FormGroup.controls[field].setValue("");
                                         ok = true;
                                         return true;

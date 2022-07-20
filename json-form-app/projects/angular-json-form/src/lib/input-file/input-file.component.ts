@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-    selector: 'app-input-image',
-    templateUrl: './input-image.component.html',
+    selector: 'app-input-file',
+    templateUrl: './input-file.component.html',
     styleUrls: ['../angular-json-form.component.scss']
 })
-export class InputImageComponent implements OnInit {
+export class InputFileComponent implements OnInit {
 
     @Input() FormGroup: FormGroup;
     @Input() field: any = {};
@@ -27,7 +27,7 @@ export class InputImageComponent implements OnInit {
         };
     }
 
-    drawImage(files) {
+    drawFile(files) {
         try {
             if (files && files.length) {
                 if (this.field.multiple && this.field.maxfiles < this.field.files.length + files.length) {
@@ -36,7 +36,7 @@ export class InputImageComponent implements OnInit {
                 };
                 for (let item of files) {
                     const file: File = item;
-                    if (["image/png", "image/jpeg", "image/jpg"].indexOf(file.type) == -1) {
+                    if ("application/pdf" != file.type) {
                         this.field.error = "FORMAT";
                         return;
                     };
@@ -44,18 +44,14 @@ export class InputImageComponent implements OnInit {
                         this.field.error = "SIZE";
                         return;
                     };
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onload = () => {
-                        if (this.field.multiple) {
-                            this.field.files.push({ url: reader.result });
-                            let values = this.FormGroup.controls[this.field.name].value || [];
-                            values.push(file);
-                            this.FormGroup.controls[this.field.name].setValue(values);
-                        } else {
-                            this.field.value = reader.result;
-                            this.FormGroup.controls[this.field.name].setValue(file);
-                        };
+                    if (this.field.multiple) {
+                        this.field.files.push(file);
+                        let values = this.FormGroup.controls[this.field.name].value || [];
+                        values.push(file);
+                        this.FormGroup.controls[this.field.name].setValue(values);
+                    } else {
+                        this.field.value = file;
+                        this.FormGroup.controls[this.field.name].setValue(file);
                     };
                 };
             };
@@ -64,14 +60,15 @@ export class InputImageComponent implements OnInit {
         };
     }
 
-    removeImage(index) {
+    removeFile(index) {
         try {
             if (this.field && this.field.files && this.field.files[index]) {
                 this.field.files.splice(index, 1);
                 let values = this.FormGroup.controls[this.field.name].value;
                 if (values && values[index]) {
                     values.splice(index, 1);
-                    this.FormGroup.controls[this.field.name].setValue(values);
+                    if (values.length == 0) this.FormGroup.controls[this.field.name].setValue("");
+                    else this.FormGroup.controls[this.field.name].setValue(values);
                 };
             };
         } catch (e) {
