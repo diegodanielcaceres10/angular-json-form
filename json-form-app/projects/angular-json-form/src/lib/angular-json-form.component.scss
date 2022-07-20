@@ -824,6 +824,52 @@
         white-space: nowrap;
     }
 
+    &__loader {
+        height: 1.5rem;
+        position: relative;
+        width: 1.5rem;
+
+        & .loader {
+            align-items: center;
+            bottom: 0;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            z-index: 20;
+        
+            &__inner,
+            &__inner:after {
+                border-radius: 50%;
+                height: 100%;
+                max-height: 3rem;
+                max-width: 3rem;
+                width: 100%;
+            }
+            
+            &__inner {
+                box-sizing: border-box;
+                position: relative;
+                border: 3px solid var(--angular-json-form-text, black);
+                border-left: 3px solid transparent;
+                -webkit-transform: translateZ(0);
+                -ms-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-animation: load8 1.1s infinite linear;
+                animation: load8 1.1s infinite linear;
+
+                &-primary {
+                    border: 3px solid var(--angular-json-form-secondary, white);
+                    border-left: 3px solid transparent;
+                }
+            }
+        }
+    }
+
     // Define scroll bar design
     &__scrollbar {
         &::-webkit-scrollbar-track {
@@ -847,4 +893,15 @@
         }
     }
     
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }

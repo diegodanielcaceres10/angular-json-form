@@ -97,9 +97,7 @@ export class AngularJsonFormComponent implements OnInit {
                             ready = false;
                             return
                         } else if (ready) {
-                            field.name = field.name.replace(/[^A-Za-z0-9]+/g, "");
-                            console.log(field.name);
-                            
+                            field.name = field.name.replace(/[^A-Za-z0-9_-]+/g, "");
                             if (names.indexOf(field.name) > -1) {
                                 console.error("Duplicate name control: " + field.name);
                                 ready = false;
@@ -114,14 +112,18 @@ export class AngularJsonFormComponent implements OnInit {
                             };
                             let validators = this.setValidators(field);
                             if (field.type == "select") {
-                                if (field.option && field.option.value) {
-                                    this.FormGroup.addControl(field.name, new FormControl(field.value && field.value && field.value[field.option.value], validators));
-                                } else if (field.value && field.value.value !== undefined) {
-                                    this.FormGroup.addControl(field.name, new FormControl(field.value.value, validators));
-                                } else {
+                                if (field.multiple) {
+                                    if (!field.value) field.value = [];
                                     this.FormGroup.addControl(field.name, new FormControl(field.value, validators));
+                                } else {
+                                    if (field.option && field.option.value) {
+                                        this.FormGroup.addControl(field.name, new FormControl(field.value && field.value && field.value[field.option.value], validators));
+                                    } else if (field.value && field.value.value !== undefined) {
+                                        this.FormGroup.addControl(field.name, new FormControl(field.value.value, validators));
+                                    } else {
+                                        this.FormGroup.addControl(field.name, new FormControl(field.value, validators));
+                                    };
                                 };
-                                if (field.multiple && !field.value) field.value = [];
                             } else if (field.type == "image" || field.type == "file") {
                                 this.FormGroup.addControl(field.name, new FormControl({
                                     value: field.multiple && field.value && field.value.map(i => new File([""], i.id)),
@@ -283,6 +285,8 @@ export class AngularJsonFormComponent implements OnInit {
     eventForm(button) {
         try {
             if (button && !button.submit) {
+                this.form.waiting = button.spinner;
+                button.loader = button.spinner;
                 this.form.error = "";
                 this.event.emit(button.event);
             };
@@ -293,11 +297,18 @@ export class AngularJsonFormComponent implements OnInit {
 
     async submitForm() {
         try {
+            this.form.buttons && this.form.buttons.map(i => {
+                if (i.submit && i.spinner) {
+                    i.loader = true;
+                    this.form.waiting = true;
+                };
+            });
             this.form.invalid = false;
             this.form.error = "";
             if (this.FormGroup.invalid) {
                 this.form.invalid = true;
                 this.form.error = this.legends[this.form.lang] ? this.legends[this.form.lang].INVALID : this.legends['en-US'].INVALID;
+                this.form.waiting = false;
             } else {
                 let values = this.FormGroup.value;
                 this.send.emit(values);
