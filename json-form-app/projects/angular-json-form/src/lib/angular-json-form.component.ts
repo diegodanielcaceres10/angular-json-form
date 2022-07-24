@@ -125,14 +125,21 @@ export class AngularJsonFormComponent implements OnInit {
                                     };
                                 };
                             } else if (field.type == "image" || field.type == "file") {
-                                this.FormGroup.addControl(field.name, new FormControl({
-                                    value: field.multiple && field.value && field.value.map(i => new File([""], i.id)),
-                                    disabled: field.disabled,
-                                }, validators));
+                                if (field.multiple) {
+                                    this.FormGroup.addControl(field.name, new FormControl({
+                                        value: field.value && field.value.map(i => new File([""], i.id)),
+                                        disabled: field.disabled,
+                                    }, validators));
+                                    field.files = field.value && field.value.length > 0 ? field.value : [];
+                                } else {
+                                    this.FormGroup.addControl(field.name, new FormControl({
+                                        value: field.value,
+                                        disabled: field.disabled,
+                                    }, validators));
+                                };
                                 if (!field.maxsize || field.maxsize < 1 || field.maxsize > 5242880) field.maxsize = 512000;
                                 if (!field.maxfiles || field.maxfiles < 1 || field.maxfiles > 8) field.maxfiles = 4;
                                 field.maxsizeconvert = field.maxsize < 1024 ? field.maxsize + " bytes" : field.maxsize / 1024 < 1024 ? (field.maxsize / 1024).toFixed(2).replace(".00", "") + " KB (" + field.maxsize + " bytes)" : (field.maxsize / 1024 / 1024).toFixed(2).replace(".00", "") + " MB (" + field.maxsize + " bytes)";
-                                if (field.multiple) field.files = field.value && field.value.length > 0 ? field.value : [];
                             } else if (field.type == "checkbox") {
                                 this.FormGroup.addControl(field.name, new FormControl(field.value ? true : false));
                             } else {
