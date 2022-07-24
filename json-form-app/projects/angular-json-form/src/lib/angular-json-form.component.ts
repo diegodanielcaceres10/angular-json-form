@@ -97,7 +97,7 @@ export class AngularJsonFormComponent implements OnInit {
                             ready = false;
                             return
                         } else if (ready) {
-                            field.name = field.name.replace(/[^A-Za-z0-9_-]+/g, "");
+                            field.name = field.name.toString().replace(/[^A-Za-z0-9_-]+/g, "");
                             if (names.indexOf(field.name) > -1) {
                                 console.error("Duplicate name control: " + field.name);
                                 ready = false;
@@ -262,6 +262,7 @@ export class AngularJsonFormComponent implements OnInit {
                                 g.fields.some(f => {
                                     if (f.name == field) {
                                         f.hidden = a.type == "visible" ? valid : !valid;
+                                        g.count = g.fields.filter(i => !i.hidden && i.type != "hidden").length;
                                         ok = true;
                                         return true;
                                     };

@@ -36,7 +36,7 @@ export class InputFileComponent implements OnInit {
                 };
                 for (let item of files) {
                     const file: File = item;
-                    if ("application/pdf" != file.type) {
+                    if (["application/pdf", "image/png", "image/jpeg", "image/jpg"].indexOf(file.type) == -1) {
                         this.field.error = "FORMAT";
                         return;
                     };
