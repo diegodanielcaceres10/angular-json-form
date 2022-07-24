@@ -504,7 +504,7 @@
 
     &__list {
         background: var(--angular-json-form-background, white);
-        border: 1px solid var(--angular-json-form-border, lightgrey);
+        border: 1px solid var(--angular-json-form-focus, gold);
         box-sizing: border-box;
         box-shadow: 2px 2px 5px rgba(black, .3);
         display: none;
