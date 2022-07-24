@@ -53,7 +53,7 @@ export class InputImageComponent implements OnInit {
                             values.push(file);
                             this.FormGroup.controls[this.field.name].setValue(values);
                         } else {
-                            this.field.value = reader.result;
+                            this.field.value = { url: reader.result };
                             this.FormGroup.controls[this.field.name].setValue(file);
                         };
                     };
