@@ -3,7 +3,8 @@
         <input [formControlName]="field.name" [value]="radio" (ngModelChange)="changedEvent()" type="radio" class="angular-json-form__input">
         <label></label>
         <label>
-            <span>{{ radio }}</span>
+            <span *ngIf="field.translate">{{ translations && translations[lang] && translations[lang][(field.prefix || "") + radio] ? translations[lang][(field.prefix || "") + radio] : radio }}</span>
+            <span *ngIf="!field.translate">{{ radio }}</span>
         </label>
     </div>
 </div>
