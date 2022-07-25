@@ -74,7 +74,7 @@
                 <app-input-password *ngIf="field.type == 'password'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-password>
 
                 <!-- Input type radio -->
-                <app-input-radio *ngIf="field.type == 'radio'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-radio>
+                <app-input-radio *ngIf="field.type == 'radio'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-radio>
 
                 <!-- Input type select -->
                 <app-input-select *ngIf="field.type == 'select'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-select>
