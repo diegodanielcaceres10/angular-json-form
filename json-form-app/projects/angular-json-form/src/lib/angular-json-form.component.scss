@@ -369,7 +369,7 @@
             & ~ span {
                 overflow: hidden;
                 padding-left: 1em;
-                padding-right: 3em;
+                padding-right: 2.5em;
                 text-overflow: ellipsis;
                 width: 100%;
                 white-space: nowrap;
@@ -471,7 +471,14 @@
         width: 100%;
         z-index: 3;
 
-        & div, & span {
+        & div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        & span {
             width: 100%;
         }
     
@@ -500,6 +507,9 @@
     }
 
     &__options {
+        bottom: 0;
+        left: 0;
+        position: absolute;
         width: 100%;
     }
 
@@ -558,9 +568,11 @@
 
         & span {
             box-sizing: border-box;
-            display: flex;
+            display: block;
             line-height: initial;
+            overflow: hidden;
             padding: 1em;
+            text-overflow: ellipsis;
         }
 
         & input {
@@ -790,7 +802,7 @@
             left: 0;
 
             & ~ input,& ~ button {
-                padding-left: 3em;
+                padding-left: 2.5em;
             }
         }
 
@@ -802,7 +814,7 @@
 
 
             & ~ input,& ~ button {
-                padding-right: 3em;
+                padding-right: 2.5em;
             }
         }
 
@@ -813,7 +825,7 @@
             z-index: 1;
 
             & ~ input,& ~ button {
-                padding-right: 3em;
+                padding-right: 2.5em;
             }
         }
     }

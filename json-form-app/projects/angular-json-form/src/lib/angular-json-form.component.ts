@@ -209,7 +209,7 @@ export class AngularJsonFormComponent implements OnInit {
                                     if (f.name == field) {
                                         if (f.type == "list" || ((f.type == "select" || f.type == "image" || f.type == "file") && f.multiple)) f.value = [];
                                         else f.value = "";
-                                        this.FormGroup.controls[field] && this.FormGroup.controls[field].setValue("");
+                                        this.FormGroup.controls[field] && this.FormGroup.controls[field].setValue(null);
                                         ok = true;
                                         return true;
                                     };

@@ -19,7 +19,7 @@
             <span *ngIf="field.translate">{{ translations && translations[lang] && translations[lang][(field.prefix || "") + field.value] ? translations[lang][(field.prefix || "") + field.value] : field.value }}</span>
             <span *ngIf="!field.translate">{{ field.value }}</span>
         </div>
-        <div class="angular-json-form__options">
+        <section class="angular-json-form__options">
             <ul class="angular-json-form__list angular-json-form__scrollbar">
                 <li *ngIf="field.searchable && field.options && field.options.length > 0" class="angular-json-form__option">
                     <input #input (input)="filterOptions($event)" [placeholder]="legends[lang] ? legends[lang].SEARCH : legends['en-US'].SEARCH" class="angular-json-form__search" type="text" spellcheck="false">
@@ -42,7 +42,7 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </section>
     </button>
     <input [formControlName]="field.name" (ngModelChange)="changedEvent()" class="angular-json-form__input angular-json-form__input-hidden">
 </div>
