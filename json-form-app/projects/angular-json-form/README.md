@@ -428,7 +428,8 @@ handleEvent(event) {
 The property `format` contains colors and styles properties.
 |Property|Type|Description|
 |-|-|-|
-|full|bool|Full width size form|
+|full|bool|Full width size set buttons|
+|expand|bool|Full width size form fields|
 |center|bool|Center buttons set|
 |primary|Css Color|Primary color|
 |secondary|Css Color|Secondary color|

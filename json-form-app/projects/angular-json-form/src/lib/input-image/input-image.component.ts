@@ -12,6 +12,7 @@ export class InputImageComponent implements OnInit {
     @Input() field: any = {};
     @Input() legends: any;
     @Input() lang: string;
+    @Input() translations: any;
     @Output() changed = new EventEmitter<any>();
 
     constructor() { }

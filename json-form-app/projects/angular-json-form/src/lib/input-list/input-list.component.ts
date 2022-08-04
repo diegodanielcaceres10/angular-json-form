@@ -12,6 +12,7 @@ export class InputListComponent implements OnInit {
     @Input() field: any = {};
     @Input() legends: any;
     @Input() lang: string;
+    @Input() translations: any;
     @Input() value: string = "";
     @Output() changed = new EventEmitter<any>();
 
