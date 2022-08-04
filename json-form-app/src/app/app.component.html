@@ -15,3 +15,7 @@
     <span style="cursor: pointer;padding: 5px;" (click)="form4.lang = 'en-US'">English</span>
     <span style="cursor: pointer;padding: 5px;" (click)="form4.lang = 'es-ES'">Español</span>
 </div>
+<hr>
+<div style="width: 1200px;max-width: 90%;">
+    <angular-json-form [form]="form5" (event)="event($event)" (send)="send($event)"></angular-json-form>
+</div>

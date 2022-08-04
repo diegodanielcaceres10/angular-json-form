@@ -29,6 +29,7 @@ export class AngularJsonFormComponent implements OnInit {
             "SELECT": "Select",
             "SEARCH": "Search...",
             "ADD": "Add",
+            "UPLOAD": "Upload image",
             "EMPTY": "No options found",
             "FORMATS": "Allowed formats",
             "MAXFILES": "Maximum number of files",
@@ -50,6 +51,7 @@ export class AngularJsonFormComponent implements OnInit {
             "SELECT": "Seleccionar",
             "SEARCH": "Buscar...",
             "ADD": "Adicionar",
+            "UPLOAD": "Subir imágen",
             "EMPTY": "No hay opciones encontradas",
             "FORMATS": "Formatos permitidos",
             "MAXFILES": "Máxima cantidad de archivos",
@@ -71,6 +73,7 @@ export class AngularJsonFormComponent implements OnInit {
             "SELECT": "Selecionar",
             "SEARCH": "Pesquisar...",
             "ADD": "Adicionar",
+            "UPLOAD": "Subir imagem",
             "EMPTY": "Nenhuma opção encontrada",
             "FORMATS": "Formatos permitidos",
             "MAXFILES": "Número máximo de arquivos",
@@ -141,7 +144,7 @@ export class AngularJsonFormComponent implements OnInit {
                                 if (!field.maxfiles || field.maxfiles < 1 || field.maxfiles > 8) field.maxfiles = 4;
                                 field.maxsizeconvert = field.maxsize < 1024 ? field.maxsize + " bytes" : field.maxsize / 1024 < 1024 ? (field.maxsize / 1024).toFixed(2).replace(".00", "") + " KB (" + field.maxsize + " bytes)" : (field.maxsize / 1024 / 1024).toFixed(2).replace(".00", "") + " MB (" + field.maxsize + " bytes)";
                             } else if (field.type == "checkbox") {
-                                this.FormGroup.addControl(field.name, new FormControl(field.value ? true : false));
+                                this.FormGroup.addControl(field.name, new FormControl({ value: field.value ? true : false, disabled: field.disabled }));
                             } else {
                                 this.FormGroup.addControl(field.name, new FormControl({ value: field.value, disabled: field.disabled }, validators));
                             };
@@ -152,6 +155,11 @@ export class AngularJsonFormComponent implements OnInit {
                         };
                     });
                 };
+            });
+            this.form.groups && this.form.groups.map(group => {
+                group.fields && group.fields.map(field => {
+                    this.changed(field);
+                });
             });
             this.form.ready = ready;
         } catch (e) {
@@ -188,7 +196,7 @@ export class AngularJsonFormComponent implements OnInit {
         } catch (e) {
             console.error("Error", e);
         };
-    };
+    }
 
     changed(field) {
         try {
@@ -202,7 +210,6 @@ export class AngularJsonFormComponent implements OnInit {
                 field.actions.map(a => {
                     if (a.type == "clear" && a.fields && a.fields.length > 0) {
                         a.fields.map(field => {
-                            let items = this.FormGroup.controls[field] && this.FormGroup.controls[field].value;
                             this.form.groups.some(g => {
                                 let ok = false;
                                 g.fields.some(f => {
@@ -284,7 +291,7 @@ export class AngularJsonFormComponent implements OnInit {
             };
 
             // event
-            if (field.event && value && field.value != value) this.event.emit({ event: field.event, value });
+            if (field.event && value && field.value != value) this.event.emit(field);
         } catch (e) {
             console.error("Error", e);
         };

@@ -24,7 +24,7 @@
     position: relative;
     width: 100%;
 
-    &-full {
+    &-expand {
         max-width: 100%;
     }
 
@@ -248,7 +248,16 @@
         z-index: 2;
 
         &::placeholder {
-            color: var(--angular-json-form-grey, lightgrey);;
+            color: var(--angular-json-form-grey, lightgrey);
+        }
+
+        &:focus {
+            border-color: var(--angular-json-form-focus, gold);
+        }
+
+        &:disabled {
+            background: var(--angular-json-form-disabled, whitesmoke);
+            opacity: .5;
         }
 
         &[type=number]::-webkit-inner-spin-button, 
@@ -258,7 +267,6 @@
         }
         
         &[type="checkbox"] {
-            cursor: pointer;
             height: 100%;
             left: 0;
             opacity: 0;
@@ -266,27 +274,40 @@
             top: 0;
             z-index: 1;
 
+            &:not(:disabled) {
+                cursor: pointer;
+            }
+
             & + label {
                 border: 1px solid var(--angular-json-form-border, lightgrey);
                 border-radius: .2em;
                 height: 20px;
                 width: 20px;
+
+                &::before {
+                    border: 1px solid transparent;
+                    border-radius: .2em;
+                    content: "";
+                    height: 14px;
+                    left: 3px;
+                    position: absolute;
+                    width: 14px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+
+            &:disabled + label {
+                background: var(--angular-json-form-disabled, whitesmoke);
+                opacity: .5;
+
+                &::before {
+                    opacity: .5;
+                }
             }
 
             &:focus + label {
                 border-color: var(--angular-json-form-focus, gold);
-            }
-
-            & + label::before {
-                border: 1px solid transparent;
-                border-radius: .2em;
-                content: "";
-                height: 14px;
-                left: 3px;
-                position: absolute;
-                width: 14px;
-                top: 50%;
-                transform: translateY(-50%);
             }
 
             &:checked + label::before {
@@ -309,7 +330,6 @@
         }
 
         &[type="radio"] {
-            cursor: pointer;
             height: 100%;
             left: 0;
             opacity: 0;
@@ -317,27 +337,40 @@
             top: 0;
             z-index: 1;
 
+            &:not(:disabled) {
+                cursor: pointer;
+            }
+
             & + label {
                 border: 1px solid var(--angular-json-form-border, lightgrey);
                 border-radius: 1.5em;
                 height: 20px;
                 width: 20px;
+
+                &::before {
+                    border: 1px solid transparent;
+                    border-radius: 100%;
+                    content: "";
+                    height: 14px;
+                    left: 3px;
+                    position: absolute;
+                    width: 14px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+
+            &:disabled + label {
+                background: var(--angular-json-form-disabled, whitesmoke);
+                opacity: .5;
+
+                &::before {
+                    opacity: .5;
+                }
             }
 
             &:focus + label {
                 border-color: var(--angular-json-form-focus, gold);
-            }
-
-            & + label::before {
-                border: 1px solid transparent;
-                border-radius: 100%;
-                content: "";
-                height: 14px;
-                left: 3px;
-                position: absolute;
-                width: 14px;
-                top: 50%;
-                transform: translateY(-50%);
             }
 
             &:checked + label::before {
@@ -362,17 +395,22 @@
 
         &[type="file"] {
             color: transparent;
-            cursor: pointer;
             position: absolute;
             z-index: 5;
+
+            &:not(:disabled) {
+                cursor: pointer;
+            }
 
             & ~ span {
                 overflow: hidden;
                 padding-left: 1em;
-                padding-right: 2.5em;
-                text-overflow: ellipsis;
-                width: 100%;
+                width: calc(100% - 3.8rem);
                 white-space: nowrap;
+
+                &.placeholder {
+                    color: var(--angular-json-form-grey, lightgrey);
+                }
             }
 
             &:focus + div {
@@ -382,38 +420,25 @@
             &::file-selector-button {
                 display: none;
             }
-
-            &[multiple] {
-
-                &:focus + span {
-                    border-color: var(--angular-json-form-focus, gold);
-                }
-
-                & ~ span {
-                    align-items: center;
-                    border-radius: .5em;
-                    display: flex;
-                    height: 100%;
-                    padding-left: 1em;
-                    width: 100%;
-                }
+    
+            &:disabled ~ span {
+                width: calc(100% - 2rem);
             }
     
-            &:disabled {
-                cursor: not-allowed;
-                opacity: 0;
-
-                & ~ span {
-                    background: var(--angular-json-form-border, lightgrey);
-                }
+            &:disabled ~ section {
+                background: var(--angular-json-form-disabled, whitesmoke);
+                opacity: .5;
             }
         }
 
         &[type="color"] {
             border-radius: 50%;
-            cursor: pointer;
             padding: .3em;
             width: 3em;
+
+            &:not(:disabled) {
+                cursor: pointer;
+            }
 
             &.empty {
                 opacity: 0;
@@ -421,6 +446,10 @@
 
             &:focus + span {
                 border-color: var(--angular-json-form-focus, gold);
+            }
+
+            &:disabled + span {
+                opacity: .5;
             }
 
             & ~ span {
@@ -440,15 +469,6 @@
                 border-radius: 50%;
                 border: none;
             }
-        }
-
-        &:focus {
-            border-color: var(--angular-json-form-focus, gold);
-        }
-
-        &:disabled {
-            background: var(--angular-json-form-border, lightgrey);
-            opacity: .5;
         }
 
         &-hidden {
@@ -480,6 +500,12 @@
 
         & span {
             width: 100%;
+
+            &.placeholder {
+                color: var(--angular-json-form-grey, lightgrey);
+                overflow: hidden;
+                white-space: nowrap;
+            }
         }
     
         &:not(:disabled) {
@@ -491,7 +517,7 @@
         }
     
         &:disabled {
-            background: var(--angular-json-form-border, lightgrey);
+            background: var(--angular-json-form-disabled, whitesmoke);
             opacity: .5;
         }
 
@@ -545,7 +571,7 @@
         width: 100%;
 
         &::placeholder {
-            color: var(--angular-json-form-grey, lightgrey);;
+            color: var(--angular-json-form-grey, lightgrey);
         }
     }
 
@@ -588,6 +614,11 @@
         height: 11.4em;
         margin-top: .5em;
         overflow-y: auto;
+
+        &-disabled {
+            background: var(--angular-json-form-disabled, whitesmoke);
+            opacity: .5;
+        }
 
         &-wrap {
             align-content: flex-start;
@@ -686,10 +717,22 @@
             overflow: hidden;
             width: 100%;
 
-            & svg {
-                fill: var(--angular-json-form-border, lightgrey);
-                opacity: .7;
-                width: 2em;
+            & div {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+
+                & span {
+                    color: var(--angular-json-form-grey, lightgrey);
+                    text-align: center;
+                    white-space: nowrap;
+                }
+
+                & svg {
+                    fill: var(--angular-json-form-border, lightgrey);
+                    opacity: .7;
+                    width: 2em;
+                }
             }
         
             & img.cover {
@@ -719,8 +762,17 @@
         resize: none;
         width: 100%;
 
+        &::placeholder {
+            color: var(--angular-json-form-grey, lightgrey);
+        }
+
         &:focus {
             border-color: var(--angular-json-form-focus, gold);
+        }
+
+        &:disabled {
+            background: var(--angular-json-form-disabled, whitesmoke);
+            opacity: .5;
         }
     }
 
@@ -814,7 +866,7 @@
 
 
             & ~ input,& ~ button {
-                padding-right: 2.5em;
+                padding-right: 2.8em;
             }
         }
 
@@ -825,7 +877,7 @@
             z-index: 1;
 
             & ~ input,& ~ button {
-                padding-right: 2.5em;
+                padding-right: 2.8em;
             }
         }
     }

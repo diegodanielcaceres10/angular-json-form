@@ -10,6 +10,8 @@ export class InputTelComponent implements OnInit {
 
     @Input() FormGroup: FormGroup;
     @Input() field: any = {};
+    @Input() lang: string;
+    @Input() translations: any;
     @Output() changed = new EventEmitter<any>();
 
     constructor() { }

@@ -1,4 +1,4 @@
-<form *ngIf="form && form.ready" [formGroup]="FormGroup" (ngSubmit)="submitForm()" [ngClass]="{ 'form-full' : form.format && form.format.full }" class="angular-json-form">
+<form *ngIf="form && form.ready" [formGroup]="FormGroup" (ngSubmit)="submitForm()" [ngClass]="{ 'angular-json-form-expand' : form.format && form.format.expand }" class="angular-json-form">
     <div *ngIf="form.title" class="angular-json-form__title">{{ form.translations && form.translations[form.lang] && form.translations[form.lang][form.title] ? form.translations[form.lang][form.title] : form.title }}</div>
     <span *ngIf="form.text" class="angular-json-form__section">{{ form.translations && form.translations[form.lang] && form.translations[form.lang][form.text] ? form.translations[form.lang][form.text] : form.text }}</span>
     <div *ngFor="let group of form.groups" class="angular-json-form__group">
@@ -53,25 +53,25 @@
                 <app-input-color *ngIf="field.type == 'color'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-color>
 
                 <!-- Input type email -->
-                <app-input-email *ngIf="field.type == 'email'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-email>
+                <app-input-email *ngIf="field.type == 'email'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-email>
 
                 <!-- Input type file -->
-                <app-input-file *ngIf="field.type == 'file'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-file>
+                <app-input-file *ngIf="field.type == 'file'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-file>
 
                 <!-- Input type hidden -->
                 <app-input-hidden *ngIf="field.type == 'hidden'" [FormGroup]="FormGroup" [field]="field"></app-input-hidden>
 
                 <!-- Input type image -->
-                <app-input-image *ngIf="field.type == 'image'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-image>
+                <app-input-image *ngIf="field.type == 'image'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-image>
 
                 <!-- Input type list -->
-                <app-input-list *ngIf="field.type == 'list'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" (changed)="changed($event)"></app-input-list>
+                <app-input-list *ngIf="field.type == 'list'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-list>
 
                 <!-- Input type number -->
-                <app-input-number *ngIf="field.type == 'number'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-number>
+                <app-input-number *ngIf="field.type == 'number'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-number>
 
                 <!-- Input type password -->
-                <app-input-password *ngIf="field.type == 'password'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-password>
+                <app-input-password *ngIf="field.type == 'password'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-password>
 
                 <!-- Input type radio -->
                 <app-input-radio *ngIf="field.type == 'radio'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-radio>
@@ -80,13 +80,13 @@
                 <app-input-select *ngIf="field.type == 'select'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-select>
 
                 <!-- Input type tel -->
-                <app-input-tel *ngIf="field.type == 'tel'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-tel>
+                <app-input-tel *ngIf="field.type == 'tel'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-tel>
 
                 <!-- Input type text -->
-                <app-input-text *ngIf="field.type == 'text'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-text>
+                <app-input-text *ngIf="field.type == 'text'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-text>
 
                 <!-- Input type textarea -->
-                <app-input-textarea *ngIf="field.type == 'textarea'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-textarea>
+                <app-input-textarea *ngIf="field.type == 'textarea'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-textarea>
 
             </div>
         </div>

@@ -216,10 +216,6 @@ export class AppComponent {
                         label: "Image logo. 100 KB Max Size",
                         maxsize: 100000,
                     },
-                ],
-            },
-            {
-                fields: [
                     {
                         name: "imagecovername",
                         type: "image",
@@ -378,6 +374,31 @@ export class AppComponent {
                 "DEVELOPMENT": "Desarrollador",
                 "DESIGNER": "Diseñador",
             },
+        },
+    };
+    form5: any = {
+        title: "Example expand fields.",
+        groups: [
+            {
+                fields: [
+                    {
+                        name: "search",
+                        type: "text",
+                        label: "Search",
+                        placeholder: "Enter text here",
+                    },
+                ],
+            },
+        ],
+        buttons: [
+            {
+                text: "Search",
+                submit: true,
+                primary: true,
+            },
+        ],
+        format: {
+            expand: true,
         },
     };
 
