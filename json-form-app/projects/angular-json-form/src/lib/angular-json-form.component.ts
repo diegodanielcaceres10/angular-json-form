@@ -158,7 +158,7 @@ export class AngularJsonFormComponent implements OnInit {
             });
             this.form.groups && this.form.groups.map(group => {
                 group.fields && group.fields.map(field => {
-                    this.changed(field);
+                    this.changed(field, false);
                 });
             });
             this.form.ready = ready;
@@ -198,25 +198,23 @@ export class AngularJsonFormComponent implements OnInit {
         };
     }
 
-    changed(field) {
+    changed(field, change = true) {
         try {
             this.form.error = "";
             field.error = false;
-            let control = this.FormGroup.controls[field.name];
-            let value = control.value;
 
             // actions
             if (field && field.actions && field.actions.length > 0) {
                 field.actions.map(a => {
-                    if (a.type == "clear" && a.fields && a.fields.length > 0) {
-                        a.fields.map(field => {
+                    if (change && a.type == "clear" && a.fields && a.fields.length > 0) {
+                        a.fields.map(i => {
                             this.form.groups.some(g => {
                                 let ok = false;
                                 g.fields.some(f => {
-                                    if (f.name == field) {
+                                    if (f.name == i) {
                                         if (f.type == "list" || ((f.type == "select" || f.type == "image" || f.type == "file") && f.multiple)) f.value = [];
                                         else f.value = "";
-                                        this.FormGroup.controls[field] && this.FormGroup.controls[field].setValue(null);
+                                        this.FormGroup.controls[i] && this.FormGroup.controls[i].setValue(null);
                                         ok = true;
                                         return true;
                                     };
@@ -226,17 +224,17 @@ export class AngularJsonFormComponent implements OnInit {
                         });
                     } else if (a.type == "enabled") {
                         let valid = false;
-                        if (typeof a.match == "string") valid = a.match == value;
-                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == value;
-                        else if (!a.match) valid = value ? true : false;
-                        a.fields.map(field => {
+                        if (typeof a.match == "string") valid = a.match == field.value;
+                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
+                        else if (!a.match) valid = field.value ? true : false;
+                        a.fields.map(i => {
                             this.form.groups.some(g => {
                                 let ok = false;
                                 g.fields.some(f => {
-                                    if (f.name == field) {
+                                    if (f.name == i) {
                                         f.disabled = !valid;
-                                        if (valid) this.FormGroup.controls[field].enable();
-                                        else this.FormGroup.controls[field].disable();
+                                        if (valid) this.FormGroup.controls[i].enable();
+                                        else this.FormGroup.controls[i].disable();
                                         ok = true;
                                         return true;
                                     };
@@ -246,18 +244,18 @@ export class AngularJsonFormComponent implements OnInit {
                         });
                     } else if (a.type == "required") {
                         let valid = false;
-                        if (typeof a.match == "string") valid = a.match == value;
-                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == value;
-                        else if (!a.match) valid = value ? true : false;
-                        a.fields.map(field => {
+                        if (typeof a.match == "string") valid = a.match == field.value;
+                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
+                        else if (!a.match) valid = field.value ? true : false;
+                        a.fields.map(i => {
                             this.form.groups.some(g => {
                                 let ok = false;
                                 g.fields.some(f => {
-                                    if (f.name == field) {
+                                    if (f.name == i) {
                                         f.required = valid;
                                         ok = true;
-                                        this.FormGroup.controls[field].setValidators(this.setValidators(f));
-                                        this.FormGroup.controls[field].updateValueAndValidity();
+                                        this.FormGroup.controls[i].setValidators(this.setValidators(f));
+                                        this.FormGroup.controls[i].updateValueAndValidity();
                                         return true;
                                     };
                                 });
@@ -266,15 +264,15 @@ export class AngularJsonFormComponent implements OnInit {
                         });
                     } else if (a.type == "visible" || a.type == "hidden") {
                         let valid = false;
-                        if (typeof a.match == "string") valid = a.match == value;
-                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == value;
-                        else if (typeof a.match == "object" && a.match && a.match.length > 0) valid = a.match.indexOf(value) > -1;
-                        else if (!a.match) valid = value ? true : false;
-                        a.fields.map(field => {
+                        if (typeof a.match == "string") valid = a.match == field.value;
+                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
+                        else if (typeof a.match == "object" && a.match && a.match.length > 0) valid = a.match.indexOf(field.value) > -1;
+                        else if (!a.match) valid = field.value ? true : false;
+                        a.fields.map(i => {
                             this.form.groups.some(g => {
                                 let ok = false;
                                 g.fields.some(f => {
-                                    if (f.name == field) {
+                                    if (f.name == i) {
                                         f.hidden = a.type == "visible" ? valid : !valid;
                                         g.count = g.fields.filter(i => !i.hidden && i.type != "hidden").length;
                                         ok = true;
@@ -285,13 +283,13 @@ export class AngularJsonFormComponent implements OnInit {
                             });
                         });
                     } else if (a.type == "match" && a.field) {
-                        if (!this.FormGroup.controls[a.field] || this.FormGroup.controls[a.field].value != value) field.error = "MATCH";
+                        if (!this.FormGroup.controls[a.field] || this.FormGroup.controls[a.field].value != field.value) field.error = "MATCH";
                     };
                 });
             };
 
             // event
-            if (field.event && value && field.value != value) this.event.emit(field);
+            if (field.event && change) this.event.emit(field);
         } catch (e) {
             console.error("Error", e);
         };
