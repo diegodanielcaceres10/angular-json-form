@@ -199,100 +199,102 @@ export class AngularJsonFormComponent implements OnInit {
     }
 
     changed(field, change = true) {
-        try {
-            this.form.error = "";
-            field.error = false;
-
-            // actions
-            if (field && field.actions && field.actions.length > 0) {
-                field.actions.map(a => {
-                    if (change && a.type == "clear" && a.fields && a.fields.length > 0) {
-                        a.fields.map(i => {
-                            this.form.groups.some(g => {
-                                let ok = false;
-                                g.fields.some(f => {
-                                    if (f.name == i) {
-                                        if (f.type == "list" || ((f.type == "select" || f.type == "image" || f.type == "file") && f.multiple)) f.value = [];
-                                        else f.value = "";
-                                        this.FormGroup.controls[i] && this.FormGroup.controls[i].setValue(null);
-                                        ok = true;
-                                        return true;
-                                    };
+        setTimeout(() => {
+            try {
+                this.form.error = "";
+                field.error = false;
+    
+                // actions
+                if (field && field.actions && field.actions.length > 0) {
+                    field.actions.map(a => {
+                        if (change && a.type == "clear" && a.fields && a.fields.length > 0) {
+                            a.fields.map(i => {
+                                this.form.groups.some(g => {
+                                    let ok = false;
+                                    g.fields.some(f => {
+                                        if (f.name == i) {
+                                            if (f.type == "list" || ((f.type == "select" || f.type == "image" || f.type == "file") && f.multiple)) f.value = [];
+                                            else f.value = "";
+                                            this.FormGroup.controls[i] && this.FormGroup.controls[i].setValue(null);
+                                            ok = true;
+                                            return true;
+                                        };
+                                    });
+                                    if (ok) return true;
                                 });
-                                if (ok) return true;
                             });
-                        });
-                    } else if (a.type == "enabled") {
-                        let valid = false;
-                        if (typeof a.match == "string") valid = a.match == field.value;
-                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
-                        else if (!a.match) valid = field.value ? true : false;
-                        a.fields.map(i => {
-                            this.form.groups.some(g => {
-                                let ok = false;
-                                g.fields.some(f => {
-                                    if (f.name == i) {
-                                        f.disabled = !valid;
-                                        if (valid) this.FormGroup.controls[i].enable();
-                                        else this.FormGroup.controls[i].disable();
-                                        ok = true;
-                                        return true;
-                                    };
+                        } else if (a.type == "enabled") {
+                            let valid = false;
+                            if (typeof a.match == "string") valid = a.match == field.value;
+                            else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
+                            else if (!a.match) valid = field.value ? true : false;
+                            a.fields.map(i => {
+                                this.form.groups.some(g => {
+                                    let ok = false;
+                                    g.fields.some(f => {
+                                        if (f.name == i) {
+                                            f.disabled = !valid;
+                                            if (valid) this.FormGroup.controls[i].enable();
+                                            else this.FormGroup.controls[i].disable();
+                                            ok = true;
+                                            return true;
+                                        };
+                                    });
+                                    if (ok) return true;
                                 });
-                                if (ok) return true;
                             });
-                        });
-                    } else if (a.type == "required") {
-                        let valid = false;
-                        if (typeof a.match == "string") valid = a.match == field.value;
-                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
-                        else if (!a.match) valid = field.value ? true : false;
-                        a.fields.map(i => {
-                            this.form.groups.some(g => {
-                                let ok = false;
-                                g.fields.some(f => {
-                                    if (f.name == i) {
-                                        f.required = valid;
-                                        ok = true;
-                                        this.FormGroup.controls[i].setValidators(this.setValidators(f));
-                                        this.FormGroup.controls[i].updateValueAndValidity();
-                                        return true;
-                                    };
+                        } else if (a.type == "required") {
+                            let valid = false;
+                            if (typeof a.match == "string") valid = a.match == field.value;
+                            else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
+                            else if (!a.match) valid = field.value ? true : false;
+                            a.fields.map(i => {
+                                this.form.groups.some(g => {
+                                    let ok = false;
+                                    g.fields.some(f => {
+                                        if (f.name == i) {
+                                            f.required = valid;
+                                            ok = true;
+                                            this.FormGroup.controls[i].setValidators(this.setValidators(f));
+                                            this.FormGroup.controls[i].updateValueAndValidity();
+                                            return true;
+                                        };
+                                    });
+                                    if (ok) return true;
                                 });
-                                if (ok) return true;
                             });
-                        });
-                    } else if (a.type == "visible" || a.type == "hidden") {
-                        let valid = false;
-                        if (typeof a.match == "string") valid = a.match == field.value;
-                        else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
-                        else if (typeof a.match == "object" && a.match && a.match.length > 0) valid = a.match.indexOf(field.value) > -1;
-                        else if (!a.match) valid = field.value ? true : false;
-                        a.fields.map(i => {
-                            this.form.groups.some(g => {
-                                let ok = false;
-                                g.fields.some(f => {
-                                    if (f.name == i) {
-                                        f.hidden = a.type == "visible" ? valid : !valid;
-                                        g.count = g.fields.filter(i => !i.hidden && i.type != "hidden").length;
-                                        ok = true;
-                                        return true;
-                                    };
+                        } else if (a.type == "visible" || a.type == "hidden") {
+                            let valid = false;
+                            if (typeof a.match == "string") valid = a.match == field.value;
+                            else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
+                            else if (typeof a.match == "object" && a.match && a.match.length > 0) valid = a.match.indexOf(field.value) > -1;
+                            else if (!a.match) valid = field.value ? true : false;
+                            a.fields.map(i => {
+                                this.form.groups.some(g => {
+                                    let ok = false;
+                                    g.fields.some(f => {
+                                        if (f.name == i) {
+                                            f.hidden = a.type == "visible" ? valid : !valid;
+                                            g.count = g.fields.filter(i => !i.hidden && i.type != "hidden").length;
+                                            ok = true;
+                                            return true;
+                                        };
+                                    });
+                                    if (ok) return true;
                                 });
-                                if (ok) return true;
                             });
-                        });
-                    } else if (a.type == "match" && a.field) {
-                        if (!this.FormGroup.controls[a.field] || this.FormGroup.controls[a.field].value != field.value) field.error = "MATCH";
-                    };
-                });
+                        } else if (a.type == "match" && a.field) {
+                            if (!this.FormGroup.controls[a.field] || this.FormGroup.controls[a.field].value != field.value) field.error = "MATCH";
+                        };
+                    });
+                };
+    
+                // event
+                if (field.event && change) this.event.emit(field);
+            } catch (e) {
+                console.error("Error", e);
             };
-
-            // event
-            if (field.event && change) this.event.emit(field);
-        } catch (e) {
-            console.error("Error", e);
-        };
+        }, 0);
     }
 
     eventForm(button) {
