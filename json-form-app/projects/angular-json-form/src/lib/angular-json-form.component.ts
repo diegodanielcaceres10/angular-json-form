@@ -34,7 +34,9 @@ export class AngularJsonFormComponent implements OnInit {
             "MAXFILES": "Maximum number of files",
             "MAXSIZE": "Maximum size allowed",
             "MAXVALUE": "Maximum allowed value",
-            "MINVALUE": "Minimum value allowed",
+            "MINVALUE": "Minimum allowed value",
+            "MAXLENGTH": "Maximum allowed length",
+            "MINLENGTH": "Minimum allowed length",
         },
         "es-ES": {
             "INVALID": "Formulario invalido",
@@ -54,8 +56,10 @@ export class AngularJsonFormComponent implements OnInit {
             "FORMATS": "Formatos permitidos",
             "MAXFILES": "Máxima cantidad de archivos",
             "MAXSIZE": "Máximo tamaño permitido",
-            "MAXVALUE": "Máximo valor permitido",
-            "MINVALUE": "Mínimo valor permitido",
+            "MAXVALUE": "Valor máximo permitido",
+            "MINVALUE": "Valor mínimo permitido",
+            "MAXLENGTH": "Logitud máximo permitido",
+            "MINLENGTH": "Logitud mínimo permitido",
         },
         "pt-BR": {
             "INVALID": "Formulário inválido",
@@ -77,6 +81,8 @@ export class AngularJsonFormComponent implements OnInit {
             "MAXSIZE": "Tamanho máximo permitido",
             "MAXVALUE": "Valor máximo permitido",
             "MINVALUE": "Valor mínimo permitido",
+            "MAXLENGTH": "Comprimento máximo permitido",
+            "MINLENGTH": "Comprimento mínimo permitido",
         },
     };
 
@@ -307,6 +313,7 @@ export class AngularJsonFormComponent implements OnInit {
     }
 
     async submitForm() {
+        console.log(this.FormGroup);
         try {
             this.form.buttons && this.form.buttons.map(i => {
                 if (i.submit && i.spinner) {
