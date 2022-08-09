@@ -158,7 +158,7 @@
         width: 1em;
 
         & section {
-            background: var(--angular-json-form-background, white);
+            background: var(--angular-json-form-fill, white);
             border: 1px solid var(--angular-json-form-border, lightgrey);
             border-radius: .5em;
             box-shadow: 0 0 5px rgba(black, .3);
