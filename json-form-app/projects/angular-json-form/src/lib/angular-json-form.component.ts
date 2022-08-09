@@ -20,7 +20,6 @@ export class AngularJsonFormComponent implements OnInit {
             "REQUIRED": "Required field",
             "MAX": "Wrong value",
             "MIN": "Wrong value",
-            "MATCH": "Wrong value",
             "FORMAT": "Wrong format",
             "SIZE": "Wrong size",
             "COUNT": "Maximum exceeded",
@@ -42,7 +41,6 @@ export class AngularJsonFormComponent implements OnInit {
             "REQUIRED": "Campo requerido",
             "MAX": "Valor incorrecto",
             "MIN": "Valor incorrecto",
-            "MATCH": "Valor incorrecto",
             "FORMAT": "Formato incorrecto",
             "SIZE": "Tamaño incorrecto",
             "COUNT": "Cantidad excedida",
@@ -64,7 +62,6 @@ export class AngularJsonFormComponent implements OnInit {
             "REQUIRED": "Campo obrigatório",
             "MAX": "Valor errado",
             "MIN": "Valor errado",
-            "MATCH": "Valor errado",
             "FORMAT": "Formato errado",
             "SIZE": "Tamanho errado",
             "COUNT": "Quantidade excedida",
@@ -284,8 +281,6 @@ export class AngularJsonFormComponent implements OnInit {
                                     if (ok) return true;
                                 });
                             });
-                        } else if (a.type == "match" && a.field) {
-                            if (!this.FormGroup.controls[a.field] || this.FormGroup.controls[a.field].value != field.value) field.error = "MATCH";
                         };
                     });
                 };
