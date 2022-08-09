@@ -5,9 +5,10 @@
         @media only screen and (max-width: 600px) { @content };
     }
 }
+
 ::selection {
     background: var(--angular-json-form-text, #444);
-    color: var(--angular-json-form-background, white);
+    color: var(--angular-json-form-fill, white);
 }
 
 .angular-json-form {
