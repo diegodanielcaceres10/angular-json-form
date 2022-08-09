@@ -173,6 +173,7 @@ export class AngularJsonFormComponent implements OnInit {
                 if (this.form.format.primary) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-primary", this.form.format.primary);
                 if (this.form.format.secondary) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-secondary", this.form.format.secondary);
                 if (this.form.format.background) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-background", this.form.format.background);
+                if (this.form.format.fill) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-fill", this.form.format.fill);
                 if (this.form.format.text) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-text", this.form.format.text);
                 if (this.form.format.focus) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-focus", this.form.format.focus);
                 if (this.form.format.error) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-error", this.form.format.error);
