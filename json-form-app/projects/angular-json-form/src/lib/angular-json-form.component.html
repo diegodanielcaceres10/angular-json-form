@@ -95,7 +95,7 @@
     <!-- Buttons -->
     <div *ngIf="form.buttons" class="angular-json-form__group">
         <div [ngClass]="{ 'angular-json-form__box-center' : form.format && form.format.center, 'angular-json-form__box-full' : form.format && form.format.full }" class="angular-json-form__box angular-json-form__box-buttons">
-            <div class="angular-json-form__control angular-json-form__control-full">
+            <div class="angular-json-form__control angular-json-form__control-full angular-json-form__control-transparent">
                 <button *ngFor="let button of form.buttons" [ngClass]="{ 'angular-json-form__button-primary' : button.primary, 'angular-json-form__button-full' : form.format && form.format.full }" [type]="button.submit ? 'submit' : 'button'" [disabled]="form.waiting" (click)="eventForm(button)" class="angular-json-form__button">
                     <div *ngIf="form.waiting && button.loader" class="angular-json-form__loader">
                         <div class="loader">

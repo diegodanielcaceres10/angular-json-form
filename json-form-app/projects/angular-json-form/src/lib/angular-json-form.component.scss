@@ -195,6 +195,7 @@
 
     &__control {
         align-items: center;
+        background: var(--angular-json-form-fill, white);
         border-radius: .5em;
         display: flex;
         height: 3em;
@@ -216,6 +217,10 @@
         &-wrap {
             flex-wrap: wrap;
             height: auto;
+        }
+
+        &-transparent {
+            background: transparent;
         }
     }
 
@@ -279,6 +284,7 @@
             }
 
             & + label {
+                background: var(--angular-json-form-fill, white);
                 border: 1px solid var(--angular-json-form-border, lightgrey);
                 border-radius: .2em;
                 height: 20px;
@@ -342,6 +348,7 @@
             }
 
             & + label {
+                background: var(--angular-json-form-fill, white);
                 border: 1px solid var(--angular-json-form-border, lightgrey);
                 border-radius: 1.5em;
                 height: 20px;
@@ -453,6 +460,7 @@
             }
 
             & ~ span {
+                background: var(--angular-json-form-fill, white);
                 border: 1px solid var(--angular-json-form-border, lightgrey);
                 border-radius: 50%;
                 height: 100%;
@@ -540,7 +548,7 @@
     }
 
     &__list {
-        background: var(--angular-json-form-background, white);
+        background: var(--angular-json-form-fill, white);
         border: 1px solid var(--angular-json-form-focus, gold);
         box-sizing: border-box;
         box-shadow: 0 0 5px rgba(black, .3);
@@ -608,6 +616,7 @@
     }
 
     &__items {
+        background: var(--angular-json-form-fill, white);
         border: 1px solid var(--angular-json-form-border, lightgrey);
         border-radius: .5em;
         display: flex;

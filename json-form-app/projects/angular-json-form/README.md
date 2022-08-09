@@ -433,7 +433,8 @@ The property `format` contains colors and styles properties.
 |center|bool|Center buttons set|
 |primary|Css Color|Primary color|
 |secondary|Css Color|Secondary color|
-|background|Css Color|Background color|
+|background|Css Color|Background form color|
+|fill|Css Color|Fill input color|
 |text|Css Color|Text color|
 |focus|Css Color|Border color in a focus input|
 |error|Css Color|Text and icons color in a error message|
