@@ -13,7 +13,7 @@ export class AngularJsonFormComponent implements OnInit {
     @Output() event = new EventEmitter<any>();
 
     FormGroup: FormGroup;
-    types: any = ["checkbox", "color", "email", "file", "hidden", "image", "list", "number", "password", "radio", "select", "tel", "text", "textarea"];
+    types: any = ["checkbox", "color", "date", "email", "file", "hidden", "image", "list", "number", "password", "radio", "select", "tel", "text", "textarea"];
     legends: any = {
         "en-US": {
             "INVALID": "Invalid form",
@@ -37,6 +37,15 @@ export class AngularJsonFormComponent implements OnInit {
             "MINVALUE": "Minimum allowed value",
             "MAXLENGTH": "Maximum allowed length",
             "MINLENGTH": "Minimum allowed length",
+            "START": "Start date",
+            "END": "End date",
+            "SU": "S",
+            "MO": "M",
+            "TU": "T",
+            "WE": "W",
+            "TH": "T",
+            "FR": "F",
+            "SA": "S",
         },
         "es-ES": {
             "INVALID": "Formulario invalido",
@@ -60,6 +69,15 @@ export class AngularJsonFormComponent implements OnInit {
             "MINVALUE": "Valor mínimo permitido",
             "MAXLENGTH": "Logitud máximo permitido",
             "MINLENGTH": "Logitud mínimo permitido",
+            "START": "Fecha inicial",
+            "END": "Fecha final",
+            "SU": "D",
+            "MO": "L",
+            "TU": "M",
+            "WE": "M",
+            "TH": "J",
+            "FR": "V",
+            "SA": "S",
         },
         "pt-BR": {
             "INVALID": "Formulário inválido",
@@ -83,6 +101,15 @@ export class AngularJsonFormComponent implements OnInit {
             "MINVALUE": "Valor mínimo permitido",
             "MAXLENGTH": "Comprimento máximo permitido",
             "MINLENGTH": "Comprimento mínimo permitido",
+            "START": "Data inicial",
+            "END": "Data final",
+            "SU": "D",
+            "MO": "S",
+            "TU": "T",
+            "WE": "Q",
+            "TH": "Q",
+            "FR": "S",
+            "SA": "S",
         },
     };
 
@@ -313,7 +340,6 @@ export class AngularJsonFormComponent implements OnInit {
     }
 
     async submitForm() {
-        console.log(this.FormGroup);
         try {
             this.form.buttons && this.form.buttons.map(i => {
                 if (i.submit && i.spinner) {

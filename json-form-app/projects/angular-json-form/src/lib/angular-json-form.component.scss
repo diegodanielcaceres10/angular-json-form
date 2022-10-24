@@ -109,7 +109,7 @@
         padding: 0 .5em;
         width: 100%;
 
-        & label {
+        & > label {
             display: flex;
             width: 100%;
         }
@@ -120,7 +120,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
 
-        & span:first-child {
+        & > span:first-child {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -141,7 +141,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
 
-        & span {
+        & > span {
             padding: 0 .2rem;
         }
     }
@@ -157,7 +157,7 @@
         padding: 0;
         width: 1em;
 
-        & section {
+        & > section {
             background: var(--angular-json-form-fill, white);
             border: 1px solid var(--angular-json-form-border, lightgrey);
             border-radius: .5em;
@@ -178,12 +178,12 @@
             width: 20em;
             z-index: 10;
 
-            & div {
+            & > div {
                 display: flex;
                 flex-direction: column;
                 word-break: break-all;
 
-                & span {
+                & > span {
                     margin: .2em 0;
                 }
             }
@@ -266,10 +266,16 @@
             opacity: .5;
         }
 
-        &[type=number]::-webkit-inner-spin-button, 
-        &[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none;
+        &[type="number"]::-webkit-inner-spin-button, 
+        &[type="number"]::-webkit-outer-spin-button { 
+            appearance: none;
             margin: 0;
+        }
+
+        &[type="date"]::-webkit-inner-spin-button,
+        &[type="date"]::-webkit-calendar-picker-indicator {
+            appearance: none;
+            display: none;
         }
         
         &[type="checkbox"] {
@@ -328,7 +334,7 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
 
-                & span {
+                & > span {
                     flex: 1;
                     padding: 0 1em 0 .3em;
                     white-space: nowrap;
@@ -394,7 +400,7 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
 
-                & span {
+                & > span {
                     flex: 1;
                     padding: 0 1em 0 .3em;
                 }
@@ -500,14 +506,14 @@
         width: 100%;
         z-index: 3;
 
-        & div {
+        & > div {
             overflow: hidden;
             text-overflow: ellipsis;
             width: 100%;
             white-space: nowrap;
         }
 
-        & span {
+        & > span {
             width: 100%;
 
             &.placeholder {
@@ -535,7 +541,11 @@
             border-bottom-right-radius: 0;
             border-color: var(--angular-json-form-focus, gold);
 
-            & ul {
+            & > section > ul {
+                display: flex;
+            }
+
+            & > section > section {
                 display: flex;
             }
         }
@@ -601,7 +611,7 @@
             }
         }
 
-        & span {
+        & > span {
             box-sizing: border-box;
             display: block;
             line-height: initial;
@@ -611,8 +621,162 @@
             white-space: nowrap;
         }
 
-        & input {
+        & > input {
             padding: 1em;
+        }
+    }
+
+    &__calendar {
+        background: var(--angular-json-form-fill, white);
+        border: 1px solid var(--angular-json-form-focus, gold);
+        box-sizing: border-box;
+        box-shadow: 0 0 5px rgba(black, .3);
+        cursor: initial;
+        display: none;
+        font-size: .8rem;
+        left: 0;
+        margin: 0;
+        max-width: 100%;
+        overflow: auto;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        
+        @include respond(phone) {
+            flex-direction: column;
+        }
+    }
+
+    &__picker {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        
+        @include respond(phone) {
+            width: 100%;
+
+            &:last-child {
+                display: none;
+            }
+        }
+    }
+
+    &__header {
+        border-bottom: 1px solid var(--angular-json-form-border, lightgrey);
+        display: flex;
+        padding: .5rem;
+
+        & > svg {
+            cursor: pointer;
+            padding: .5rem;
+            width: .5em;
+
+            &:hover {
+                fill: var(--angular-json-form-primary, blue);
+            }
+        }
+
+        & > span {
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            flex: 1;
+            justify-content: center;
+
+            &:hover {
+                color: var(--angular-json-form-primary, blue);
+                opacity: .8;
+            }
+        }
+    }
+
+    &__weeks {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: .5rem 0;
+    }
+
+    &__week {
+        display: flex;
+        justify-content: space-evenly;
+        max-width: 20rem;
+        width: 100%;
+    }
+
+    &__day {
+        align-items: center;
+        border: 1px solid transparent;
+        border-radius: .3em;
+        display: flex;
+        height: 1.5rem;
+        justify-content: center;
+        margin: .2rem 0;
+        width: 100%;
+
+        &-header {
+            font-weight: bold;
+        }
+
+        &-enabled:hover {
+            border-color: var(--angular-json-form-primary, blue);
+            color: var(--angular-json-form-primary, blue);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        &-weekend {
+            opacity: .8;
+        }
+
+        &-selected {
+            background: var(--angular-json-form-primary, blue);
+            border-color: var(--angular-json-form-primary, blue);
+            color: var(--angular-json-form-secondary, white);
+            font-weight: bold;
+
+            &:hover {
+                color: var(--angular-json-form-secondary, white);
+            }
+        }
+
+        &-start {
+            background: var(--angular-json-form-primary, blue);
+            border-color: var(--angular-json-form-primary, blue);
+            border-radius: .5em;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            color: var(--angular-json-form-secondary, white);
+            font-weight: bold;
+
+            &:hover {
+                color: var(--angular-json-form-secondary, white);
+            }
+        }
+
+        &-middle {
+            background: var(--angular-json-form-border, lightgrey);
+            border-color: var(--angular-json-form-border, lightgrey);
+            border-radius: 0;
+
+            &:hover {
+                color: var(--angular-json-form-secondary, white);
+            }
+        }
+
+        &-end {
+            background: var(--angular-json-form-primary, blue);
+            border-color: var(--angular-json-form-primary, blue);
+            border-radius: .5em;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+            color: var(--angular-json-form-secondary, white);
+            font-weight: bold;
+
+            &:hover {
+                color: var(--angular-json-form-secondary, white);
+            }
         }
     }
 
@@ -637,7 +801,7 @@
             flex-wrap: wrap;
         }
 
-        & figure {
+        & > figure {
             align-items: center;
             border-radius: .5em;
             box-sizing: border-box;
@@ -654,7 +818,7 @@
                 opacity: .5;
             }
 
-            & svg {
+            & > svg {
                 cursor: pointer;
                 fill: var(--angular-json-form-error, red);
                 margin: .3em;
@@ -671,13 +835,13 @@
                 }
             }
         
-            & img.cover {
+            & > img.cover {
                 min-height: 100%;
                 object-fit: cover;
                 width: 100%;
             }
         
-            & img.contain {
+            & > img.contain {
                 height: 100%;
                 min-width: 100%;
                 object-fit: contain;
@@ -691,18 +855,18 @@
         display: flex;
         padding: 1em;
 
-        & div {
+        & > div {
             flex: 1;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
 
-            & span {
+            & > span {
                 width: 100%;
             }
         }
     
-        & svg {
+        & > svg {
             cursor: pointer;
             fill: var(--angular-json-form-error, red);
             margin-left: .5em;
@@ -718,7 +882,7 @@
         display: flex;
         width: 100%;
 
-        & figure {
+        & > figure {
             align-items: center;
             border-radius: .5em;
             display: flex;
@@ -728,31 +892,31 @@
             overflow: hidden;
             width: 100%;
 
-            & div {
+            & > div {
                 align-items: center;
                 display: flex;
                 flex-direction: column;
 
-                & span {
+                & > span {
                     color: var(--angular-json-form-grey, lightgrey);
                     text-align: center;
                     white-space: nowrap;
                 }
 
-                & svg {
+                & > svg {
                     fill: var(--angular-json-form-border, lightgrey);
                     opacity: .7;
                     width: 2em;
                 }
             }
         
-            & img.cover {
+            & > img.cover {
                 min-height: 100%;
                 object-fit: cover;
                 width: 100%;
             }
         
-            & img.contain {
+            & > img.contain {
                 height: 100%;
                 min-width: 100%;
                 object-fit: contain;
@@ -817,12 +981,12 @@
             transform: translateY(.2em);
         }
     
-        & span {
+        & > span {
             align-items: baseline;
             display: flex;
             justify-content: center;
     
-            & i ~ span {
+            & > i ~ span {
                 padding-left: .3em;
             }
         }
@@ -856,7 +1020,7 @@
         width: 2.5em;
         z-index: 5;
 
-        & svg {
+        & > svg {
             fill: var(--angular-json-form-border, lightgrey);
             width: 1em;
         }

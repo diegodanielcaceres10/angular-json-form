@@ -7,6 +7,7 @@ import { AngularJsonFormComponent } from './angular-json-form.component';
 
 import { InputCheckboxComponent } from './input-checkbox/input-checkbox.component';
 import { InputColorComponent } from './input-color/input-color.component';
+import { InputDateComponent } from './input-date/input-date.component';
 import { InputEmailComponent } from './input-email/input-email.component';
 import { InputFileComponent } from './input-file/input-file.component';
 import { InputHiddenComponent } from './input-hidden/input-hidden.component';
@@ -25,6 +26,7 @@ import { InputTextareaComponent } from './input-textarea/input-textarea.componen
         AngularJsonFormComponent,
         InputCheckboxComponent,
         InputColorComponent,
+        InputDateComponent,
         InputEmailComponent,
         InputFileComponent,
         InputHiddenComponent,
