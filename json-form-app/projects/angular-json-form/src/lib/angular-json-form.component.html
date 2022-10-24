@@ -62,6 +62,9 @@
                 <!-- Input type color -->
                 <app-input-color *ngIf="field.type == 'color'" [FormGroup]="FormGroup" [field]="field" (changed)="changed($event)"></app-input-color>
 
+                <!-- Input type date -->
+                <app-input-date *ngIf="field.type == 'date'" [FormGroup]="FormGroup" [field]="field" [legends]="legends" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-date>
+
                 <!-- Input type email -->
                 <app-input-email *ngIf="field.type == 'email'" [FormGroup]="FormGroup" [field]="field" [lang]="form.lang" [translations]="form.translations" (changed)="changed($event)"></app-input-email>
 

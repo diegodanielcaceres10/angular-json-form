@@ -420,6 +420,7 @@ handleEvent(event) {
 |hidden|bool|Hidden input form|
 |searchable|bool|Enable search input for a select input type|
 |multiple|bool|Enable multiple item. Only for image and select type|
+|range|bool|Enable range for data values. Only for date type|
 |cover|bool|Format image size to cover the background. Only for image type|
 |help|string|Tooltip text on a help icon for som e help text|
 |spinner|string|Spinner animation on a button after submit|
