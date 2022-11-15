@@ -37,11 +37,43 @@ export class InputDateComponent implements OnInit {
 
     ngOnInit(): void {
         try {
-            this.data.start.date = new Date();
+            let current = new Date();
+            if (this.field.value) {
+                if (this.field.range) {
+                    if (this.field.value.length == 2) {
+                        const value1 = new Date(this.field.value[0]);
+                        const value2 = new Date(this.field.value[1]);
+                        if (!value1 || value1.toString() == "Invalid Date" || !value2 || value2.toString() == "Invalid Date" || value2 < value1) {
+                            this.field.value = "";
+                            this.FormGroup.controls[this.field.name].setValue(this.field.value);
+                            console.error("Invalid Range", this.field.value);
+                            console.error("Name control: " + this.field.name);
+                        } else {
+                            current = value1;
+                        };
+                    } else {
+                        this.field.value = "";
+                        this.FormGroup.controls[this.field.name].setValue(this.field.value);
+                        console.error("Invalid Range", this.field.value);
+                        console.error("Name control: " + this.field.name);
+                    };
+                } else {
+                    const value = new Date(this.field.value);
+                    if (!value || value.toString() == "Invalid Date") {
+                        this.field.value = "";
+                        this.FormGroup.controls[this.field.name].setValue(this.field.value);
+                        console.error("Invalid Date", this.field.value);
+                        console.error("Name control: " + this.field.name);
+                    } else {
+                        current = value;
+                    };
+                };
+            };
+            this.data.start.date = new Date(current);
             this.data.start.year = this.data.start.date.getFullYear();
             this.data.start.month = this.data.start.date.getMonth() + 1;
             if (this.data.start.month < 10) this.data.start.month = "0" + this.data.start.month;
-            this.data.end.date = new Date();
+            this.data.end.date = new Date(current);
             this.data.end.date = new Date(this.data.end.date.setMonth(this.data.end.date.getMonth() + 1));
             this.data.end.year = this.data.end.date.getFullYear();
             this.data.end.month = this.data.end.date.getMonth() + 1;
@@ -111,7 +143,7 @@ export class InputDateComponent implements OnInit {
                     let daysofweek = [];
                     for (var d = 0; d < 7; d++) {
                         if (day > 0 && day <= data.days) {
-                            let date = data.year + "/" + data.month + "/" + (day < 10 ? "0" : "") + day;
+                            let date = data.year + "-" + data.month + "-" + (day < 10 ? "0" : "") + day;
                             daysofweek.push({ date, weekend: new Date(date).getDay() == 0 || new Date(date).getDay() == 6 });
                         } else {
                             daysofweek.push({});
