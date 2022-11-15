@@ -665,11 +665,31 @@
         border-bottom: 1px solid var(--angular-json-form-border, lightgrey);
         display: flex;
         padding: .5rem;
+        position: relative;
 
         & > svg {
             cursor: pointer;
             padding: .5rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
             width: .5em;
+
+            &.left {
+                left: 0;
+            }
+
+            &.right {
+                right: 0;
+            }
+
+            &.hide {
+                display: none;
+        
+                @include respond(phone) {
+                    display: flex;
+                }
+            }
 
             &:hover {
                 fill: var(--angular-json-form-primary, blue);
@@ -719,15 +739,19 @@
             font-weight: bold;
         }
 
+        &-weekend {
+            opacity: .8;
+        }
+
         &-enabled:hover {
-            border-color: var(--angular-json-form-primary, blue);
             color: var(--angular-json-form-primary, blue);
             cursor: pointer;
             font-weight: bold;
         }
 
-        &-weekend {
-            opacity: .8;
+        &-disabled {
+            cursor: not-allowed;
+            opacity: .3;
         }
 
         &-selected {
@@ -759,10 +783,6 @@
             background: var(--angular-json-form-border, lightgrey);
             border-color: var(--angular-json-form-border, lightgrey);
             border-radius: 0;
-
-            &:hover {
-                color: var(--angular-json-form-secondary, white);
-            }
         }
 
         &-end {
@@ -807,12 +827,12 @@
             box-sizing: border-box;
             box-shadow: 0 0 5px rgba(black, .3);
             display: flex;
-            height: 8em;
+            height: 7em;
             justify-content: center;
-            margin: .2em;
+            margin: .5em;
             overflow: hidden;
             position: relative;
-            width: 8em;
+            width: 7em;
 
             &:hover svg {
                 opacity: .5;
@@ -899,6 +919,7 @@
 
                 & > span {
                     color: var(--angular-json-form-grey, lightgrey);
+                    margin-top: 1rem;
                     text-align: center;
                     white-space: nowrap;
                 }

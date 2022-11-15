@@ -119,6 +119,7 @@ export class AppComponent {
                         name: "datename",
                         type: "date",
                         label: "Date",
+                        value: "2022-06-10",
                     },
                 ],
             },
@@ -129,6 +130,7 @@ export class AppComponent {
                         type: "date",
                         label: "Date",
                         range: true,
+                        value: ["2022-06-10", "2023-05-11"],
                     },
                 ],
             },
@@ -250,6 +252,37 @@ export class AppComponent {
                         type: "image",
                         label: "Images",
                         multiple: true,
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
+                        name: "imageurlname",
+                        type: "image",
+                        label: "Image by URL",
+                        url: true,
+                    },
+                    {
+                        name: "imagecoverurlname",
+                        type: "image",
+                        label: "Cover Image by URL",
+                        url: true,
+                        cover: true,
+                        required: true,
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
+                        name: "imagesurlname",
+                        type: "image",
+                        label: "Images by URL",
+                        multiple: true,
+                        url: true,
+                        cover: true,
+                        required: true,
                     },
                 ],
             },
