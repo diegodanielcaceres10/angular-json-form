@@ -27,7 +27,9 @@
                     <input #input (input)="filterOptions($event)" [placeholder]="legends[lang] ? legends[lang].SEARCH : legends['en-US'].SEARCH" class="angular-json-form__search" type="text" spellcheck="false">
                 </li>
                 <li *ngIf="!field.optionsView || field.optionsView.length == 0" class="angular-json-form__option angular-json-form__option-empty">
-                    <span>{{ legends[lang] ? legends[lang].EMPTY : legends["en-US"].EMPTY }}</span>
+                    <div>
+                        <span>{{ legends[lang] ? legends[lang].EMPTY : legends["en-US"].EMPTY }}</span>
+                    </div>
                 </li>
                 <li *ngFor="let option of field.optionsView" (click)="selectOption(option)" class="angular-json-form__option angular-json-form__option-valid">
                     <div *ngIf="field.option">

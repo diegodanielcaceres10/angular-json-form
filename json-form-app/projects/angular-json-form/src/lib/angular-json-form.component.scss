@@ -611,14 +611,17 @@
             }
         }
 
-        & > div > span {
-            box-sizing: border-box;
-            display: block;
-            line-height: initial;
-            overflow: hidden;
+        & > div {
             padding: 1em;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+
+            & > span {
+                box-sizing: border-box;
+                display: block;
+                line-height: initial;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
         }
 
         & > input {
