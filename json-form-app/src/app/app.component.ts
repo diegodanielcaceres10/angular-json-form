@@ -165,6 +165,17 @@ export class AppComponent {
                         name: "selectname",
                         type: "select",
                         label: "Element Select",
+                        searchable: true,
+                        required: true,
+                    },
+                ],
+            },
+            {
+                fields: [
+                    {
+                        name: "selectname2",
+                        type: "select",
+                        label: "Element Select",
                         options: ["Option 1", "Option 2", "Option 3"],
                         searchable: true,
                         required: true,
