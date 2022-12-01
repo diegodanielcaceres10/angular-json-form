@@ -234,6 +234,7 @@ export class AngularJsonFormComponent implements OnInit {
             try {
                 this.form.error = "";
                 field.error = false;
+                field.value = this.FormGroup.controls[field.name].value;
     
                 // actions
                 if (field && field.actions && field.actions.length > 0) {
@@ -258,6 +259,7 @@ export class AngularJsonFormComponent implements OnInit {
                             let valid = false;
                             if (typeof a.match == "string") valid = a.match == field.value;
                             else if (typeof a.match == "object" && a.match && a.match.value) valid = a.match.value == field.value;
+                            else if (typeof a.match == "boolean") valid = field.value ? true : false;
                             else if (!a.match) valid = field.value ? true : false;
                             a.fields.map(i => {
                                 this.form.groups.some(g => {
