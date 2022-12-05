@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
     title = 'json-form-app';
     form: any = {
-        lang: "pt-BR",
         title: "Title From Header",
         text: "Example text description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dicta dolor ipsam iure. Corporis, tenetur eaque commodi deserunt modi dignissimos nostrum rem velit nihil accusamus debitis, reiciendis aperiam repudiandae asperiores.",
         groups: [
