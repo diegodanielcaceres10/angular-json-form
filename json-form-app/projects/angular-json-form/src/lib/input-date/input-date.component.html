@@ -8,10 +8,10 @@
         <span *ngIf="field.placeholder && (!field.value || field.range && field.value && (!field.value[0] || !field.value[1]))" class="placeholder">{{ translations && translations[lang] && translations[lang][field.placeholder] ? translations[lang][field.placeholder] : field.placeholder }}</span>
         <span *ngIf="!field.placeholder && (!field.value || field.range && field.value && (!field.value[0] || !field.value[1]))" class="placeholder">{{ legends[lang] ? legends[lang].SELECT : legends["en-US"].SELECT }}</span>
         <div *ngIf="field.value && !field.range">
-            <span>{{ field.value | date: lang == "es-ES" ? "MM/dd/YYYY" : "dd/MM/YYYY" }}</span>
+            <span>{{ field.value | date: !lang || lang == "en-US" ? "MM/dd/YYYY" : "dd/MM/YYYY" }}</span>
         </div>
         <div *ngIf="field.value && field.value[0] && field.value[1] && field.range">
-            <span>{{ (field.value[0] | date: lang == "es-ES" ? "MM/dd/YYYY" : "dd/MM/YYYY") + " - " + (field.value[1] | date: lang == "es-ES" ? "MM/dd/YYYY" : "dd/MM/YYYY") }}</span>
+            <span>{{ (field.value[0] | date: !lang || lang == "en-US" ? "MM/dd/YYYY" : "dd/MM/YYYY") + " - " + (field.value[1] | date: !lang || lang == "en-US" ? "MM/dd/YYYY" : "dd/MM/YYYY") }}</span>
         </div>
         <section class="angular-json-form__options">
             <section class="angular-json-form__calendar">

@@ -142,7 +142,7 @@
         white-space: nowrap;
 
         & > span {
-            padding: 0 .2rem;
+            padding: 0 .2em;
         }
     }
 
@@ -419,7 +419,7 @@
             & ~ span {
                 overflow: hidden;
                 padding-left: 1em;
-                width: calc(100% - 3.8rem);
+                width: calc(100% - 3.8em);
                 white-space: nowrap;
 
                 &.placeholder {
@@ -436,7 +436,7 @@
             }
     
             &:disabled ~ span {
-                width: calc(100% - 2rem);
+                width: calc(100% - 2em);
             }
     
             &:disabled ~ section {
@@ -636,7 +636,7 @@
         box-shadow: 0 0 5px rgba(black, .3);
         cursor: initial;
         display: none;
-        font-size: .8rem;
+        font-size: .8em;
         left: 0;
         margin: 0;
         max-width: 100%;
@@ -667,12 +667,12 @@
     &__header {
         border-bottom: 1px solid var(--angular-json-form-border, lightgrey);
         display: flex;
-        padding: .5rem;
+        padding: .5em;
         position: relative;
 
         & > svg {
             cursor: pointer;
-            padding: .5rem;
+            margin: 0 .5em;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -718,13 +718,13 @@
         display: flex;
         flex: 1;
         flex-direction: column;
-        padding: .5rem 0;
+        padding: .5em 0;
     }
 
     &__week {
         display: flex;
         justify-content: space-evenly;
-        max-width: 20rem;
+        max-width: 20em;
         width: 100%;
     }
 
@@ -733,9 +733,9 @@
         border: 1px solid transparent;
         border-radius: .3em;
         display: flex;
-        height: 1.5rem;
+        height: 1.5em;
         justify-content: center;
-        margin: .2rem 0;
+        margin: .2em 0;
         width: 100%;
 
         &-header {
@@ -922,7 +922,7 @@
 
                 & > span {
                     color: var(--angular-json-form-grey, lightgrey);
-                    margin-top: 1rem;
+                    margin-top: 1em;
                     text-align: center;
                     white-space: nowrap;
                 }
@@ -1095,9 +1095,9 @@
     }
 
     &__loader {
-        height: 1.5rem;
+        height: 1.5em;
         position: relative;
-        width: 1.5rem;
+        width: 1.5em;
 
         & .loader {
             align-items: center;
@@ -1116,8 +1116,8 @@
             &__inner:after {
                 border-radius: 50%;
                 height: 100%;
-                max-height: 3rem;
-                max-width: 3rem;
+                max-height: 3em;
+                max-width: 3em;
                 width: 100%;
             }
             
