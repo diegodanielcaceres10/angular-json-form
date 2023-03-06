@@ -16,16 +16,22 @@
         <section class="angular-json-form__options">
             <section class="angular-json-form__calendar">
                 <div *ngIf="data.start && data.start.date" class="angular-json-form__picker">
-                    <div class="angular-json-form__header">
-                        <svg class="left" (click)="changeMonth(-1)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                            <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
-                        </svg>
-                        <span>{{ data.start && data.start.date | date: "MMMM, YYYY" }}</span>
-                        <svg [ngClass]="{ 'hide' : field.range }" class="right" (click)="changeMonth(1)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                            <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
-                        </svg>
+                    <div *ngIf="mode == 'day'" class="angular-json-form__header">
+                        <div (click)="changeMonth(-1)" class="angular-json-form__arrow angular-json-form__arrow-back">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                            </svg>
+                        </div>
+                        <div class="angular-json-form__datelegend angular-json-form__datelegend-click">
+                            <span (click)="mode = 'month'">{{ data.start && data.start.date | date: "MMMM, YYYY" }}</span>
+                        </div>
+                        <div (click)="changeMonth(1)" [ngClass]="{ 'angular-json-form__arrow-hide' : field.range }" class="angular-json-form__arrow angular-json-form__arrow-front">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="angular-json-form__weeks">
+                    <div *ngIf="mode == 'day'" class="angular-json-form__weeks">
                         <div class="angular-json-form__week">
                             <div class="angular-json-form__day angular-json-form__day-header angular-json-form__day-weekend">{{ legends[lang] ? legends[lang].SU : legends["en-US"].SU }}</div>
                             <div class="angular-json-form__day angular-json-form__day-header">{{ legends[lang] ? legends[lang].MO : legends["en-US"].MO }}</div>
@@ -39,13 +45,85 @@
                             <div *ngFor="let day of week" (click)="day.date && (!field.range || (!field.value || field.value[1] || (field.value[0] && field.value[0] <= day.date && !field.value[1]))) && selectDate(day.date)" [ngClass]="{ 'angular-json-form__day-weekend' : day.weekend, 'angular-json-form__day-enabled' : day.date && (!field.range || (!field.value || field.value[1] || (field.value[0] && field.value[0] <= day.date && !field.value[1]))), 'angular-json-form__day-disabled' : field.range && field.value && field.value[0] && field.value[0] > day.date && !field.value[1], 'angular-json-form__day-selected' : (!field.range && field.value && field.value == day.date) || (field.range && field.value && field.value[0] && field.value[0] == day.date && field.value[1] && field.value[1] == day.date), 'angular-json-form__day-start' : field.range && field.value && field.value[0] && field.value[0] == day.date && field.value[1] != day.date, 'angular-json-form__day-end' : field.range && field.value && field.value[1] && field.value[1] == day.date && field.value[0] != day.date, 'angular-json-form__day-middle' : field.range && field.value && field.value[0] && field.value[0] <= day.date && field.value[1] && field.value[1] > day.date }" class="angular-json-form__day">{{ day.date | date: "d" }}</div>
                         </div>
                     </div>
+                    <div *ngIf="mode == 'month'" class="angular-json-form__header">
+                        <div (click)="changeYear(-1)" class="angular-json-form__arrow angular-json-form__arrow-back">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                            </svg>
+                        </div>
+                        <div class="angular-json-form__datelegend angular-json-form__datelegend-click">
+                            <span (click)="mode = 'year'">{{ data.start && data.start.date | date: "YYYY" }}</span>
+                        </div>
+                        <div (click)="changeYear(1)" class="angular-json-form__arrow angular-json-form__arrow-front">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div *ngIf="mode == 'month'" class="angular-json-form__weeks">
+                        <div class="angular-json-form__week">
+                            <div (click)="changeMonth(false, 0)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].JAN : legends["en-US"].JAN }}</div>
+                            <div (click)="changeMonth(false, 1)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].FEB : legends["en-US"].FEB }}</div>
+                            <div (click)="changeMonth(false, 2)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].MAR : legends["en-US"].MAR }}</div>
+                            <div (click)="changeMonth(false, 3)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].APR : legends["en-US"].APR }}</div>
+                        </div>
+                        <div class="angular-json-form__week">
+                            <div (click)="changeMonth(false, 4)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].MAY : legends["en-US"].MAY }}</div>
+                            <div (click)="changeMonth(false, 5)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].JUN : legends["en-US"].JUN }}</div>
+                            <div (click)="changeMonth(false, 6)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].JUL : legends["en-US"].JUL }}</div>
+                            <div (click)="changeMonth(false, 7)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].AUG : legends["en-US"].AUG }}</div>
+                        </div>
+                        <div class="angular-json-form__week">
+                            <div (click)="changeMonth(false, 8)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].SEP : legends["en-US"].SEP }}</div>
+                            <div (click)="changeMonth(false, 9)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].OCT : legends["en-US"].OCT }}</div>
+                            <div (click)="changeMonth(false, 10)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].NOV : legends["en-US"].NOV }}</div>
+                            <div (click)="changeMonth(false, 11)" class="angular-json-form__day angular-json-form__day-enabled">{{ legends[lang] ? legends[lang].DEC : legends["en-US"].DEC }}</div>
+                        </div>
+                    </div>
+                    <div *ngIf="mode == 'year'" class="angular-json-form__header">
+                        <div (click)="changeYear(-10)" class="angular-json-form__arrow angular-json-form__arrow-back">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                            </svg>
+                        </div>
+                        <div class="angular-json-form__datelegend">
+                            <span>{{ data.start.decade }} - {{ (data.start.decade + 9) }}</span>
+                        </div>
+                        <div (click)="changeYear(10)" class="angular-json-form__arrow angular-json-form__arrow-front">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div *ngIf="mode == 'year'" class="angular-json-form__weeks">
+                        <div class="angular-json-form__week">
+                            <div (click)="changeYear(false, data.start.decade)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade }}</div>
+                            <div (click)="changeYear(false, data.start.decade + 1)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 1 }}</div>
+                            <div (click)="changeYear(false, data.start.decade + 2)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 2 }}</div>
+                            <div (click)="changeYear(false, data.start.decade + 3)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 3 }}</div>
+                        </div>
+                        <div class="angular-json-form__week">
+                            <div (click)="changeYear(false, data.start.decade + 4)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 4 }}</div>
+                            <div (click)="changeYear(false, data.start.decade + 5)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 5 }}</div>
+                            <div (click)="changeYear(false, data.start.decade + 6)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 6 }}</div>
+                            <div (click)="changeYear(false, data.start.decade + 7)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 7 }}</div>
+                        </div>
+                        <div class="angular-json-form__week">
+                            <div (click)="changeYear(false, data.start.decade + 8)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 8 }}</div>
+                            <div (click)="changeYear(false, data.start.decade + 9)" class="angular-json-form__day angular-json-form__day-enabled">{{ data.start.decade + 9 }}</div>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="data.end && data.end.date && field.range" class="angular-json-form__picker">
+                <div *ngIf="mode == 'day' && data.end && data.end.date && field.range" class="angular-json-form__picker">
                     <div class="angular-json-form__header">
-                        <span>{{ data.end && data.end.date | date: "MMMM, YYYY" }}</span>
-                        <svg class="right" (click)="changeMonth(1)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                            <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
-                        </svg>
+                        <div class="angular-json-form__datelegend angular-json-form__datelegend-click">
+                            <span (click)="mode = 'month'">{{ data.end && data.end.date | date: "MMMM, YYYY" }}</span>
+                        </div>
+                        <div (click)="changeMonth(1)" class="angular-json-form__arrow angular-json-form__arrow-front">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="angular-json-form__weeks">
                         <div class="angular-json-form__week">

@@ -669,47 +669,55 @@
         display: flex;
         padding: .5em;
         position: relative;
+    }
 
-        & > svg {
+    &__datelegend {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+
+        &-click {
             cursor: pointer;
-            margin: 0 .5em;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: .5em;
-
-            &.left {
-                left: 0;
-            }
-
-            &.right {
-                right: 0;
-            }
-
-            &.hide {
-                display: none;
-        
-                @include respond(phone) {
-                    display: flex;
-                }
-            }
-
-            &:hover {
-                fill: var(--angular-json-form-primary, blue);
-            }
-        }
-
-        & > span {
-            align-items: center;
-            cursor: pointer;
-            display: flex;
-            flex: 1;
-            justify-content: center;
 
             &:hover {
                 color: var(--angular-json-form-primary, blue);
                 opacity: .8;
             }
+        }
+    }
+
+    &__arrow {
+        display: flex;
+        cursor: pointer;
+        height: 1.5em;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1.5em;
+
+        & > svg {
+            width: 1em;
+        }
+
+        &-back {
+            left: 0;
+        }
+
+        &-front {
+            right: 0;
+        }
+
+        &-hide {
+            display: none;
+    
+            @include respond(phone) {
+                display: flex;
+            }
+        }
+
+        &:hover {
+            fill: var(--angular-json-form-primary, blue);
         }
     }
 

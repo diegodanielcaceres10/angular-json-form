@@ -16,6 +16,7 @@ export class InputDateComponent implements OnInit {
     @Input() translations: any;
     @Output() changed = new EventEmitter<any>();
 
+    mode: string = "day";
     current: string = "start";
     data: any = {
         start: {
@@ -92,28 +93,34 @@ export class InputDateComponent implements OnInit {
         };
     }
 
-    changeYear(value) {
+    changeYear(value, year?) {
         try {
             if (this.data && this.data.start && this.data.start.date) {
-                this.data.start.date = new Date(this.data.start.date.setFullYear(this.data.start.date.getFullYear() + value));
+                if (year !== undefined) this.data.start.date = new Date(this.data.start.date.setFullYear(year));
+                else this.data.start.date = new Date(this.data.start.date.setFullYear(this.data.start.date.getFullYear() + value));
             };
             if (this.data && this.data.end && this.data.end.date) {
-                this.data.end.date = new Date(this.data.end.date.setFullYear(this.data.end.date.getFullYear() + value));
+                if (year !== undefined) this.data.end.date = new Date(this.data.end.date.setFullYear(year));
+                else this.data.end.date = new Date(this.data.end.date.setFullYear(this.data.end.date.getFullYear() + value));
             };
+            if (value != 10 && value != -10) this.mode = "month";
             this.updateDays();
         } catch (e) {
             console.error("Error", e);
         };
     }
 
-    changeMonth(value) {
+    changeMonth(value, month?) {
         try {
             if (this.data && this.data.start && this.data.start.date) {
-                this.data.start.date = new Date(this.data.start.date.setMonth(this.data.start.date.getMonth() + value));
+                if (month !== undefined) this.data.start.date = new Date(this.data.start.date.setMonth(month));
+                else this.data.start.date = new Date(this.data.start.date.setMonth(this.data.start.date.getMonth() + value));
             };
             if (this.data && this.data.end && this.data.end.date) {
-                this.data.end.date = new Date(this.data.end.date.setMonth(this.data.end.date.getMonth() + value));
+                if (month !== undefined) this.data.end.date = new Date(this.data.end.date.setMonth(month + 1));
+                else this.data.end.date = new Date(this.data.end.date.setMonth(this.data.end.date.getMonth() + value));
             };
+            this.mode = "day";
             this.updateDays();
         } catch (e) {
             console.error("Error", e);
@@ -152,6 +159,7 @@ export class InputDateComponent implements OnInit {
                     };
                     data.weeks.push(daysofweek);
                 };
+                data.decade = Math.round(data.year / 10) * 10;
             };
         } catch (e) {
             console.error("Error", e);
