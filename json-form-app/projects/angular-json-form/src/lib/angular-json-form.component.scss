@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Ubuntu&display=swap');
-
 @mixin respond($breakpoint) {
     @if $breakpoint == phone {
         @media only screen and (max-width: 600px) { @content };
@@ -18,7 +16,7 @@
     color: var(--angular-json-form-text, #444);
     display: flex;
     flex-wrap: wrap;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: inherit;
     line-height: normal;
     max-width: 600px;
     padding: .5em;
@@ -59,10 +57,12 @@
 
         &-visible {
             padding: .5em 0;
-            width: 100%;
+            flex: 1;
+            width: 1px;
 
             @include respond(phone) {
-                max-width: 100% !important;
+                flex: initial;
+                width: 100%;
             }
         }
 
@@ -116,6 +116,7 @@
     }
 
     &__name {
+        flex: 1;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -125,16 +126,11 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
-        &-error {
-            max-width: calc(100% - 10em);
-        }
     }
 
     &__error {
         box-sizing: border-box;
         color: var(--angular-json-form-error, red);
-        flex: 1;
         font-size: .8em;
         overflow: hidden;
         text-align: right;
@@ -154,13 +150,13 @@
         height: 1em;
         margin: 0;
         outline: none;
-        padding: 0;
+        padding-left: .2rem;
         width: 1em;
 
         & > section {
             background: var(--angular-json-form-fill, white);
             border: 1px solid var(--angular-json-form-border, lightgrey);
-            border-radius: .5em;
+            border-radius: var(--angular-json-form-radius, .5rem);
             box-shadow: 0 0 5px rgba(black, .3);
             box-sizing: border-box;
             cursor: default;
@@ -197,7 +193,6 @@
     &__control {
         align-items: center;
         background: var(--angular-json-form-fill, white);
-        border-radius: .5em;
         display: flex;
         height: 3em;
         position: relative;
@@ -241,7 +236,7 @@
     &__input {
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5em;
+        border-radius: var(--angular-json-form-radius, .5rem);
         box-sizing: border-box;
         color: var(--angular-json-form-text, #444);
         font: inherit;
@@ -330,7 +325,6 @@
 
             & ~ label:last-child {
                 flex: 1;
-                font-size: .9em;
                 overflow: hidden;
                 text-overflow: ellipsis;
 
@@ -394,7 +388,6 @@
 
             & ~ label:last-child {
                 flex: 1;
-                font-size: .9em;
                 height: 1em;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -495,7 +488,7 @@
         align-items: center;
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5em;
+        border-radius: var(--angular-json-form-radius, .5rem);
         color: var(--angular-json-form-text, #444);
         display: flex;
         font: inherit;
@@ -779,7 +772,7 @@
         &-start {
             background: var(--angular-json-form-primary, blue);
             border-color: var(--angular-json-form-primary, blue);
-            border-radius: .5em;
+            border-radius: var(--angular-json-form-radius, .5rem);
             border-bottom-right-radius: 0;
             border-top-right-radius: 0;
             color: var(--angular-json-form-secondary, white);
@@ -799,7 +792,7 @@
         &-end {
             background: var(--angular-json-form-primary, blue);
             border-color: var(--angular-json-form-primary, blue);
-            border-radius: .5em;
+            border-radius: var(--angular-json-form-radius, .5rem);
             border-bottom-left-radius: 0;
             border-top-left-radius: 0;
             color: var(--angular-json-form-secondary, white);
@@ -814,7 +807,7 @@
     &__items {
         background: var(--angular-json-form-fill, white);
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5em;
+        border-radius: var(--angular-json-form-radius, .5rem);
         display: flex;
         flex-direction: column;
         height: 11.4em;
@@ -834,7 +827,7 @@
 
         & > figure {
             align-items: center;
-            border-radius: .5em;
+            border-radius: var(--angular-json-form-radius, .5rem);
             box-sizing: border-box;
             box-shadow: 0 0 5px rgba(black, .3);
             display: flex;
@@ -907,7 +900,7 @@
 
     &__image {
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5em;
+        border-radius: var(--angular-json-form-radius, .5rem);
         box-sizing: border-box;
         height: 100%;
         display: flex;
@@ -915,7 +908,7 @@
 
         & > figure {
             align-items: center;
-            border-radius: .5em;
+            border-radius: var(--angular-json-form-radius, .5rem);
             display: flex;
             height: 100%;
             justify-content: center;
@@ -959,7 +952,7 @@
     &__textarea {
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5em;
+        border-radius: var(--angular-json-form-radius, .5rem);
         box-sizing: border-box;
         color: var(--angular-json-form-text, #444);
         height: 100%;
@@ -987,7 +980,7 @@
         align-items: center;
         background: transparent;
         border: 1px solid var(--angular-json-form-border, lightgrey);
-        border-radius: .5em;
+        border-radius: var(--angular-json-form-radius, .5rem);
         color: var(--angular-json-form-text, #444);
         display: flex;
         font: inherit;
@@ -1107,7 +1100,7 @@
         position: relative;
         width: 1.5em;
 
-        & .loader {
+        &__box {
             align-items: center;
             bottom: 0;
             display: flex;

@@ -2,10 +2,10 @@
     <div *ngIf="form.title" class="angular-json-form__title">{{ form.translations && form.translations[form.lang] && form.translations[form.lang][form.title] ? form.translations[form.lang][form.title] : form.title }}</div>
     <span *ngIf="form.text" class="angular-json-form__section">{{ form.translations && form.translations[form.lang] && form.translations[form.lang][form.text] ? form.translations[form.lang][form.text] : form.text }}</span>
     <div *ngFor="let group of form.groups" class="angular-json-form__group">
-        <div *ngFor="let field of group.fields" [ngStyle]="{ 'max-width' : !field.hidden && field.type != 'hidden' ? ((100 / group.count) + '%') : '0' }" [ngClass]="{ 'angular-json-form__box-visible' : !field.hidden && field.type != 'hidden', 'angular-json-form__box-overflow' : !field.hidden && field.type == 'checkbox', 'angular-json-form__box-portrait' : !field.hidden && (field.type == 'image' || field.type == 'color') && !field.multiple }" class="angular-json-form__box">
+        <div *ngFor="let field of group.fields" [ngClass]="{ 'angular-json-form__box-visible' : !field.hidden && field.type != 'hidden', 'angular-json-form__box-overflow' : !field.hidden && field.type == 'checkbox', 'angular-json-form__box-portrait' : !field.hidden && (field.type == 'image' || field.type == 'color') && !field.multiple }" class="angular-json-form__box">
             <div *ngIf="!field.hidden && field.type != 'hidden'" class="angular-json-form__label">
                 <label>
-                    <div [ngClass]="{ 'angular-json-form__name-error' : (form.invalid && FormGroup.controls && FormGroup.controls[field.name] && FormGroup.controls[field.name].errors) || field.error }" class="angular-json-form__name">
+                    <div class="angular-json-form__name">
                         <span *ngIf="field.label">{{ form.translations && form.translations[form.lang] && form.translations[form.lang][field.label] ? form.translations[form.lang][field.label] : field.label }}</span>
                     </div>
                     <span *ngIf="field.required">*</span>
@@ -111,8 +111,8 @@
             <div class="angular-json-form__control angular-json-form__control-full angular-json-form__control-transparent">
                 <button *ngFor="let button of form.buttons" [ngClass]="{ 'angular-json-form__button-primary' : button.primary, 'angular-json-form__button-full' : form.format && form.format.full }" [type]="button.submit ? 'submit' : 'button'" [disabled]="form.waiting" (click)="eventForm(button)" class="angular-json-form__button">
                     <div *ngIf="form.waiting && button.loader" class="angular-json-form__loader">
-                        <div class="loader">
-                            <div [ngClass]="{ 'loader__inner-primary' : button.primary }" class="loader__inner"></div>
+                        <div class="angular-json-form__loader__box">
+                            <div [ngClass]="{ 'angular-json-form__loader__box__inner-primary' : button.primary }" class="angular-json-form__loader__box__inner"></div>
                         </div>
                     </div>
                     <span *ngIf="!form.waiting || !button.loader">

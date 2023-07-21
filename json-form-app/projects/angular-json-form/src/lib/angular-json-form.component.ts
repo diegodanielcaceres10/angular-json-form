@@ -245,6 +245,7 @@ export class AngularJsonFormComponent implements OnInit {
                 if (this.form.format.error) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-error", this.form.format.error);
                 if (this.form.format.border) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-border", this.form.format.border);
                 if (this.form.format.grey) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-grey", this.form.format.grey);
+                if (this.form.format.radius !== undefined) this.ElementRef.nativeElement.style.setProperty("--angular-json-form-radius", this.form.format.radius);
             };
         } catch (e) {
             console.error("Error", e);

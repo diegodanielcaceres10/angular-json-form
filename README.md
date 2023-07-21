@@ -440,6 +440,7 @@ The property `format` contains colors and styles properties.
 |focus|Css Color|Border color in a focus input|
 |error|Css Color|Text and icons color in a error message|
 |border|Css Color|Border and icons color in a input|
+|radius|Css Size|Border radius in a input|
 |grey|Css Color|Placeholder and hover color in a input|
 |lang|string|Custom lang for a legends. Default value: "en-US". Allow values: "es-ES", "pt-BR".|
 
